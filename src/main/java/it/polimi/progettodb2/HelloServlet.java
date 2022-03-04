@@ -18,7 +18,7 @@ public class HelloServlet extends HttpServlet {
         final String DB_URL = "jdbc:mysql://localhost:3306/dbproj"; //Replace with your own configuration
         final String USER = "root"; //Replace with your own configuration
         final String PASS = "Peppe2098"; //Replace with your own configuration
-        String result = "Connection tua madre";
+        String result = "Connection SuCk";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             DriverManager.getConnection(DB_URL, USER, PASS);

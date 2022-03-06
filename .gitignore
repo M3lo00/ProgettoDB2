@@ -3,4 +3,4 @@
 /target/
 /.idea/
 .DS_Store
-ddl/database_0.1.sql.bak
+.bak

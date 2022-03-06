@@ -84,6 +84,7 @@ public class UserEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUser", nullable=false)
     private Long idUser; //noi abbiamo usato int.. dobbiamo cambiare in Long???
+    //Un signed int può avere al max ((2^31)-1) 429.4967.295 elementi. Mi sa che ci basta int long è ((2^63)-1)
 
     @Column(name = "email", nullable=false)
     private String email; //Loro hanno aggiunto in più che devono essere unique

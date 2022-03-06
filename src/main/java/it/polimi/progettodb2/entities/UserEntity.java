@@ -84,20 +84,17 @@ public class UserEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUser", nullable=false)
     private Long idUser; //noi abbiamo usato int.. dobbiamo cambiare in Long???
-    //Un signed int può avere al max ((2^31)-1) 429.4967.295 elementi. Mi sa che ci basta int long è ((2^63)-1)
-
+    @Basic
     @Column(name = "email", nullable=false)
     private String email; //Loro hanno aggiunto in più che devono essere unique
-
     @Column(name = "Username", nullable=false)
     private String Username; //Loro hanno aggiunto in più che devono essere unique
-
+    //Un signed int può avere al max ((2^31)-1) 429.4967.295 elementi. Mi sa che ci basta int long è ((2^63)-1)
     @Column(name = "Password", nullable=false)
     private String Password; //Loro hanno aggiunto in più che devono essere unique
-
     @Column(name = "Insolvent", nullable=false)
     private Boolean Insolvent;
-
+    @Basic
     @Column(name = "failedPay", nullable=false)
     private int failedPay;
     /*
@@ -119,4 +116,90 @@ public class UserEntity implements Serializable{
     java.time.LocalTime, java.time.LocalDateTime, java.time.OffsetTime and
     java.time.OffsetDateTime.
      */
+    /*
+    @Basic
+    @Column(name = "Username")
+    private String username;
+    @Basic
+    @Column(name = "Password")
+    private String password;
+    @Basic
+    @Column(name = "Insolvent")
+    private Object insolvent;
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Object getFailedPay() {
+        return failedPay;
+    }
+
+    public void setFailedPay(Object failedPay) {
+        this.failedPay = failedPay;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Object getInsolvent() {
+        return insolvent;
+    }
+
+    public void setInsolvent(Object insolvent) {
+        this.insolvent = insolvent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserEntity that = (UserEntity) o;
+
+        if (failedPay != that.failedPay) return false;
+        if (idUser != null ? !idUser.equals(that.idUser) : that.idUser != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (insolvent != null ? !insolvent.equals(that.insolvent) : that.insolvent != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idUser != null ? idUser.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (insolvent != null ? insolvent.hashCode() : 0);
+        result = 31 * result + failedPay;
+        return result;
+    }*/
 }

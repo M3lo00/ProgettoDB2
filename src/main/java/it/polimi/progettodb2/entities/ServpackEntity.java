@@ -2,6 +2,8 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "servpack", schema = "dbproj")
 @IdClass(ServpackEntityPK.class)
@@ -29,6 +31,9 @@ public class ServpackEntity {
     @Basic
     @Column(name = "ServPackcol")
     private Double servPackcol;
+
+    @ManyToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ServiceEntity> ServiceEntity;
 
     public int getRefService() {
         return refService;

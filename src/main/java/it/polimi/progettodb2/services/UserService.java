@@ -54,4 +54,17 @@ public class UserService {
             return null;
         }
     }
+
+    public Optional<UserEntity> findByUsername(String usrn) {
+        return em.createNamedQuery("User.findByUsername", UserEntity.class)
+                .setParameter("username", usrn)
+                .getResultStream().findFirst();
+    }
+
+    public Optional<UserEntity> findByEmail(String email) {
+        return em.createNamedQuery("User.findByEmail", UserEntity.class)
+                .setParameter("email", email)
+                .getResultStream().findFirst();
+    }
+
 }

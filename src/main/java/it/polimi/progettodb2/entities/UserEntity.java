@@ -44,9 +44,23 @@ name of the entity.
 
 @Entity
 @Table(name = "user", schema = "dbproj")
-
 @NamedQuery(name = "User.checkCredentials",
         query = "SELECT r FROM UserEntity r  WHERE r.username = ?1 and r.password = ?2")
+
+
+@NamedQuery(
+        name = "User.findByUsername",
+        query = "SELECT u " +
+                "FROM UserEntity u " +
+                "WHERE u.username = :username"
+)
+
+@NamedQuery(
+        name = "User.findByEmail",
+        query = "SELECT u " +
+                "FROM UserEntity u " +
+                "WHERE u.email = :email"
+)
 
 
 public class UserEntity implements Serializable{

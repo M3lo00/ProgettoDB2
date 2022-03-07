@@ -45,6 +45,9 @@ name of the entity.
 @Entity
 @Table(name = "user", schema = "dbproj")
 
+@NamedQuery(name = "User.checkCredentials",
+        query = "SELECT r FROM UserEntity r  WHERE r.username = ?1 and r.password = ?2")
+
 
 public class UserEntity implements Serializable{
 
@@ -88,12 +91,12 @@ public class UserEntity implements Serializable{
     @Column(name = "email", nullable=false)
     private String email; //Loro hanno aggiunto in più che devono essere unique
     @Column(name = "Username", nullable=false)
-    private String Username; //Loro hanno aggiunto in più che devono essere unique
+    private String username; //Loro hanno aggiunto in più che devono essere unique
     //Un signed int può avere al max ((2^31)-1) 429.4967.295 elementi. Mi sa che ci basta int long è ((2^63)-1)
     @Column(name = "Password", nullable=false)
-    private String Password; //Loro hanno aggiunto in più che devono essere unique
+    private String password; //Loro hanno aggiunto in più che devono essere unique
     @Column(name = "Insolvent", nullable=false)
-    private Boolean Insolvent;
+    private Boolean insolvent;
     @Basic
     @Column(name = "failedPay", nullable=false)
     private int failedPay;
@@ -116,6 +119,19 @@ public class UserEntity implements Serializable{
     java.time.LocalTime, java.time.LocalDateTime, java.time.OffsetTime and
     java.time.OffsetDateTime.
      */
+
+    public UserEntity() {
+    }
+
+    //costruttore entity
+    public UserEntity(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        failedPay=0;
+        insolvent=false;
+    }
+
     /*
     @Basic
     @Column(name = "Username")

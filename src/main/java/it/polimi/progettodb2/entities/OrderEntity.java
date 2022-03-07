@@ -1,5 +1,5 @@
 package it.polimi.progettodb2.entities;
-
+/*
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -130,3 +130,5 @@ public class OrderEntity {
         return result;
     }
 }
+
+ */

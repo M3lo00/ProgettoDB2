@@ -14,10 +14,12 @@ Forse potremmo togliere la tabella service, dovremmo rivedere un attimo il db
 
 cambiare refservpack in refpack ownoptservice
 
-BuyService
-ConfirmationPage
-bill the customer by calling an external service
-A service activation schedule is a record of the services and optional products to activate for the user with their date of activation and date of deactivation.
+User:
+
+	BuyService
+	ConfirmationPage
+	bill the customer by calling an external service
+	A service activation schedule is a record of the services and optional products to activate for the user with their date of activation and date of deactivation.
 
 Employee:
 	login

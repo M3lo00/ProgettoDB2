@@ -1,10 +1,12 @@
 create table feeperiod
 (
-    refPackage int not null
+    idFeePeriod int auto_increment not null
         primary key,
+    refPackage int not null,
     periodo    int not null,
     fee        int null,
-    constraint fk_Package2
+
+    constraint fk_Package1
         foreign key (refPackage) references package (idPackage)
 );
 

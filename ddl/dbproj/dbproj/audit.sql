@@ -1,8 +1,9 @@
 create table audit
 (
+    idAudit          int auto_increment
+        primary key,
     refUser          int not null,
     refLastRejection int not null,
-    primary key (refUser, refLastRejection),
     constraint refUser
         unique (refUser),
     constraint fk_Payment

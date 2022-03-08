@@ -25,11 +25,8 @@ public class PaymentEntity {
     @Column(name = "payTime")
     private Timestamp payTime;
 
-
-//da sistemare
-    @OneToMany(mappedBy = "paymentByRefLastRejection")
-    private Collection<AuditEntity> auditsByIdPayments;
-//*****************************************************
+    @OneToOne (mappedBy = "refLastRejection", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private AuditEntity auditEntity;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
@@ -116,12 +113,12 @@ public class PaymentEntity {
         return result;
     }
 
-    public Collection<AuditEntity> getAuditsByIdPayments() {
-        return auditsByIdPayments;
+    public AuditEntity getAudits() {
+        return auditEntity;
     }
 
-    public void setAuditsByIdPayments(Collection<AuditEntity> auditsByIdPayments) {
-        this.auditsByIdPayments = auditsByIdPayments;
+    public void setAudits(AuditEntity auditEntity) {
+        this.auditEntity = auditEntity;
     }
 
     public OrderEntity getOrderByRefOrder() {

@@ -5,6 +5,21 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "Employee.findByEmail",
+                        query = "SELECT e FROM EmployeeEntity e " +
+                                "WHERE e.email = :email"
+                ),
+                @NamedQuery(
+                        name = "Employee.checkCredentials",
+                        query = "SELECT e FROM EmployeeEntity " +
+                                "e  WHERE e.email = ?1 and e.password = ?2"
+                )
+        }
+)
+
 @Table(name = "employee", schema = "dbproj")
 public class EmployeeEntity implements Serializable {
 

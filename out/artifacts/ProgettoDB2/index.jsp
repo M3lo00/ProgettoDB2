@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Telco Website</title>
+    <title>Quaccio Website</title>
 </head>
 <%--
 <style><%@include file="css/style.css"%></style>
@@ -18,7 +18,7 @@
 
 
 <div class='parent'>
-    <h1>Telco Company</h1>
+    <h1>Quaccio Company</h1>
     <div class="login-page">
         <div class="form">
             <h2>LOGIN</h2>

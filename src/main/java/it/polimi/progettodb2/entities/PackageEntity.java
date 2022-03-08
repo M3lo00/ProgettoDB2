@@ -45,8 +45,8 @@ public class PackageEntity {
 
 
 
-    @OneToOne(mappedBy = "packageByRefPackage")
-    private FeeperiodEntity feeperiodByIdPackage;
+    @OneToMany(mappedBy = "packageByRefPackage", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<FeeperiodEntity> feeperiodByIdPackage;
 
 
     @OneToMany(mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -175,11 +175,13 @@ public class PackageEntity {
         this.extraFGiga = extraFGiga;
     }
 
-    public FeeperiodEntity getFeeperiodByIdPackage() {
+
+
+    public Collection<FeeperiodEntity> getFeeperiodByIdPackage() {
         return feeperiodByIdPackage;
     }
 
-    public void setFeeperiodByIdPackage(FeeperiodEntity feeperiodByIdPackage) {
+    public void setFeeperiodByIdPackage(Collection<FeeperiodEntity> feeperiodByIdPackage) {
         this.feeperiodByIdPackage = feeperiodByIdPackage;
     }
 

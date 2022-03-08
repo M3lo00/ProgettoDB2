@@ -15,13 +15,24 @@ public class AuditEntity {
     @Column(name = "refLastRejection")
     private int refLastRejection;
 
-    @ManyToOne
-    @JoinColumn(name = "refUser", referencedColumnName = "idUser", nullable = false)
+
+
+    @OneToOne(mappedBy = "idUser", fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
     private UserEntity userEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "refLastRejection", referencedColumnName = "idPayments", nullable = false)
+    @OneToOne(mappedBy = "idPayments", fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
     private PaymentEntity paymentByRefLastRejection;
+
 
     public int getRefUser() {
         return refUser;

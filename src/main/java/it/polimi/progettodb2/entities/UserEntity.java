@@ -123,8 +123,8 @@ public class UserEntity implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PaymentEntity> payments;
 
-    @OneToMany(mappedBy = "refUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<AuditEntity> audits;
+    @OneToOne(mappedBy = "refUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private AuditEntity audits;
 
     @OneToMany(mappedBy = "refUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
@@ -244,11 +244,11 @@ public class UserEntity implements Serializable{
         return result;
     }
 
-    public Collection<AuditEntity> getAudits() {
+    public AuditEntity getAudits() {
         return audits;
     }
 
-    public void setAudits(Collection<AuditEntity> audits) {
+    public void setAudits(AuditEntity audits) {
         this.audits = audits;
     }
 

@@ -22,10 +22,15 @@ public class FeeperiodEntity {
     private int periodo;
 
 
-
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
     @JoinColumn(name = "refPackage", referencedColumnName = "idPackage", nullable = false)
     private PackageEntity packageByRefPackage;
+
 
     public int getRefPackage() {
         return refPackage;

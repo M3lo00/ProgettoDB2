@@ -1,8 +1,10 @@
 package it.polimi.progettodb2.web;
 
 import it.polimi.progettodb2.entities.UserEntity;
+import it.polimi.progettodb2.entities.EmployeeEntity;
 import it.polimi.progettodb2.services.UserService;
 import it.polimi.progettodb2.exceptions.CredentialsException;
+import it.polimi.progettodb2.services.EmployeeService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,13 +22,13 @@ public class LoginServlet extends HttpServlet {
 
     @EJB
     private UserService userService;
-    /*
+
     @EJB
     private EmployeeService employeeService;
 
-
-    ServicePackageEntity servicePackage;
-*/
+    /*
+       ServicePackageEntity servicePackage;
+   */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -36,9 +38,9 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         UserEntity user = null;
-        //EmployeeEntity employee = null;
+        EmployeeEntity employee = null;
 
-        /*try {
+        try {
             employee = employeeService.checkCredentials(username, password);
         } catch (CredentialsException e) {
             e.printStackTrace();
@@ -48,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("employee", employee);
             destServlet = "homePageEmployee";
         }
-        else {*/
+        else {
             try {
                 user = userService.checkCredentials(username, password);
             } catch (CredentialsException e) {
@@ -66,7 +68,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
             }
             else destServlet = "login?loginFailed=true";
-        //}
+        }
 
         resp.sendRedirect(destServlet);
     }

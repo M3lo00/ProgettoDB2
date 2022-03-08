@@ -1,26 +1,24 @@
 package it.polimi.progettodb2.entities;
-/*
+
 import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
-@Table(name = "order", schema = "dbproj")
+@Table(name = "order", schema = "dbproj", catalog = "")
 public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idOrder")
-    private int idOrder;
+    private Integer idOrder;
     @Basic
     @Column(name = "refUser")
     private int refUser;
     @Basic
     @Column(name = "refPack")
     private int refPack;
-    @Basic
-    @Column(name = "period")
-    private int period;
     @Basic
     @Column(name = "creationDate")
     private Timestamp creationDate;
@@ -33,12 +31,39 @@ public class OrderEntity {
     @Basic
     @Column(name = "totalAmount")
     private int totalAmount;
+    @Basic
+    @Column(name = "nMobile")
+    private Integer nMobile;
+    @Basic
+    @Column(name = "nFixed")
+    private Integer nFixed;
 
-    public int getIdOrder() {
+    @ManyToOne (fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
+    @JoinColumn(name = "refUser", referencedColumnName = "idUser", nullable = false)
+    private UserEntity userEntity;
+
+    @ManyToOne (fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
+    @JoinColumn(name = "refPack", referencedColumnName = "idPackage", nullable = false)
+    private PackageEntity packageEntity;
+
+    @OneToMany(mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<PaymentEntity> payments;
+
+    public Integer getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(int idOrder) {
+    public void setIdOrder(Integer idOrder) {
         this.idOrder = idOrder;
     }
 
@@ -56,14 +81,6 @@ public class OrderEntity {
 
     public void setRefPack(int refPack) {
         this.refPack = refPack;
-    }
-
-    public int getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(int period) {
-        this.period = period;
     }
 
     public Timestamp getCreationDate() {
@@ -98,6 +115,22 @@ public class OrderEntity {
         this.totalAmount = totalAmount;
     }
 
+    public Integer getnMobile() {
+        return nMobile;
+    }
+
+    public void setnMobile(Integer nMobile) {
+        this.nMobile = nMobile;
+    }
+
+    public Integer getnFixed() {
+        return nFixed;
+    }
+
+    public void setnFixed(Integer nFixed) {
+        this.nFixed = nFixed;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,30 +138,54 @@ public class OrderEntity {
 
         OrderEntity that = (OrderEntity) o;
 
-        if (idOrder != that.idOrder) return false;
         if (refUser != that.refUser) return false;
         if (refPack != that.refPack) return false;
-        if (period != that.period) return false;
         if (totalAmount != that.totalAmount) return false;
+        if (idOrder != null ? !idOrder.equals(that.idOrder) : that.idOrder != null) return false;
         if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
         if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
         if (valid != null ? !valid.equals(that.valid) : that.valid != null) return false;
+        if (nMobile != null ? !nMobile.equals(that.nMobile) : that.nMobile != null) return false;
+        if (nFixed != null ? !nFixed.equals(that.nFixed) : that.nFixed != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idOrder;
+        int result = idOrder != null ? idOrder.hashCode() : 0;
         result = 31 * result + refUser;
         result = 31 * result + refPack;
-        result = 31 * result + period;
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (valid != null ? valid.hashCode() : 0);
         result = 31 * result + totalAmount;
+        result = 31 * result + (nMobile != null ? nMobile.hashCode() : 0);
+        result = 31 * result + (nFixed != null ? nFixed.hashCode() : 0);
         return result;
     }
-}
 
- */
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public PackageEntity getPackageEntity() {
+        return packageEntity;
+    }
+
+    public void setPackageEntity(PackageEntity packageEntity) {
+        this.packageEntity = packageEntity;
+    }
+
+    public Collection<PaymentEntity> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Collection<PaymentEntity> payments) {
+        this.payments = payments;
+    }
+}

@@ -3,7 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "audit", schema = "dbproj")
+@Table(name = "audit", schema = "dbproj", catalog = "")
 @IdClass(AuditEntityPK.class)
 public class AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +14,14 @@ public class AuditEntity {
     @Id
     @Column(name = "refLastRejection")
     private int refLastRejection;
+
+    @ManyToOne
+    @JoinColumn(name = "refUser", referencedColumnName = "idUser", nullable = false)
+    private UserEntity userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "refLastRejection", referencedColumnName = "idPayments", nullable = false)
+    private PaymentEntity paymentByRefLastRejection;
 
     public int getRefUser() {
         return refUser;
@@ -49,5 +57,21 @@ public class AuditEntity {
         int result = refUser;
         result = 31 * result + refLastRejection;
         return result;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public PaymentEntity getPaymentByRefLastRejection() {
+        return paymentByRefLastRejection;
+    }
+
+    public void setPaymentByRefLastRejection(PaymentEntity paymentByRefLastRejection) {
+        this.paymentByRefLastRejection = paymentByRefLastRejection;
     }
 }

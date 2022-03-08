@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +44,7 @@ name of the entity.
 
 
 @Entity
-@Table(name = "user", schema = "dbproj")
+@Table(name = "user", schema = "dbproj", catalog = "")
 @NamedQuery(name = "User.checkCredentials",
         query = "SELECT r FROM UserEntity r  WHERE r.username = ?1 and r.password = ?2")
 
@@ -104,16 +105,77 @@ public class UserEntity implements Serializable{
     @Basic
     @Column(name = "email", nullable=false)
     private String email; //Loro hanno aggiunto in più che devono essere unique
+    @Basic
     @Column(name = "Username", nullable=false)
     private String username; //Loro hanno aggiunto in più che devono essere unique
     //Un signed int può avere al max ((2^31)-1) 429.4967.295 elementi. Mi sa che ci basta int long è ((2^63)-1)
+    @Basic
     @Column(name = "Password", nullable=false)
     private String password; //Loro hanno aggiunto in più che devono essere unique
+    @Basic
     @Column(name = "Insolvent", nullable=false)
     private Boolean insolvent;
     @Basic
     @Column(name = "failedPay", nullable=false)
     private int failedPay;
+
+    //data will be fetched only when the user asks for payment history
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<PaymentEntity> payments;
+
+    @OneToMany(mappedBy = "refUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<AuditEntity> audits;
+
+    @OneToMany(mappedBy = "refUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<OrderEntity> orders;
+
+
+    public UserEntity() {
+    }
+
+    //costruttore entity
+    public UserEntity(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        failedPay=0;
+        insolvent=false;
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+/*
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> payment;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PaymentEntity> payment;
+    */
     /*
     A volte, potremmo voler rendere un campo non persistente.
     Possiamo usare l'annotazione @Transient per farlo. Specifica che il campo
@@ -134,75 +196,24 @@ public class UserEntity implements Serializable{
     java.time.OffsetDateTime.
      */
 
-    public UserEntity() {
-    }
-
-    //costruttore entity
-    public UserEntity(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        failedPay=0;
-        insolvent=false;
-    }
-
-    /*
-    @Basic
-    @Column(name = "Username")
-    private String username;
-    @Basic
-    @Column(name = "Password")
-    private String password;
-    @Basic
-    @Column(name = "Insolvent")
-    private Object insolvent;
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Object getFailedPay() {
-        return failedPay;
-    }
-
-    public void setFailedPay(Object failedPay) {
-        this.failedPay = failedPay;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Object getInsolvent() {
+    public boolean getInsolvent() {
         return insolvent;
     }
 
-    public void setInsolvent(Object insolvent) {
+    public void setInsolvent(boolean insolvent) {
         this.insolvent = insolvent;
+    }
+
+    public int getFailedPay() {
+        return failedPay;
+    }
+
+    public void setFailedPay(int failedPay) {
+        this.failedPay = failedPay;
     }
 
     @Override
@@ -231,5 +242,29 @@ public class UserEntity implements Serializable{
         result = 31 * result + (insolvent != null ? insolvent.hashCode() : 0);
         result = 31 * result + failedPay;
         return result;
-    }*/
+    }
+
+    public Collection<AuditEntity> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Collection<AuditEntity> audits) {
+        this.audits = audits;
+    }
+
+    public Collection<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Collection<OrderEntity> orders) {
+        this.orders = orders;
+    }
+
+    public Collection<PaymentEntity> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Collection<PaymentEntity> payments) {
+        this.payments = payments;
+    }
 }

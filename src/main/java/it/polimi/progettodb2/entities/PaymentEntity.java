@@ -3,9 +3,10 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
-@Table(name = "payment", schema = "dbproj")
+@Table(name = "payment", schema = "dbproj", catalog = "")
 public class PaymentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,6 +24,31 @@ public class PaymentEntity {
     @Basic
     @Column(name = "payTime")
     private Timestamp payTime;
+
+
+//da sistemare
+    @OneToMany(mappedBy = "paymentByRefLastRejection")
+    private Collection<AuditEntity> auditsByIdPayments;
+//*****************************************************
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
+    @JoinColumn(name = "refOrder", referencedColumnName = "idOrder", nullable = false)
+    private OrderEntity paymentRelatedToOrder;
+
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}
+    )
+    @JoinColumn(name = "refUser", referencedColumnName = "idUser", nullable = false)
+    private UserEntity paymentRelatedToUser;
 
     public int getIdPayments() {
         return idPayments;
@@ -88,5 +114,29 @@ public class PaymentEntity {
         result = 31 * result + (int) status;
         result = 31 * result + (payTime != null ? payTime.hashCode() : 0);
         return result;
+    }
+
+    public Collection<AuditEntity> getAuditsByIdPayments() {
+        return auditsByIdPayments;
+    }
+
+    public void setAuditsByIdPayments(Collection<AuditEntity> auditsByIdPayments) {
+        this.auditsByIdPayments = auditsByIdPayments;
+    }
+
+    public OrderEntity getOrderByRefOrder() {
+        return paymentRelatedToOrder;
+    }
+
+    public void setOrderByRefOrder(OrderEntity orderByRefOrder) {
+        this.paymentRelatedToOrder = orderByRefOrder;
+    }
+
+    public UserEntity getUserByRefUser() {
+        return paymentRelatedToUser;
+    }
+
+    public void setUserByRefUser(UserEntity userByRefUser) {
+        this.paymentRelatedToUser = userByRefUser;
     }
 }

@@ -4,15 +4,14 @@ create table package
         primary key,
     name        varchar(45) not null,
     refEmployee int         null,
-    sms       int null,
-    minute   int null,
-    mGiga     int null,
-    extraMGiga FLOAT null,
-    extraSMS  FLOAT null,
-    fixedPhone TINYINT null,
-    fGiga     int null,
-    extraFGiga FLOAT null,
-
+    sms         int         null,
+    minute      int         null,
+    mGiga       int         null,
+    extraMGiga  float       null,
+    extraSMS    float       null,
+    fixedPhone  tinyint     null,
+    fGiga       int         null,
+    extraFGiga  float       null,
     constraint name_UNIQUE
         unique (name),
     constraint fk_EmployeePack

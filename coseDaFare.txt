@@ -12,3 +12,9 @@ Forse potremmo togliere la tabella service, dovremmo rivedere un attimo il db
 
 --- uno stesso numero non può essere utilizzato da user diversi
 
+cambiare refservpack in refpack ownoptservice
+
+cambiare tabella audit, fare relazioni one to one
+
+
+--- feeperiod da sistemare

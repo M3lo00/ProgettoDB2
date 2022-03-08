@@ -3,7 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "chosenoptional", schema = "dbproj")
+@Table(name = "chosenoptional", schema = "dbproj", catalog = "")
 @IdClass(ChosenoptionalEntityPK.class)
 public class ChosenoptionalEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +14,12 @@ public class ChosenoptionalEntity {
     @Id
     @Column(name = "refOptService")
     private int refOptService;
+    @ManyToOne
+    @JoinColumn(name = "refOrder", referencedColumnName = "idOrder", nullable = false)
+    private OrderEntity orderByRefOrder;
+    @ManyToOne
+    @JoinColumn(name = "refOptService", referencedColumnName = "idOptService", nullable = false)
+    private OptserviceEntity optserviceByRefOptService;
 
     public int getRefOrder() {
         return refOrder;
@@ -49,5 +55,21 @@ public class ChosenoptionalEntity {
         int result = refOrder;
         result = 31 * result + refOptService;
         return result;
+    }
+
+    public OrderEntity getOrderByRefOrder() {
+        return orderByRefOrder;
+    }
+
+    public void setOrderByRefOrder(OrderEntity orderByRefOrder) {
+        this.orderByRefOrder = orderByRefOrder;
+    }
+
+    public OptserviceEntity getOptserviceByRefOptService() {
+        return optserviceByRefOptService;
+    }
+
+    public void setOptserviceByRefOptService(OptserviceEntity optserviceByRefOptService) {
+        this.optserviceByRefOptService = optserviceByRefOptService;
     }
 }

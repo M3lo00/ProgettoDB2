@@ -3,6 +3,8 @@ create table audit
     refUser          int not null,
     refLastRejection int not null,
     primary key (refUser, refLastRejection),
+    constraint refUser
+        unique (refUser),
     constraint fk_Payment
         foreign key (refLastRejection) references payment (idPayments),
     constraint fk_User2

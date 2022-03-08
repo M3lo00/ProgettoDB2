@@ -3,6 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @NamedQueries(
@@ -20,7 +21,7 @@ import java.io.Serializable;
         }
 )
 
-@Table(name = "employee", schema = "dbproj")
+@Table(name = "employee", schema = "dbproj", catalog = "")
 public class EmployeeEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,8 +39,18 @@ public class EmployeeEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
+
+    @OneToMany(mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<OptserviceEntity> optServicesRelatedToEmployee;
+    @OneToMany(mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<PackageEntity> packagesRelatedToEmployee;
+
     public int getIdEmployee() {
         return idEmployee;
+    }
+
+    public void setIdEmployee(Integer idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public void setIdEmployee(int idEmployee) {
@@ -82,5 +93,21 @@ public class EmployeeEntity implements Serializable {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    public Collection<OptserviceEntity> getOptservicesByIdEmployee() {
+        return optServicesRelatedToEmployee;
+    }
+
+    public void setOptservicesByIdEmployee(Collection<OptserviceEntity> optservicesByIdEmployee) {
+        this.optServicesRelatedToEmployee = optservicesByIdEmployee;
+    }
+
+    public Collection<PackageEntity> getPackagesByIdEmployee() {
+        return packagesRelatedToEmployee;
+    }
+
+    public void setPackagesByIdEmployee(Collection<PackageEntity> packagesByIdEmployee) {
+        this.packagesRelatedToEmployee = packagesByIdEmployee;
     }
 }

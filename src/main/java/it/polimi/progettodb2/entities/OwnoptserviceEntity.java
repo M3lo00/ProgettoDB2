@@ -3,7 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ownoptservice", schema = "dbproj")
+@Table(name = "ownoptservice", schema = "dbproj", catalog = "")
 @IdClass(OwnoptserviceEntityPK.class)
 public class OwnoptserviceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +14,12 @@ public class OwnoptserviceEntity {
     @Id
     @Column(name = "refOptService")
     private int refOptService;
+    @ManyToOne
+    @JoinColumn(name = "refServPack", referencedColumnName = "idPackage", nullable = false)
+    private PackageEntity packageByRefServPack;
+    @ManyToOne
+    @JoinColumn(name = "refOptService", referencedColumnName = "idOptService", nullable = false)
+    private OptserviceEntity optserviceByRefOptService;
 
     public int getRefServPack() {
         return refServPack;
@@ -49,5 +55,21 @@ public class OwnoptserviceEntity {
         int result = refServPack;
         result = 31 * result + refOptService;
         return result;
+    }
+
+    public PackageEntity getPackageByRefServPack() {
+        return packageByRefServPack;
+    }
+
+    public void setPackageByRefServPack(PackageEntity packageByRefServPack) {
+        this.packageByRefServPack = packageByRefServPack;
+    }
+
+    public OptserviceEntity getOptserviceByRefOptService() {
+        return optserviceByRefOptService;
+    }
+
+    public void setOptserviceByRefOptService(OptserviceEntity optserviceByRefOptService) {
+        this.optserviceByRefOptService = optserviceByRefOptService;
     }
 }

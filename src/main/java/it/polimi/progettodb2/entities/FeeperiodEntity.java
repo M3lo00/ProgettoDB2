@@ -3,7 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "feeperiod", schema = "dbproj")
+@Table(name = "feeperiod", schema = "dbproj", catalog = "")
 @IdClass(FeeperiodEntityPK.class)
 public class FeeperiodEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,15 @@ public class FeeperiodEntity {
     @Basic
     @Column(name = "fee")
     private Integer fee;
+    @Basic
+    @Column(name = "periodo")
+    private int periodo;
+
+
+
+    @OneToOne
+    @JoinColumn(name = "refPackage", referencedColumnName = "idPackage", nullable = false)
+    private PackageEntity packageByRefPackage;
 
     public int getRefPackage() {
         return refPackage;
@@ -62,5 +71,21 @@ public class FeeperiodEntity {
         result = 31 * result + period;
         result = 31 * result + (fee != null ? fee.hashCode() : 0);
         return result;
+    }
+
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
+
+    public PackageEntity getPackageByRefPackage() {
+        return packageByRefPackage;
+    }
+
+    public void setPackageByRefPackage(PackageEntity packageByRefPackage) {
+        this.packageByRefPackage = packageByRefPackage;
     }
 }

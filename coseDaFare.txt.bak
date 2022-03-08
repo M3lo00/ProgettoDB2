@@ -14,18 +14,7 @@ Forse potremmo togliere la tabella service, dovremmo rivedere un attimo il db
 
 cambiare refservpack in refpack ownoptservice
 
-BuyService
-ConfirmationPage
-bill the customer by calling an external service
-A service activation schedule is a record of the services and optional products to activate for the user with their date of activation and date of deactivation.
+cambiare tabella audit, fare relazioni one to one
 
-Employee:
-	login
-	creation of service packages
-	
-	Number of total purchases per package.
-	Number of total purchases per package and validity period.
-	Total value of sales per package with and without the optional products.
-	Average number of optional products sold together with each service package.
-	List of insolvent users, suspended orders and alerts.
-	Best seller optional product, i.e. the optional product with the greatest value of sales across all the sold service packages.
+
+--- feeperiod da sistemare

@@ -1,5 +1,3 @@
-Forse potremmo togliere la tabella service, dovremmo rivedere un attimo il db
-
 --- Chiedere se fare la registrazione di employee
 --- Decidere se mettere required nel registration form o permettere di sign uppare per mostrare l'errore di campo vuoto
 --- button sign up: formnovalidate class="btn btn-success"
@@ -11,8 +9,6 @@ Forse potremmo togliere la tabella service, dovremmo rivedere un attimo il db
 --- risulta essere >= dell'end date delle offerte già presenti relative al numero
 
 --- uno stesso numero non può essere utilizzato da user diversi
-
-cambiare refservpack in refpack ownoptservice
 
 User:
 

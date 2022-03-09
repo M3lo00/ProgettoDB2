@@ -1,12 +1,13 @@
 create table ownoptservice
 (
-    refServPack   int not null,
+    refPack   int not null,
     refOptService int not null,
-    primary key (refServPack, refOptService),
+    primary key (refPack, refOptService),
     constraint fk_OptService
         foreign key (refOptService) references optservice (idOptService),
     constraint fk_Package
-        foreign key (refServPack) references package (idPackage)
+        foreign key (refPack) references package (idPackage)
+
 );
 
 create index fk_OptService_idx

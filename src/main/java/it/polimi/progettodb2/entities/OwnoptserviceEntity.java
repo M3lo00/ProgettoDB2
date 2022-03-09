@@ -8,25 +8,25 @@ import jakarta.persistence.*;
 public class OwnoptserviceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "refServPack")
-    private int refServPack;
+    @Column(name = "refPack")
+    private int refPack;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "refOptService")
     private int refOptService;
     @ManyToOne
-    @JoinColumn(name = "refServPack", referencedColumnName = "idPackage", nullable = false)
-    private PackageEntity packageByRefServPack;
+    @JoinColumn(name = "refPack", referencedColumnName = "idPackage", nullable = false)
+    private PackageEntity optServPackage;
     @ManyToOne
     @JoinColumn(name = "refOptService", referencedColumnName = "idOptService", nullable = false)
     private OptserviceEntity optserviceByRefOptService;
 
     public int getRefServPack() {
-        return refServPack;
+        return refPack;
     }
 
-    public void setRefServPack(int refServPack) {
-        this.refServPack = refServPack;
+    public void setRefServPack(int refPack) {
+        this.refPack = refPack;
     }
 
     public int getRefOptService() {
@@ -44,7 +44,7 @@ public class OwnoptserviceEntity {
 
         OwnoptserviceEntity that = (OwnoptserviceEntity) o;
 
-        if (refServPack != that.refServPack) return false;
+        if (refPack != that.refPack) return false;
         if (refOptService != that.refOptService) return false;
 
         return true;
@@ -52,17 +52,17 @@ public class OwnoptserviceEntity {
 
     @Override
     public int hashCode() {
-        int result = refServPack;
+        int result = refPack;
         result = 31 * result + refOptService;
         return result;
     }
 
-    public PackageEntity getPackageByRefServPack() {
-        return packageByRefServPack;
+    public PackageEntity getOptServPackage() {
+        return optServPackage;
     }
 
-    public void setPackageByRefServPack(PackageEntity packageByRefServPack) {
-        this.packageByRefServPack = packageByRefServPack;
+    public void setPackageByRefServPack(PackageEntity optServPackage) {
+        this.optServPackage = optServPackage;
     }
 
     public OptserviceEntity getOptserviceByRefOptService() {

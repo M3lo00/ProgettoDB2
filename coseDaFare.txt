@@ -1,7 +1,7 @@
 --- Chiedere se fare la registrazione di employee
 --- Decidere se mettere required nel registration form o permettere di sign uppare per mostrare l'errore di campo vuoto
 --- button sign up: formnovalidate class="btn btn-success"
-
+dbproj
 ---Appena l'offerta è terminata è necessario eliminare la tupla dalla tab order per permettere ad un numero di comprare
 ---un altro pacchetto con lo stesso numero
 
@@ -41,3 +41,8 @@ Employee:
 
 
 --- user ed employee non possono avere lo stesso username
+
+Trigger quando viene rifiutato un pagamento per un pacchetto in cui la start date è stata superata aggiornare con la data del pagamento accettato
+
+--- Facciamo il total amount come trigger ??
+

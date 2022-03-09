@@ -6,6 +6,7 @@ create table `order`
     refPack      int                       not null,
     creationDate datetime                  not null,
     startDate    date                      null,
+    periodo      int                       not null,
     valid        tinyint unsigned zerofill null,
     totalAmount  int                       not null,
     nMobile      int                       null,

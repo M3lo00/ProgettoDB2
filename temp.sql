@@ -30,7 +30,7 @@ create table totpurchaseperpackandvalidity
 );
 
 insert into `order` (refUser, refPack, creationDate, startDate, periodo, totalAmount, valid)
-    VALUES (4,5, CURRENT_DATE, current_date, 12, 15, 1);
+    VALUES (4,5, CURRENT_DATE, current_date, 12, 15, 0);
 
 select *
 from `order`

@@ -47,3 +47,5 @@ Trigger quando viene rifiutato un pagamento per un pacchetto in cui la start dat
 --- Facciamo il total amount come trigger ??
 
 add auto_increment to OptServices
+
+Trigger 5 insolvent list, conviene il trigger o l'attributo?

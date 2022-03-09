@@ -35,7 +35,7 @@ BEGIN
     END IF;
 END;
 
-create trigger addPurchaseToPackage
+create trigger updatePurchaseToPackage
     after update
     on `order`
     for each row

@@ -31,6 +31,12 @@ Employee:
 
 	List of insolvent users, suspended orders and alerts.
 	Best seller optional product, i.e. the optional product with the greatest value of sales across all the sold service packages.
+
+	Triggers dei ragazzi
+	    first query
+            1. aumento di 1 il pack corrispondente ad un ordine effettuato correttamente (is valid==true)
+            2. aumento di 1 il pack corrispondente ad un ordine effettuato con un errore nel pagamento che poi è stato pagato
+            3. employee crea il pack
     sommatoria costo mensile * mesi
 
 

@@ -46,3 +46,4 @@ BEGIN
         WHERE package_id =NEW.refPack AND periodo=NEW.periodo;
     END IF;
 END;
+

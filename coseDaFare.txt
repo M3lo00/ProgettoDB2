@@ -25,11 +25,11 @@ Employee:
 	Number of total purchases per package and validity period.
 	(chiedere al professore se va bene unire le due funzioni precedenti)
 
-	Total value of sales per package with and without the optional products.
+	**Total value of sales per package with and without the optional products.
 	Average number of optional products sold together with each service package.
 	(chiedere se è inutile mettere l'attributo avg avendo total/how many)
 
-	List of insolvent users, suspended orders and alerts.
+	**List of insolvent users, suspended orders and alerts.
 	Best seller optional product, i.e. the optional product with the greatest value of sales across all the sold service packages.
 
 	Triggers dei ragazzi

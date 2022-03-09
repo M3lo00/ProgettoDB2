@@ -24,22 +24,25 @@ BEGIN
 end;
 
 create trigger addPurchaseToPackage
-after insert on `order`
-for each row
+    after insert
+    on `order`
+    for each row
 BEGIN
-    IF NEW.valid = true THEN
+    IF NEW.valid = 1 THEN
         UPDATE totpurchaseperpackandvalidity
         SET totalPurchases = totalPurchases + 1
-        WHERE (package_id, periodo) IN (NEW.refPack, NEW.periodo);
+        WHERE package_id =NEW.refPack AND periodo=NEW.periodo;
     END IF;
 END;
 
-#IN (SELECT s.idPackage, s.periodo
- #   FROM `package` AS s
-  #  WHERE s.idPackage = NEW.refPack
-   #   AND s.periodo= NEW.periodo);
-
-WHERE (package_id, periodo) IN (SELECT s.refPack, s.periodo
-                                        FROM `order` AS s
-                                        WHERE s.refPack = NEW.refPack
-                                        AND s.periodo= NEW.periodo);
+create trigger addPurchaseToPackage
+    after update
+    on `order`
+    for each row
+BEGIN
+    IF NEW.valid = 1 THEN
+        UPDATE totpurchaseperpackandvalidity
+        SET totalPurchases = totalPurchases + 1
+        WHERE package_id =NEW.refPack AND periodo=NEW.periodo;
+    END IF;
+END;

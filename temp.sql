@@ -2,7 +2,7 @@ select *
 from package
 
 insert into package (name, sms)
-    values ('prova', 1);
+    values ('prova1', 12);
 
 drop trigger newPackage
 
@@ -29,8 +29,8 @@ create table totpurchaseperpackandvalidity
         foreign key (package_id) references package (idPackage)
 );
 
-insert into `order` (refUser, refPack, creationDate, startDate, periodo, totalAmount)
-    VALUES (4,4, CURRENT_DATE, current_date, 12, 10);
+insert into `order` (refUser, refPack, creationDate, startDate, periodo, totalAmount, valid)
+    VALUES (4,5, CURRENT_DATE, current_date, 12, 15, 1);
 
 select *
 from `order`

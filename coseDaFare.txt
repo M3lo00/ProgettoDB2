@@ -49,3 +49,15 @@ Trigger quando viene rifiutato un pagamento per un pacchetto in cui la start dat
 add auto_increment to OptServices
 
 Trigger 5 insolvent list, conviene il trigger o l'attributo?
+
+
+
+
+--- HomePage Customer
+--- HomePage Employee
+--- Public landing
+--- Buy service
+--- Confirmation
+--- Login
+--- Registration
+--- Sales Report 

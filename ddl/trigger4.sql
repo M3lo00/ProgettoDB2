@@ -21,18 +21,23 @@ END;
 CREATE TRIGGER addOrderAvg
     AFTER INSERT ON `order` for each row
 BEGIN
-    DECLARE temporaryChos, x  int;
+    DECLARE temporaryChos, x, z, y  int;
     IF NEW.valid = 1 THEN
-        SELECT count(*), o.idOrder INTO temporaryChos, x
+        SELECT o.idOrder, count(*) INTO x
         FROM dbproj.order as o
-                 JOIN chosenoptional c on o.idOrder = c.refOrder
-                 JOIN ownoptservice o2 on o.refPack = o2.refPack
+                 INNER JOIN ownoptservice o2 on o.refPack = o2.refPack
         WHERE o.refPack = NEW.refPack
         GROUP BY o.idOrder;
 
+        SELECT o1.idOrder, count(*) INTO y
+        FROM dbproj.order as o1
+                 INNER JOIN ownoptservice o2 on o1.refPack = o2.refPack
+        WHERE o1.refPack = NEW.refPack
+        GROUP BY o1.idOrder;
 
+        
         UPDATE avgproductperservice
-        SET numoptservice = numoptservice + temporaryChos,
+        SET numoptservice = numoptservice + x + y,
             numpackage = numpackage +1
         WHERE package_id =NEW.refPack;
     END IF;

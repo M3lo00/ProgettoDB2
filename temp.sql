@@ -30,7 +30,7 @@ create table totpurchaseperpackandvalidity
 );
 
 insert into `order` (refUser, refPack, creationDate, startDate, periodo, totalAmount, valid)
-    VALUES (4,5, CURRENT_DATE, current_date, 12, 15, 0);
+    VALUES (4,5, CURRENT_DATE, current_date, 12, 15, 1);
 
 select *
 from `order`
@@ -47,3 +47,10 @@ BEGIN
         WHERE package_id =NEW.refPack AND periodo=NEW.periodo;
     END IF;
 END;
+
+SELECT count(*), o.idOrder
+FROM dbproj.order as o
+         JOIN chosenoptional c on o.idOrder = c.refOrder
+         JOIN ownoptservice o2 on o.refPack = o2.refPack
+WHERE o.refPack = 5 and o.idOrder=23
+GROUP BY o.idOrder;

@@ -19,25 +19,50 @@ END;
 
 
 CREATE TRIGGER addOrderAvg
-    AFTER INSERT ON `order` for each row
+    AFTER UPDATE ON `order` for each row
 BEGIN
-    DECLARE temporaryChos, x, z, y  int;
+    DECLARE temporaryChosAdd, x, temporaryChosPack, y  int;
     IF NEW.valid = 1 THEN
-        SELECT o.idOrder, count(*) INTO x
+        SELECT count(*), o.idOrder INTO temporaryChosAdd
         FROM dbproj.order as o
                  INNER JOIN ownoptservice o2 on o.refPack = o2.refPack
         WHERE o.refPack = NEW.refPack
         GROUP BY o.idOrder;
 
-        SELECT o1.idOrder, count(*) INTO y
+        SELECT count(*), o1.idOrder INTO temporaryChosPack
         FROM dbproj.order as o1
                  INNER JOIN ownoptservice o2 on o1.refPack = o2.refPack
         WHERE o1.refPack = NEW.refPack
         GROUP BY o1.idOrder;
 
-        
+
         UPDATE avgproductperservice
-        SET numoptservice = numoptservice + x + y,
+        SET numoptservice = numoptservice + temporaryChosAdd + temporaryChosPack,
+            numpackage = numpackage +1
+        WHERE package_id =NEW.refPack;
+    END IF;
+END;
+
+CREATE TRIGGER upOrderAvg
+    AFTER UPDATE ON `order` for each row
+BEGIN
+    DECLARE temporaryChosAdd, x, temporaryChosPack, y  int;
+    IF NEW.valid = 1 THEN
+        SELECT count(*), o.idOrder INTO temporaryChosAdd
+        FROM dbproj.order as o
+                 INNER JOIN ownoptservice o2 on o.refPack = o2.refPack
+        WHERE o.refPack = NEW.refPack
+        GROUP BY o.idOrder;
+
+        SELECT count(*), o1.idOrder INTO temporaryChosPack
+        FROM dbproj.order as o1
+                 INNER JOIN ownoptservice o2 on o1.refPack = o2.refPack
+        WHERE o1.refPack = NEW.refPack
+        GROUP BY o1.idOrder;
+
+
+        UPDATE avgproductperservice
+        SET numoptservice = numoptservice + temporaryChosAdd + temporaryChosPack,
             numpackage = numpackage +1
         WHERE package_id =NEW.refPack;
     END IF;

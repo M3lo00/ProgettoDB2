@@ -54,3 +54,10 @@ FROM dbproj.order as o
          JOIN ownoptservice o2 on o.refPack = o2.refPack
 WHERE o.refPack = 5 and o.idOrder=23
 GROUP BY o.idOrder;
+
+SELECT count(*), o.idOrder
+FROM dbproj.order as o
+         JOIN chosenoptional c on o.idOrder = c.refOrder
+         JOIN ownoptservice o2 on o.refPack = o2.refPack
+WHERE o.refPack = 5 and o.idOrder=23
+GROUP BY o.idOrder;

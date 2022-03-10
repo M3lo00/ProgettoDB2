@@ -47,6 +47,3 @@ BEGIN
     END IF;
 END;
 
-
-
-create trigger

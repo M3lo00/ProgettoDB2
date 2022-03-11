@@ -3,36 +3,26 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "audit", schema = "dbproj", catalog = "")
-@IdClass(AuditEntityPK.class)
+@Table(name = "audit", schema = "dbproj")
 public class AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "idAudit")
+    private int idAudit;
+    
     @Column(name = "refUser")
     private int refUser;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+    
     @Column(name = "refLastRejection")
     private int refLastRejection;
 
+    public int getIdAudit() {
+        return idAudit;
+    }
 
-
-    @OneToOne(mappedBy = "idUser", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.DETACH}
-    )
-    private UserEntity userEntity;
-
-    @OneToOne(mappedBy = "idPayments", fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.DETACH}
-    )
-    private PaymentEntity paymentByRefLastRejection;
-
+    public void setIdAudit(int idAudit) {
+        this.idAudit = idAudit;
+    }
 
     public int getRefUser() {
         return refUser;
@@ -57,6 +47,7 @@ public class AuditEntity {
 
         AuditEntity that = (AuditEntity) o;
 
+        if (idAudit != that.idAudit) return false;
         if (refUser != that.refUser) return false;
         if (refLastRejection != that.refLastRejection) return false;
 
@@ -65,24 +56,9 @@ public class AuditEntity {
 
     @Override
     public int hashCode() {
-        int result = refUser;
+        int result = idAudit;
+        result = 31 * result + refUser;
         result = 31 * result + refLastRejection;
         return result;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public PaymentEntity getPaymentByRefLastRejection() {
-        return paymentByRefLastRejection;
-    }
-
-    public void setPaymentByRefLastRejection(PaymentEntity paymentByRefLastRejection) {
-        this.paymentByRefLastRejection = paymentByRefLastRejection;
     }
 }

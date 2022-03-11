@@ -4,74 +4,77 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Collection;
 
 @Entity
-@Table(name = "order", schema = "dbproj", catalog = "")
+@Table(name = "order", schema = "dbproj")
 public class OrderEntity {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idOrder")
-    private Integer idOrder;
-    @Basic
-    @Column(name = "refUser")
-    private int refUser;
-    @Basic
+    private int idOrder;
+    
     @Column(name = "refPack")
     private int refPack;
-    @Basic
+    
     @Column(name = "creationDate")
     private Timestamp creationDate;
-    @Basic
+    
     @Column(name = "startDate")
     private Date startDate;
-    @Basic
+    
+    @Column(name = "periodo")
+    private int periodo;
+    
     @Column(name = "valid")
-    private Object valid;
-    @Basic
+    private Boolean valid;
+    
     @Column(name = "totalAmount")
     private int totalAmount;
-    @Basic
+    
     @Column(name = "nMobile")
     private Integer nMobile;
-    @Basic
+    
     @Column(name = "nFixed")
     private Integer nFixed;
 
-    @ManyToOne (fetch = FetchType.EAGER, cascade = {
+    @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
-            CascadeType.DETACH}
-    )
-    @JoinColumn(name = "refUser", referencedColumnName = "idUser", nullable = false)
-    private UserEntity userEntity;
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "refUser")
+    private UserEntity refUser;
 
-    @ManyToOne (fetch = FetchType.EAGER, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.DETACH}
-    )
-    @JoinColumn(name = "refPack", referencedColumnName = "idPackage", nullable = false)
-    private PackageEntity packageEntity;
+    public void OrderEntity(){}
 
-    @OneToMany(mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<PaymentEntity> payments;
+    public void OrderEntity(UserEntity refUser, int refPack, Timestamp creationDate, Date startDate, Boolean valid, int totalAmount, int nMobile, int nFixed){
+            this.refUser=refUser;
+            this.refPack=refPack;
+            this.creationDate=creationDate;
+            this.startDate=startDate;
+            this.valid=valid;
+            this.totalAmount=totalAmount;
+            this.nMobile=nMobile;
+            this.nFixed=nFixed;
+    }
 
-    public Integer getIdOrder() {
+    public int getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(Integer idOrder) {
+    public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
     }
 
-    public int getRefUser() {
+    public UserEntity getRefUser() {
         return refUser;
     }
 
-    public void setRefUser(int refUser) {
+    public void setRefUser(UserEntity refUser) {
         this.refUser = refUser;
     }
 
@@ -99,11 +102,19 @@ public class OrderEntity {
         this.startDate = startDate;
     }
 
-    public Object getValid() {
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
+
+    public Boolean getValid() {
         return valid;
     }
 
-    public void setValid(Object valid) {
+    public void setValid(Boolean valid) {
         this.valid = valid;
     }
 
@@ -138,10 +149,11 @@ public class OrderEntity {
 
         OrderEntity that = (OrderEntity) o;
 
+        if (idOrder != that.idOrder) return false;
         if (refUser != that.refUser) return false;
         if (refPack != that.refPack) return false;
+        if (periodo != that.periodo) return false;
         if (totalAmount != that.totalAmount) return false;
-        if (idOrder != null ? !idOrder.equals(that.idOrder) : that.idOrder != null) return false;
         if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
         if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
         if (valid != null ? !valid.equals(that.valid) : that.valid != null) return false;
@@ -153,39 +165,16 @@ public class OrderEntity {
 
     @Override
     public int hashCode() {
-        int result = idOrder != null ? idOrder.hashCode() : 0;
-        result = 31 * result + refUser;
+        int result = idOrder;
+        result = 31 * result + (refUser != null ? refUser.hashCode() : 0);
         result = 31 * result + refPack;
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + periodo;
         result = 31 * result + (valid != null ? valid.hashCode() : 0);
         result = 31 * result + totalAmount;
         result = 31 * result + (nMobile != null ? nMobile.hashCode() : 0);
         result = 31 * result + (nFixed != null ? nFixed.hashCode() : 0);
         return result;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public PackageEntity getPackageEntity() {
-        return packageEntity;
-    }
-
-    public void setPackageEntity(PackageEntity packageEntity) {
-        this.packageEntity = packageEntity;
-    }
-
-    public Collection<PaymentEntity> getPayments() {
-        return payments;
-    }
-
-    public void setPayments(Collection<PaymentEntity> payments) {
-        this.payments = payments;
     }
 }

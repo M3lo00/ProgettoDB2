@@ -2,41 +2,22 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
-
 @Entity
-@Table(name = "optservice", schema = "dbproj", catalog = "")
+@Table(name = "optservice", schema = "dbproj")
 public class OptserviceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idOptService")
     private int idOptService;
-    @Basic
+    
     @Column(name = "name")
     private String name;
-    @Basic
+    
     @Column(name = "monthly")
     private int monthly;
-    @Basic
+    
     @Column(name = "refEmployee")
     private Integer refEmployee;
-
-
-
-
-
-
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.DETACH}
-    )
-    @JoinColumn(name = "refEmployee", referencedColumnName = "idEmployee")
-    private EmployeeEntity optCreatedByEmployee;
-
-
 
     public int getIdOptService() {
         return idOptService;
@@ -93,16 +74,4 @@ public class OptserviceEntity {
         result = 31 * result + (refEmployee != null ? refEmployee.hashCode() : 0);
         return result;
     }
-
-
-
-    public EmployeeEntity getEmployeeByRefEmployee() {
-        return optCreatedByEmployee;
-    }
-
-    public void setEmployeeByRefEmployee(EmployeeEntity employeeByRefEmployee) {
-        this.optCreatedByEmployee = employeeByRefEmployee;
-    }
-
-
 }

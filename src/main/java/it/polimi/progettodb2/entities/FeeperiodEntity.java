@@ -3,34 +3,29 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "feeperiod", schema = "dbproj", catalog = "")
-@IdClass(FeeperiodEntityPK.class)
+@Table(name = "feeperiod", schema = "dbproj")
 public class FeeperiodEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "idFeePeriod")
+    private int idFeePeriod;
+    
     @Column(name = "refPackage")
     private int refPackage;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "period")
-    private int period;
-    @Basic
-    @Column(name = "fee")
-    private Integer fee;
-    @Basic
+    
     @Column(name = "periodo")
     private int periodo;
+    
+    @Column(name = "fee")
+    private Integer fee;
 
+    public int getIdFeePeriod() {
+        return idFeePeriod;
+    }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.DETACH}
-    )
-    @JoinColumn(name = "refPackage", referencedColumnName = "idPackage", nullable = false)
-    private PackageEntity packageByRefPackage;
-
+    public void setIdFeePeriod(int idFeePeriod) {
+        this.idFeePeriod = idFeePeriod;
+    }
 
     public int getRefPackage() {
         return refPackage;
@@ -40,12 +35,12 @@ public class FeeperiodEntity {
         this.refPackage = refPackage;
     }
 
-    public int getPeriod() {
-        return period;
+    public int getPeriodo() {
+        return periodo;
     }
 
-    public void setPeriod(int period) {
-        this.period = period;
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
     }
 
     public Integer getFee() {
@@ -63,8 +58,9 @@ public class FeeperiodEntity {
 
         FeeperiodEntity that = (FeeperiodEntity) o;
 
+        if (idFeePeriod != that.idFeePeriod) return false;
         if (refPackage != that.refPackage) return false;
-        if (period != that.period) return false;
+        if (periodo != that.periodo) return false;
         if (fee != null ? !fee.equals(that.fee) : that.fee != null) return false;
 
         return true;
@@ -72,25 +68,10 @@ public class FeeperiodEntity {
 
     @Override
     public int hashCode() {
-        int result = refPackage;
-        result = 31 * result + period;
+        int result = idFeePeriod;
+        result = 31 * result + refPackage;
+        result = 31 * result + periodo;
         result = 31 * result + (fee != null ? fee.hashCode() : 0);
         return result;
-    }
-
-    public int getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(int periodo) {
-        this.periodo = periodo;
-    }
-
-    public PackageEntity getPackageByRefPackage() {
-        return packageByRefPackage;
-    }
-
-    public void setPackageByRefPackage(PackageEntity packageByRefPackage) {
-        this.packageByRefPackage = packageByRefPackage;
     }
 }

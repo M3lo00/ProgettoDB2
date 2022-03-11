@@ -8,21 +8,21 @@ import jakarta.persistence.Id;
 import java.io.Serializable;
 
 public class OwnoptserviceEntityPK implements Serializable {
-    @Column(name = "refServPack")
+    @Column(name = "refPack")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int refServPack;
+    private int refPack;
     @Column(name = "refOptService")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int refOptService;
 
-    public int getRefServPack() {
-        return refServPack;
+    public int getRefPack() {
+        return refPack;
     }
 
-    public void setRefServPack(int refServPack) {
-        this.refServPack = refServPack;
+    public void setRefPack(int refPack) {
+        this.refPack = refPack;
     }
 
     public int getRefOptService() {
@@ -40,7 +40,7 @@ public class OwnoptserviceEntityPK implements Serializable {
 
         OwnoptserviceEntityPK that = (OwnoptserviceEntityPK) o;
 
-        if (refServPack != that.refServPack) return false;
+        if (refPack != that.refPack) return false;
         if (refOptService != that.refOptService) return false;
 
         return true;
@@ -48,7 +48,7 @@ public class OwnoptserviceEntityPK implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = refServPack;
+        int result = refPack;
         result = 31 * result + refOptService;
         return result;
     }

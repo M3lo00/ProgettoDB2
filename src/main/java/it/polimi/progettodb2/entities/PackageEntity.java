@@ -2,71 +2,46 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
-
 @Entity
-@Table(name = "package", schema = "dbproj", catalog = "")
+@Table(name = "package", schema = "dbproj")
 public class PackageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idPackage")
     private int idPackage;
-    @Basic
+    
     @Column(name = "name")
     private String name;
-    @Basic
+    
     @Column(name = "refEmployee")
     private Integer refEmployee;
-    @Basic
+    
     @Column(name = "sms")
     private Integer sms;
-    @Basic
+    
     @Column(name = "minute")
     private Integer minute;
-    @Basic
+    
     @Column(name = "mGiga")
     private Integer mGiga;
-    @Basic
+    
     @Column(name = "extraMGiga")
     private Double extraMGiga;
-    @Basic
+    
     @Column(name = "extraSMS")
     private Double extraSms;
-    @Basic
+    
     @Column(name = "fixedPhone")
     private Byte fixedPhone;
-    @Basic
+    
     @Column(name = "fGiga")
     private Integer fGiga;
-    @Basic
+    
     @Column(name = "extraFGiga")
     private Double extraFGiga;
 
-
-
-
-    @OneToMany(mappedBy = "packageByRefPackage", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<FeeperiodEntity> feeperiodByIdPackage;
-
-
-    @OneToMany(mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<OrderEntity> ordersPackage;
-
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.DETACH}
-    ) @JoinColumn(name = "refEmployee", referencedColumnName = "idEmployee")
-    private EmployeeEntity createdByEmployee;
-
     public int getIdPackage() {
         return idPackage;
-    }
-
-    public void setIdPackage(Integer idPackage) {
-        this.idPackage = idPackage;
     }
 
     public void setIdPackage(int idPackage) {
@@ -87,28 +62,6 @@ public class PackageEntity {
 
     public void setRefEmployee(Integer refEmployee) {
         this.refEmployee = refEmployee;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PackageEntity that = (PackageEntity) o;
-
-        if (idPackage != that.idPackage) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (refEmployee != null ? !refEmployee.equals(that.refEmployee) : that.refEmployee != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idPackage;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (refEmployee != null ? refEmployee.hashCode() : 0);
-        return result;
     }
 
     public Integer getSms() {
@@ -175,29 +128,41 @@ public class PackageEntity {
         this.extraFGiga = extraFGiga;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        PackageEntity that = (PackageEntity) o;
 
-    public Collection<FeeperiodEntity> getFeeperiodByIdPackage() {
-        return feeperiodByIdPackage;
+        if (idPackage != that.idPackage) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (refEmployee != null ? !refEmployee.equals(that.refEmployee) : that.refEmployee != null) return false;
+        if (sms != null ? !sms.equals(that.sms) : that.sms != null) return false;
+        if (minute != null ? !minute.equals(that.minute) : that.minute != null) return false;
+        if (mGiga != null ? !mGiga.equals(that.mGiga) : that.mGiga != null) return false;
+        if (extraMGiga != null ? !extraMGiga.equals(that.extraMGiga) : that.extraMGiga != null) return false;
+        if (extraSms != null ? !extraSms.equals(that.extraSms) : that.extraSms != null) return false;
+        if (fixedPhone != null ? !fixedPhone.equals(that.fixedPhone) : that.fixedPhone != null) return false;
+        if (fGiga != null ? !fGiga.equals(that.fGiga) : that.fGiga != null) return false;
+        if (extraFGiga != null ? !extraFGiga.equals(that.extraFGiga) : that.extraFGiga != null) return false;
+
+        return true;
     }
 
-    public void setFeeperiodByIdPackage(Collection<FeeperiodEntity> feeperiodByIdPackage) {
-        this.feeperiodByIdPackage = feeperiodByIdPackage;
-    }
-
-    public Collection<OrderEntity> getOrdersByIdPackage() {
-        return ordersPackage;
-    }
-
-    public void setOrdersByIdPackage(Collection<OrderEntity> ordersByIdPackage) {
-        this.ordersPackage = ordersByIdPackage;
-    }
-
-    public EmployeeEntity getEmployeeByRefEmployee() {
-        return createdByEmployee;
-    }
-
-    public void setEmployeeByRefEmployee(EmployeeEntity employeeByRefEmployee) {
-        this.createdByEmployee = employeeByRefEmployee;
+    @Override
+    public int hashCode() {
+        int result = idPackage;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (refEmployee != null ? refEmployee.hashCode() : 0);
+        result = 31 * result + (sms != null ? sms.hashCode() : 0);
+        result = 31 * result + (minute != null ? minute.hashCode() : 0);
+        result = 31 * result + (mGiga != null ? mGiga.hashCode() : 0);
+        result = 31 * result + (extraMGiga != null ? extraMGiga.hashCode() : 0);
+        result = 31 * result + (extraSms != null ? extraSms.hashCode() : 0);
+        result = 31 * result + (fixedPhone != null ? fixedPhone.hashCode() : 0);
+        result = 31 * result + (fGiga != null ? fGiga.hashCode() : 0);
+        result = 31 * result + (extraFGiga != null ? extraFGiga.hashCode() : 0);
+        return result;
     }
 }

@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Table(name = "employee", schema = "dbproj")
+
 @NamedQueries(
         {
                 @NamedQuery(
@@ -21,36 +24,23 @@ import java.util.Collection;
         }
 )
 
-@Table(name = "employee", schema = "dbproj", catalog = "")
-public class EmployeeEntity implements Serializable {
+public class EmployeeEntity {
 
     private static final long serialVersionUID = 1L;
-    //dobbiamo capire perché si utilizza questo e perché in questo modo...
-
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idEmployee")
     private int idEmployee;
-    @Basic
+    
     @Column(name = "email")
     private String email;
-    @Basic
+    
     @Column(name = "password")
     private String password;
 
-
-    @OneToMany(mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<OptserviceEntity> optServicesRelatedToEmployee;
-    @OneToMany(mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<PackageEntity> packagesRelatedToEmployee;
-
     public int getIdEmployee() {
         return idEmployee;
-    }
-
-    public void setIdEmployee(Integer idEmployee) {
-        this.idEmployee = idEmployee;
     }
 
     public void setIdEmployee(int idEmployee) {
@@ -93,21 +83,5 @@ public class EmployeeEntity implements Serializable {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
-    }
-
-    public Collection<OptserviceEntity> getOptservicesByIdEmployee() {
-        return optServicesRelatedToEmployee;
-    }
-
-    public void setOptservicesByIdEmployee(Collection<OptserviceEntity> optservicesByIdEmployee) {
-        this.optServicesRelatedToEmployee = optservicesByIdEmployee;
-    }
-
-    public Collection<PackageEntity> getPackagesByIdEmployee() {
-        return packagesRelatedToEmployee;
-    }
-
-    public void setPackagesByIdEmployee(Collection<PackageEntity> packagesByIdEmployee) {
-        this.packagesRelatedToEmployee = packagesByIdEmployee;
     }
 }

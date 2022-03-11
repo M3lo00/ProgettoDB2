@@ -3,7 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ownoptservice", schema = "dbproj", catalog = "")
+@Table(name = "ownoptservice", schema = "dbproj")
 @IdClass(OwnoptserviceEntityPK.class)
 public class OwnoptserviceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,18 +14,12 @@ public class OwnoptserviceEntity {
     @Id
     @Column(name = "refOptService")
     private int refOptService;
-    @ManyToOne
-    @JoinColumn(name = "refPack", referencedColumnName = "idPackage", nullable = false)
-    private PackageEntity optServPackage;
-    @ManyToOne
-    @JoinColumn(name = "refOptService", referencedColumnName = "idOptService", nullable = false)
-    private OptserviceEntity optserviceByRefOptService;
 
-    public int getRefServPack() {
+    public int getRefPack() {
         return refPack;
     }
 
-    public void setRefServPack(int refPack) {
+    public void setRefPack(int refPack) {
         this.refPack = refPack;
     }
 
@@ -55,21 +49,5 @@ public class OwnoptserviceEntity {
         int result = refPack;
         result = 31 * result + refOptService;
         return result;
-    }
-
-    public PackageEntity getOptServPackage() {
-        return optServPackage;
-    }
-
-    public void setPackageByRefServPack(PackageEntity optServPackage) {
-        this.optServPackage = optServPackage;
-    }
-
-    public OptserviceEntity getOptserviceByRefOptService() {
-        return optserviceByRefOptService;
-    }
-
-    public void setOptserviceByRefOptService(OptserviceEntity optserviceByRefOptService) {
-        this.optserviceByRefOptService = optserviceByRefOptService;
     }
 }

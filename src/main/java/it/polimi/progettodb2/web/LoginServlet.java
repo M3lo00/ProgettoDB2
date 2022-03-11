@@ -71,43 +71,12 @@ public class LoginServlet extends HttpServlet {
                 else*/ destServlet = "hello-servlet";
 
                 session.setAttribute("user", user);
-                System.out.println(session.getAttribute("user"));
             }
-            else destServlet = "login?loginFailed=true";
+            else destServlet = "/dbproj/?loginFailed=true";
         }
 
         resp.sendRedirect(destServlet);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //servicePackage = (ServicePackageEntity) req.getSession(false).getAttribute("servicePackage");
-
-        String message = "Invalid email/password";
-
-        PaymentEntity payment= null;
-/*
-        try {
-            payment = paymentService.getPaymentById(1);
-        } catch (CredentialsException e) {
-            e.printStackTrace();
-        }
-
-        log(payment.toString());
-
-
- */
-        if (req.getParameter("loginFailed") != null) req.setAttribute("messageLogin", message);
-/*
-        System.out.println(payment.getIdPayments());
-        payment.getUser();
-        req.setAttribute("prova", payment.getStatus() + " prova ");
-
-
- */
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-        dispatcher.forward(req, resp);
-    }
 
 }

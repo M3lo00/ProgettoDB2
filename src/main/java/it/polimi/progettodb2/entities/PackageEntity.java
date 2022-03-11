@@ -7,6 +7,13 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
+
+@NamedQuery(
+        name = "Package.findAll",
+        query = "SELECT u " +
+                "FROM PackageEntity u "
+)
+
 @Table(name = "package", schema = "dbproj")
 public class PackageEntity implements Serializable {
 

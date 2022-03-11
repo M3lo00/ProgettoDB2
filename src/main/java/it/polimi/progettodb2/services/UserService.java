@@ -67,4 +67,9 @@ public class UserService {
                 .getResultStream().findFirst();
     }
 
+    public List<PackageEntity> findAllPackages(){
+
+        return em.createNamedQuery("Package.findAll", PackageEntity.class).getResultList();
+    }
+
 }

@@ -1,4 +1,5 @@
-<%-- <%@ page import="it.polimi.progettodb2.entities.ServicePackageEntity" %> --%>
+<%@ page import="it.polimi.progettodb2.entities.PackageEntity" %><%-- <%@ page import="it.polimi.progettodb2.entities.ServicePackageEntity" %> --%>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -9,11 +10,11 @@
 </head>
 <%--
 <style><%@include file="css/style.css"%></style>
-
-<%
-    ServicePackageEntity servicePackage = (ServicePackageEntity) request.getSession().getAttribute("servicePackage");
-%>
 --%>
+<%
+    List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
+%>
+
 <body>
 
 
@@ -45,8 +46,61 @@
             </form>
         </div>
     </div>
-    <div class="login-page">
-        <br>${prova}
+    <div >
+        <form action="packageSelect" method="post">
+
+            <%--@declare id="nameservpackage"--%>
+            <input class="inputSrvPackage" name="nameServPackage" placeholder="Name Service Package" required/>
+            <br><br>
+
+            <fieldset>
+                <legend>Choose one or more services</legend>
+                <%
+                    for (PackageEntity pack: packageEntityList) {
+                %>
+                <input type="checkbox" name="services"
+                       value="<%=pack.getIdPackage()%>"><%=pack.getName()%><br>
+                <%
+                    }
+                %>
+
+            </fieldset>
+
+            <br><br>
+                <%--
+            <fieldset>
+                <legend>Choose one or more optional products</legend>
+                <%
+
+                    for (OptionalProductEntity optProd: optionalProducts) {
+                %>
+                <input type="checkbox" name="optionalProducts"
+                       value="<%=optProd.getOptionalProduct_id() %>"><%=optProd.getName() %><br>
+                <%
+                    }
+                %>
+            </fieldset>
+
+            <br><br>
+
+            <fieldset>
+                <legend>Choose one or more validity periods associated to this service package</legend>
+                <%
+                    for (ValidityPeriodEntity valPer: validityPeriods) {
+                %>
+                <input type="checkbox" name="validityPeriods"
+                       value="<%=valPer.getValidityPeriod_id() %>"><%=valPer.toString() %><br>
+                <%
+                    }
+                %>
+            </fieldset>
+
+            <br>${messageServicePackage}
+            <br><br>
+            --%>
+
+            <button class="niceButton" type="submit">CREATE</button>
+        </form>
     </div>
 
 </div>

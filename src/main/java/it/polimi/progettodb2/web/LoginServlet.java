@@ -71,6 +71,7 @@ public class LoginServlet extends HttpServlet {
                 else*/ destServlet = "hello-servlet";
 
                 session.setAttribute("user", user);
+                System.out.println(session.getAttribute("user"));
             }
             else destServlet = "login?loginFailed=true";
         }
@@ -86,7 +87,7 @@ public class LoginServlet extends HttpServlet {
         String message = "Invalid email/password";
 
         PaymentEntity payment= null;
-
+/*
         try {
             payment = paymentService.getPaymentById(1);
         } catch (CredentialsException e) {
@@ -95,11 +96,16 @@ public class LoginServlet extends HttpServlet {
 
         log(payment.toString());
 
+
+ */
         if (req.getParameter("loginFailed") != null) req.setAttribute("messageLogin", message);
+/*
         System.out.println(payment.getIdPayments());
         payment.getUser();
         req.setAttribute("prova", payment.getStatus() + " prova ");
 
+
+ */
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
     }

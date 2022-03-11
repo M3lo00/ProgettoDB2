@@ -60,4 +60,6 @@ Trigger 5 insolvent list, conviene il trigger o l'attributo?
 --- Confirmation
 --- Login
 --- Registration
---- Sales Report 
+--- Sales Report
+
+A livello di enity aggiugere "nullable" nella definizione delle colonne

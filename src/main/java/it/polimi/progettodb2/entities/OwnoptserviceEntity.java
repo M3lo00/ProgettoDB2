@@ -2,10 +2,15 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "ownoptservice", schema = "dbproj")
 @IdClass(OwnoptserviceEntityPK.class)
-public class OwnoptserviceEntity {
+public class OwnoptserviceEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "refPack")

@@ -1,6 +1,7 @@
 package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +29,10 @@ import java.util.Objects;
                 "FROM UserEntity u " +
                 "WHERE u.email = :email"
 )
-public class UserEntity {
+public class UserEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idUser")
@@ -51,6 +55,12 @@ public class UserEntity {
 
     @OneToMany(targetEntity = OrderEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
+
+    @OneToMany(targetEntity = PaymentEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<PaymentEntity> pay;
+
+    @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private OrderEntity audits;
 
     public UserEntity() {
     }

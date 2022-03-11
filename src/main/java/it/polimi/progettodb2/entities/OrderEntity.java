@@ -2,12 +2,13 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "order", schema = "dbproj")
-public class OrderEntity {
+public class OrderEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -2,10 +2,15 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "chosenoptional", schema = "dbproj")
 @IdClass(ChosenoptionalEntityPK.class)
-public class ChosenoptionalEntity {
+public class ChosenoptionalEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "refOrder")

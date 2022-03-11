@@ -39,6 +39,10 @@ public class EmployeeEntity {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<PackageEntity> packagesRelatedToEmployee;
+
+
     public int getIdEmployee() {
         return idEmployee;
     }

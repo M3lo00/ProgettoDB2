@@ -2,9 +2,14 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "optservice", schema = "dbproj")
-public class OptserviceEntity {
+public class OptserviceEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idOptService")

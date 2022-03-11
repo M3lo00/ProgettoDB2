@@ -2,9 +2,16 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "package", schema = "dbproj")
-public class PackageEntity {
+public class PackageEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idPackage")
@@ -12,9 +19,7 @@ public class PackageEntity {
     
     @Column(name = "name")
     private String name;
-    
-    @Column(name = "refEmployee")
-    private Integer refEmployee;
+
     
     @Column(name = "sms")
     private Integer sms;
@@ -40,6 +45,17 @@ public class PackageEntity {
     @Column(name = "extraFGiga")
     private Double extraFGiga;
 
+    @ManyToOne(fetch=FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "refEmployee")
+    private EmployeeEntity refEmployee;
+
+
+
     public int getIdPackage() {
         return idPackage;
     }
@@ -56,11 +72,11 @@ public class PackageEntity {
         this.name = name;
     }
 
-    public Integer getRefEmployee() {
+    public EmployeeEntity getRefEmployee() {
         return refEmployee;
     }
 
-    public void setRefEmployee(Integer refEmployee) {
+    public void setRefEmployee(EmployeeEntity refEmployee) {
         this.refEmployee = refEmployee;
     }
 

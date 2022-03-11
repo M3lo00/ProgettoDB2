@@ -2,11 +2,24 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
+
+//@NamedQuery(name = "Payment.getById",
+ //       query = "SELECT r FROM PaymentEntity r  WHERE r.idPayments = ?1")
+@NamedQuery(name = "Payment.getById",
+        query = "SELECT r FROM PaymentEntity r  WHERE r.idPayments =: idPayments")
+
+@NamedQuery(name = "Payment.UserPayment",
+        query ="SELECT r FROM PaymentEntity r JOIN r.refUser u WHERE r.refUser=:user")
+
 @Table(name = "payment", schema = "dbproj")
-public class PaymentEntity {
+public class PaymentEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idPayments")
@@ -15,21 +28,32 @@ public class PaymentEntity {
     @Column(name = "refOrder")
     private int refOrder;
     
-    @Column(name = "refUser")
-    private int refUser;
-    
     @Column(name = "status")
     private byte status;
     
     @Column(name = "payTime")
     private Timestamp payTime;
 
+    /*@OneToOne(targetEntity = AuditEntity.class, mappedBy = "refLastRejection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private AuditEntity audit;
+    */
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "refUser", referencedColumnName = "idUser")
+    private UserEntity refUser;
+
+    public void setIdPayments(int idPayments) {
+        this.idPayments = idPayments;
+    }
+
     public int getIdPayments() {
         return idPayments;
     }
 
-    public void setIdPayments(int idPayments) {
-        this.idPayments = idPayments;
+    public void getUser(){
+        System.out.println("User entity "+ refUser);
+        System.out.println("siamo qua"+ idPayments+ " "+ payTime);
+        return;
     }
 
     public int getRefOrder() {
@@ -39,14 +63,14 @@ public class PaymentEntity {
     public void setRefOrder(int refOrder) {
         this.refOrder = refOrder;
     }
-
-    public int getRefUser() {
+/*
+    public UserEntity getRefUser() {
         return refUser;
     }
 
-    public void setRefUser(int refUser) {
+    public void setRefUser(UserEntity refUser) {
         this.refUser = refUser;
-    }
+    }*/
 
     public byte getStatus() {
         return status;
@@ -73,7 +97,7 @@ public class PaymentEntity {
 
         if (idPayments != that.idPayments) return false;
         if (refOrder != that.refOrder) return false;
-        if (refUser != that.refUser) return false;
+       //if (refUser != that.refUser) return false;
         if (status != that.status) return false;
         if (payTime != null ? !payTime.equals(that.payTime) : that.payTime != null) return false;
 
@@ -84,7 +108,7 @@ public class PaymentEntity {
     public int hashCode() {
         int result = idPayments;
         result = 31 * result + refOrder;
-        result = 31 * result + refUser;
+        //result = 31 * result + (refUser != null ? refUser.hashCode() : 0);
         result = 31 * result + (int) status;
         result = 31 * result + (payTime != null ? payTime.hashCode() : 0);
         return result;

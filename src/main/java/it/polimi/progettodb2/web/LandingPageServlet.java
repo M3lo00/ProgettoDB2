@@ -27,7 +27,7 @@ public class LandingPageServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        HttpSession session =req.getSession();
+        HttpSession session = req.getSession();
 
         String message = "Invalid email/password";
         if (req.getParameter("loginFailed") != null) req.setAttribute("messageLogin", message);

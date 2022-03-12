@@ -14,6 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/buy")
@@ -34,7 +36,13 @@ public class BuyServlet extends HttpServlet{
         List<FeeperiodEntity> fees = userService.findAllFees();
         session.setAttribute("fees", fees);
 
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        req.setAttribute("startDate", formatter.format(date));
 
+        if (req.getParameter("chosenPack")!=null){
+            req.setAttribute("monthChoice", "false");
+        }else{req.setAttribute("monthChoice", "true");}
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);
@@ -43,14 +51,27 @@ public class BuyServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
 
-        if (req.getParameter("chosenPack")!=null){
+        System.out.println(req.getParameter("chosenMonths"));
+        System.out.println(req.getParameter("startDate"));
+        System.out.println(req.getParameter("chosenPack"));
+        System.out.println(req.getSession().getAttribute("chosenPack"));
+        if (req.getSession().getAttribute("chosenPack")==null) req.getSession().setAttribute("chosenPack", req.getParameter("chosenPack"));
 
-            int refPack= Integer.parseInt(req.getParameter("chosenPackid"));
+        if (req.getSession().getAttribute("chosenPack")!=null && req.getParameter("chosenMonths")!=null){
+
+            System.out.println((req.getSession().getAttribute("chosenPack").getClass()));
+            int refPack= Integer.parseInt((String) req.getSession().getAttribute("chosenPack"));
+
+            System.out.println(refPack);
 
             List<OptserviceEntity> optionals=userService.choosableOptServices(refPack);
             session.setAttribute("optionals", optionals);
+            System.out.println(optionals.toString());
+
         }
 
+        res.sendRedirect("buy");
     }
+
 
 }

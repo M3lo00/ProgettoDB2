@@ -37,7 +37,7 @@ public class LandingPageServlet extends HttpServlet {
 
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("prova.jsp");
         dispatcher.forward(req, res);
     }
 

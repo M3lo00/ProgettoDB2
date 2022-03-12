@@ -46,7 +46,7 @@
             </form>
         </div>
     </div>
-    <div >
+    <div>
         <form action="packageSelect" method="post">
 
             <%--@declare id="nameservpackage"--%>

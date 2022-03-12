@@ -33,10 +33,6 @@
 <body>
 
     <div class="container d-flex flex-wrap">
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         <a class="navbar-brand" href="#">TELCO COMPANY</a>
         <ul class="nav me-auto">
             <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Buy Service</a></li>
@@ -131,17 +127,11 @@
                         <div class="btn btn-orange mt-4">Get started</div>
                     </div>
                 </div>
-<<<<<<< Updated upstream
-                <div class="btn btn-orange mt-4">Get started</div>
-            </div>
-        </div>
-=======
                 <%
                     }
                 %>
 
 
->>>>>>> Stashed changes
     </div>
 <!-- Optional JavaScript; choose one of the two! -->
 

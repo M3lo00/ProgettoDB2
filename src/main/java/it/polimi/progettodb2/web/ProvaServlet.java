@@ -24,7 +24,7 @@ public class ProvaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("prova.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, res);
     }
 }

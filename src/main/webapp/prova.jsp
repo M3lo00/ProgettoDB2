@@ -23,7 +23,7 @@
 <body>
 
     <div class="container d-flex flex-wrap">
-        <img class="comp-logo mr-4 mb-3" src="https://i.imgur.com/S2lYrKD.gif">
+
         <a class="navbar-brand" href="#">TELCO COMPANY</a>
         <ul class="nav me-auto">
             <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
@@ -110,7 +110,6 @@
                 <div class="btn btn-orange mt-4">Get started</div>
             </div>
         </div>
-
     </div>
 <!-- Optional JavaScript; choose one of the two! -->
 

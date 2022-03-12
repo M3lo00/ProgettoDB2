@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+
+@NamedQuery(
+        name= "Fee.findAll",
+        query = "SELECT f FROM FeeperiodEntity f "
+)
+
 @Table(name = "feeperiod", schema = "dbproj")
 public class FeeperiodEntity implements Serializable {
 
@@ -14,15 +20,21 @@ public class FeeperiodEntity implements Serializable {
     @Id
     @Column(name = "idFeePeriod")
     private int idFeePeriod;
-    
-    @Column(name = "refPackage")
-    private int refPackage;
-    
+
     @Column(name = "periodo")
     private int periodo;
     
     @Column(name = "fee")
     private Integer fee;
+
+    @ManyToOne (fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}, optional = false
+    )
+    @JoinColumn(name = "refPackage")
+    private PackageEntity refPackage;
 
     public int getIdFeePeriod() {
         return idFeePeriod;
@@ -32,11 +44,11 @@ public class FeeperiodEntity implements Serializable {
         this.idFeePeriod = idFeePeriod;
     }
 
-    public int getRefPackage() {
+    public PackageEntity getRefPackage() {
         return refPackage;
     }
 
-    public void setRefPackage(int refPackage) {
+    public void setRefPackage(PackageEntity refPackage) {
         this.refPackage = refPackage;
     }
 
@@ -74,7 +86,7 @@ public class FeeperiodEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = idFeePeriod;
-        result = 31 * result + refPackage;
+        result = 31 * result + (refPackage != null ? refPackage.hashCode() : 0);
         result = 31 * result + periodo;
         result = 31 * result + (fee != null ? fee.hashCode() : 0);
         return result;

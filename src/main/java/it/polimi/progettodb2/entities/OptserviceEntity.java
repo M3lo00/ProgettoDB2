@@ -5,6 +5,14 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+
+@NamedQuery(
+        name="Optional.findAllNotInPack",
+        query = "SELECT o FROM OptserviceEntity o " +
+                "WHERE o.idOptService NOT IN (SELECT w FROM OwnoptserviceEntity w" +
+                "                             WHERE w.refPack=?1)"
+)
+
 @Table(name = "optservice", schema = "dbproj")
 public class OptserviceEntity implements Serializable {
 

@@ -72,4 +72,13 @@ public class UserService {
         return em.createNamedQuery("Package.findAll", PackageEntity.class).getResultList();
     }
 
+    public List<FeeperiodEntity> findAllFees(){
+        return em.createNamedQuery("Fee.findAll", FeeperiodEntity.class).getResultList();
+
+    }
+
+    public List<OptserviceEntity> choosableOptServices(int refPack){
+        return em.createNamedQuery("Optional.findAllNotInPack", OptserviceEntity.class).setParameter(1, refPack).getResultList();
+    }
+
 }

@@ -47,17 +47,81 @@
     </ul>
 </div>
 
+<%-- Name, SMs, minute, mGiga, extraMGiga, extraSms, fixedPhone, fGiga, extraFgiga --%>
+<div class="container-fluid px-1 px-sm-4 py-5 col-md-6">
+    <form>
+        <div class="form-row mb-3">
+            <div class="form-group ">
+                <label for="packageName">Package Name</label>
+                <input type="text" class="form-control" id="packageName" placeholder="Es. RED Pro">
 
+            </div>
+        </div>
+        <label for="packageName">SMS</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Minute</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity1" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Giga Mobile</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity2" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Extra Giga Mobile</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity3" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Extra SMS</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity4" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Extra Giga Mobile</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity5" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Giga Fixed</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity6" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <label for="packageName">Extra Giga Fixed</label>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+            </div>
+            <input type="number" id="quantity7" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+                Fixed Phone
+            </label>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
 </body>
 </html>

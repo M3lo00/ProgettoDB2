@@ -26,16 +26,19 @@ public class EmployeeServlet extends HttpServlet {
     EmployeeService employeeService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         EmployeeEntity employee = null;
         HttpSession session = req.getSession();
 
         if(session.getAttribute("employee")!=null){
             employee = (EmployeeEntity) session.getAttribute("employee");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
+            dispatcher.forward(req, res);
+        }else{
+            res.sendRedirect("./"); //ti sposta di servlet
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
-        dispatcher.forward(req, resp);
+
     }
 
 }

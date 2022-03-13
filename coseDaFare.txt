@@ -66,7 +66,7 @@ A livello di enity aggiugere "nullable" nella definizione delle colonne
 
 Capire a che serve @EJB
 
-
+-DB in package mettere prezzo del pacchetto e cambiare gli int in float
 
 
 --- portabilità del numero

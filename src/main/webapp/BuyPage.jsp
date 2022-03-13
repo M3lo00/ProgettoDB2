@@ -1,6 +1,7 @@
 <%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page import="it.polimi.progettodb2.entities.OptserviceEntity" %>
+<%@ page import="jakarta.persistence.criteria.CriteriaBuilder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -65,7 +66,19 @@ Div per la scelta del periodo.
 
 <form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="buy" method="post">
     <%
+        PackageEntity chosen =null;
+        if (request.getSession().getAttribute("chosenPack")!=null){ //lasciare in pack solo un pacchetto
+
+            Integer chosenPack_Id= Integer.parseInt(request.getSession().getAttribute("chosenPack").toString());
+
+            chosen = packageEntityList.stream()
+                    .filter(pack -> chosenPack_Id.equals(pack.getIdPackage()))
+                    .findFirst()
+                    .orElse(null);
+            System.out.println(chosenPack_Id+"  "+chosen+" chosen pack= "+request.getSession().getAttribute("chosenPack"));
+        }
         for (PackageEntity pack: packageEntityList) {
+            if(request.getSession().getAttribute("chosenPack")!=null && pack==chosen || request.getSession().getAttribute("chosenPack")==null){
     %>
     <div class="row d-flex justify-content-start card-strip">
         <div class="info">
@@ -87,6 +100,7 @@ Div per la scelta del periodo.
         </div>
     </div>
     <%
+            }
         }
     %>
 </form>
@@ -155,7 +169,7 @@ Div per la scelta del periodo.
         </div>
     </form>
 <%
-}
+    }
 %>
 <%--
 <container>

@@ -97,7 +97,7 @@
 
 
 
-    <div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
+    <form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="buy" method="post">
 
 
                 <%
@@ -165,7 +165,7 @@
                             <h4 class="blue-text mr-2">$ 380,00</h4>
                             <p class="mt-1 price-fall mr-5"><del>$ 760,00</del></p>
                         </div>
-                        <div class="btn btn-orange mt-4">Get started</div>
+                        <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
                     </div>
                 </div>
                 <%
@@ -173,7 +173,7 @@
                 %>
 
 
-    </div>
+    </form>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

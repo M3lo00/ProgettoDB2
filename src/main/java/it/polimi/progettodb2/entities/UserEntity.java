@@ -37,7 +37,6 @@ import java.util.Objects;
                 "WHERE u.idUser = : idUser"
 )
 
-
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

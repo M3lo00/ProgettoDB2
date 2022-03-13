@@ -53,10 +53,7 @@ public class BuyServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
 
-        System.out.println(req.getParameter("chosenMonths"));
-        System.out.println(req.getParameter("startDate"));
-        System.out.println(req.getParameter("chosenPack"));
-        System.out.println(req.getSession().getAttribute("chosenPack"));
+
         if (req.getSession().getAttribute("chosenPack")==null) req.getSession().setAttribute("chosenPack", req.getParameter("chosenPack"));
 
         if (req.getSession().getAttribute("chosenPack")!=null && req.getParameter("chosenMonths")!=null){

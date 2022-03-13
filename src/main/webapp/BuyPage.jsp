@@ -1,7 +1,5 @@
 <%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="it.polimi.progettodb2.entities.OptserviceEntity" %>
-<%@ page import="jakarta.persistence.criteria.CriteriaBuilder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -75,7 +73,7 @@ Div per la scelta del periodo.
                     .filter(pack -> chosenPack_Id.equals(pack.getIdPackage()))
                     .findFirst()
                     .orElse(null);
-            System.out.println(chosenPack_Id+"  "+chosen+" chosen pack= "+request.getSession().getAttribute("chosenPack"));
+            request.getSession().setAttribute("chosenPackObj", chosen);
         }
         for (PackageEntity pack: packageEntityList) {
             if(request.getSession().getAttribute("chosenPack")!=null && pack==chosen || request.getSession().getAttribute("chosenPack")==null){

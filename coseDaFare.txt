@@ -72,3 +72,5 @@ Capire a che serve @EJB
 --- portabilità del numero
 
 --- registration servlet redeploy (session)
+
+URGENTE mettere tutte le relazioni

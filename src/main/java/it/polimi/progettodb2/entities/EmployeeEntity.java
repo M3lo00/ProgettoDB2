@@ -19,7 +19,7 @@ import java.util.List;
                 @NamedQuery(
                         name = "Employee.checkCredentials",
                         query = "SELECT e FROM EmployeeEntity " +
-                                "e  WHERE e.email = ?1 and e.password = ?2"
+                                "e  WHERE e.username = ?1 and e.password = ?2"
                 )
         }
 )
@@ -32,15 +32,23 @@ public class EmployeeEntity {
     @Id
     @Column(name = "idEmployee")
     private int idEmployee;
-    
-    @Column(name = "email")
-    private String email;
-    
+
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
+    
+
+
+
     @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PackageEntity> packagesRelatedToEmployee;
+
+
 
 
     public int getIdEmployee() {
@@ -87,5 +95,13 @@ public class EmployeeEntity {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

@@ -15,11 +15,11 @@ public class EmployeeService {
 
     @PersistenceContext
     private EntityManager em;
-    public EmployeeEntity checkCredentials(String mail, String pwd) throws CredentialsException, NonUniqueResultException {
+    public EmployeeEntity checkCredentials(String username, String password) throws CredentialsException, NonUniqueResultException {
 
         List<EmployeeEntity> eList;
         try {
-            eList = em.createNamedQuery("Employee.checkCredentials", EmployeeEntity.class).setParameter(1, mail).setParameter(2, pwd)
+            eList = em.createNamedQuery("Employee.checkCredentials", EmployeeEntity.class).setParameter(1, username).setParameter(2, password)
                     .getResultList();
         } catch (PersistenceException e) {
             throw new CredentialsException("Could not verify credentials");

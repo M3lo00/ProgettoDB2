@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 else*/ destServlet = "customer";
 
-                session.setAttribute("user", user);
+                session.setAttribute("customer", user);
             }
             else destServlet = "/dbproj/?loginFailed=true";
         }

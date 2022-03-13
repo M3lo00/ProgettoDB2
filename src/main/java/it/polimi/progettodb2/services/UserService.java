@@ -100,7 +100,7 @@ public class UserService {
                 .getResultStream().findFirst();
     }
 
-    public List<OrderEntity> findAllOrdersByUser(int idUser){
+    public List<OrderEntity> findAllOrderByUser(int idUser){
         List<OrderEntity> orders = em.createNamedQuery("Order.findAllOrderByUser", OrderEntity.class).
                 setParameter("user", findByUserID(idUser).get()).
                 getResultList();

@@ -44,6 +44,8 @@ public class BuyServlet extends HttpServlet{
             req.setAttribute("monthChoice", "false");
         }else{req.setAttribute("monthChoice", "true");}
 
+        System.out.println(req.getSession().getAttribute("customer"));
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);
     }

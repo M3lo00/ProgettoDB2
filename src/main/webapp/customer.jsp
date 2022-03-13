@@ -28,12 +28,12 @@
 
     UserEntity user = null;
     String userUsername = null;
-    if(request.getSession().getAttribute("user")!=null){
-        user = (UserEntity) request.getSession().getAttribute("user");
+    if(request.getSession().getAttribute("customer")!=null){
+        user = (UserEntity) request.getSession().getAttribute("customer");
         userUsername = user.getUsername();
     }
-    List<OrderEntity> rejectedOrders = (List<OrderEntity>) request.getAttribute("rejectedOrders");
-    List<OrderEntity> allOrderByUser = (List<OrderEntity>) request.getAttribute("allOrderByUser");
+    List<OrderEntity> rejectedOrders = (List<OrderEntity>) request.getSession().getAttribute("rejectedOrders");
+    List<OrderEntity> allOrderByUser = (List<OrderEntity>) request.getSession().getAttribute("allOrderByUser");
 %>
 <%--
     if(user!=null){
@@ -56,11 +56,11 @@ e --%>
 <div class="container d-flex flex-wrap">
     <a class="navbar-brand" href="#">TELCO COMPANY</a>
     <ul class="nav me-auto">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Buy Service</a></li>
+        <li class="nav-item"><a href="./buy" class="nav-link link-dark px-2">Buy Service</a></li>
     </ul>
     <ul class="nav">
         <% if (user!=null) { %>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2" value="<%=user.getIdUser()%>"><%=user.getUsername()%></a></li>
+            <li class="nav-item"><a class="nav-link link-dark px-2" value="<%=user.getIdUser()%>"><%=user.getUsername()%></a></li>
             <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="${pageContext.request.contextPath}/logout">Logout</a></li>
         <% } %>
     </ul>

@@ -26,21 +26,13 @@
     List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
 %>
 
-
-
-
-
 <body>
 
-    <div class="container d-flex flex-wrap">
-        <a class="navbar-brand" href="#">TELCO COMPANY</a>
-        <ul class="nav me-auto">
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Buy Service</a></li>
-        </ul>
-        <ul class="nav">
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>
 
-        </ul>
+    <div class="container d-flex flex-wrap">
+
+        <a class="navbar-brand" href="">TELCO COMPANY</a>
+
     </div>
 
     <div class="container-fluid">

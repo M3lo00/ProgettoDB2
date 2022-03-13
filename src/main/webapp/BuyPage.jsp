@@ -33,14 +33,28 @@
 <div class="container d-flex flex-wrap">
 
     <a class="navbar-brand" href="/dbproj/">TELCO COMPANY</a>
-    <ul class="nav me-auto">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Buy Service</a></li>
-    </ul>
-    <ul class="nav">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>
 
+    <ul class="nav me-auto">
+        <li class="nav-item"><a href="#" class="nav-link link-dark px-2"></a></li>
     </ul>
+
+    <%  if (request.getSession().getAttribute("customer")!=null){%>
+
+    <ul class="nav">
+        <li class="nav-item"><a class="nav-link link-dark px-2">${customer.getUsername()}</a></li>
+        <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="${pageContext.request.contextPath}/logout">Logout</a></li>
+    </ul>
+
+    <%  }else{%>
+
+    <ul class="nav">
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </ul>
+
+    <%  }%>
 </div>
 <%--
 div della landing page con cui scegliamo un pacchetto,

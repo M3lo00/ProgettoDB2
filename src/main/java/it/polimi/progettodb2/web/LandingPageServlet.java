@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.ws.rs.core.Request;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,9 +37,17 @@ public class LandingPageServlet extends HttpServlet {
         session.setAttribute("packages", packages);
 
 
+        RequestDispatcher dispatcher = null;
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("prova.jsp");
-        dispatcher.forward(req, res);
+        if(req.getSession().getAttribute("customer")!=null) {
+            res.sendRedirect("./customer"); //ti sposta di servlet
+
+        }else{
+            dispatcher= req.getRequestDispatcher("prova.jsp"); //compila il jsp con le req indicate nel get
+            dispatcher.forward(req, res);
+        }
+
+
     }
 
 }

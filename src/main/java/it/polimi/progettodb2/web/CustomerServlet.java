@@ -32,15 +32,15 @@ public class CustomerServlet extends HttpServlet {
         List<OrderEntity> rejectedOrders = null;
         List<OrderEntity> allOrderByUser = null;
 
-        if(session.getAttribute("user")!=null){
-            user = (UserEntity) session.getAttribute("user");
+        if(session.getAttribute("customer")!=null){
+            user = (UserEntity) session.getAttribute("customer");
 
             if(user.getUsername()!=null) rejectedOrders = userService.findRejectedOrdersByUser(user.getIdUser());
 
-            if(user.getUsername()!=null) allOrderByUser = userService.findAllOrdersByUser(user.getIdUser());
+            if(user.getUsername()!=null) allOrderByUser = userService.findAllOrderByUser(user.getIdUser());
 
-            req.setAttribute("rejectedOrders", rejectedOrders);
-            req.setAttribute("allOrderByUser", allOrderByUser);
+            req.getSession().setAttribute("rejectedOrders", rejectedOrders);
+            req.getSession().setAttribute("allOrderByUser", allOrderByUser);
         }
 
 

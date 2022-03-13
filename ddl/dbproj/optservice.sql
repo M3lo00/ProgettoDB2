@@ -1,6 +1,6 @@
 create table optservice
 (
-    idOptService int         not null
+    idOptService int auto_increment
         primary key,
     name         varchar(45) not null,
     monthly      int         not null,

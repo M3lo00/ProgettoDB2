@@ -1,6 +1,7 @@
 package it.polimi.progettodb2.web;
 
 import it.polimi.progettodb2.entities.EmployeeEntity;
+import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.entities.OrderEntity;
 import it.polimi.progettodb2.entities.UserEntity;
 import it.polimi.progettodb2.services.EmployeeService;
@@ -27,8 +28,13 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+        List<OptserviceEntity> optionalProducts = employeeService.findAllOptionalProduct();
         EmployeeEntity employee = null;
         HttpSession session = req.getSession();
+
+
+        req.setAttribute("findAllOptionalProduct", optionalProducts);
 
         if(session.getAttribute("employee")!=null){
             employee = (EmployeeEntity) session.getAttribute("employee");
@@ -37,8 +43,6 @@ public class EmployeeServlet extends HttpServlet {
         }else{
             res.sendRedirect("./"); //ti sposta di servlet
         }
-
-
     }
 
 }

@@ -42,7 +42,10 @@ public class LandingPageServlet extends HttpServlet {
         if(req.getSession().getAttribute("customer")!=null) {
             res.sendRedirect("./customer"); //ti sposta di servlet
 
-        }else{
+        }else if(req.getSession().getAttribute("employee")!=null){
+            res.sendRedirect("./employee"); //ti sposta di servlet
+        }
+        else{
             dispatcher= req.getRequestDispatcher("prova.jsp"); //compila il jsp con le req indicate nel get
             dispatcher.forward(req, res);
         }

@@ -13,6 +13,11 @@ import java.io.Serializable;
                 "                             WHERE w.refPack=?1)"
 )
 
+@NamedQuery(
+        name="Optional.findAllOptionalProduct",
+        query = "SELECT o FROM OptserviceEntity o "
+)
+
 @Table(name = "optservice", schema = "dbproj")
 public class OptserviceEntity implements Serializable {
 

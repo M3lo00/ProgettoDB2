@@ -102,7 +102,11 @@ public class RegistrationServlet extends HttpServlet{
             message = "Registration completed. Now you can log in!";
             req.setAttribute("messageSignUp", message);
         }
+
         dispatcher.forward(req, resp);
+
+
+
     }
 
 

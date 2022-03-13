@@ -7,11 +7,11 @@ create table package
     sms         int         null,
     minute      int         null,
     mGiga       int         null,
-    extraMGiga  float       null,
-    extraSMS    float       null,
+    extraMGiga  int       null,
+    extraSMS    int       null,
     fixedPhone  tinyint     null,
     fGiga       int         null,
-    extraFGiga  float       null,
+    extraFGiga  int       null,
     constraint name_UNIQUE
         unique (name),
     constraint fk_EmployeePack

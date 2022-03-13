@@ -29,6 +29,15 @@ import java.util.Objects;
                 "FROM UserEntity u " +
                 "WHERE u.email = :email"
 )
+
+@NamedQuery(
+        name = "User.findByID",
+        query = "SELECT u " +
+                "FROM UserEntity u " +
+                "WHERE u.idUser = : idUser"
+)
+
+
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

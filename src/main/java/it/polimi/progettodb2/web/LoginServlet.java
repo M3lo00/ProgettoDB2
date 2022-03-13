@@ -1,5 +1,6 @@
 package it.polimi.progettodb2.web;
 
+import it.polimi.progettodb2.entities.PackageEntity;
 import it.polimi.progettodb2.entities.UserEntity;
 import it.polimi.progettodb2.entities.EmployeeEntity;
 import it.polimi.progettodb2.services.UserService;
@@ -25,9 +26,9 @@ public class LoginServlet extends HttpServlet {
     @EJB
     private EmployeeService employeeService;
 
-    /*
-       ServicePackageEntity servicePackage;
-   */
+
+    PackageEntity pack;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -62,7 +63,7 @@ public class LoginServlet extends HttpServlet {
                         session.setAttribute("rejectedOrders", userService.findRejectedOrdersByUser(user.getUser_id()));
                     }
                 }
-                else*/ destServlet = "hello-servlet";
+                else*/ destServlet = "customer";
 
                 session.setAttribute("user", user);
             }
@@ -71,6 +72,8 @@ public class LoginServlet extends HttpServlet {
 
         resp.sendRedirect(destServlet);
     }
+
+
 
 
 }

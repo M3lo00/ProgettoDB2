@@ -65,3 +65,10 @@ Trigger 5 insolvent list, conviene il trigger o l'attributo?
 A livello di enity aggiugere "nullable" nella definizione delle colonne
 
 Capire a che serve @EJB
+
+
+
+
+--- portabilità del numero
+
+--- registration servlet redeploy (session)

@@ -55,6 +55,12 @@ public class UserService {
         }
     }
 
+    public Optional<UserEntity> findByUserID(int idUser){
+        return em.createNamedQuery("User.findByID", UserEntity.class)
+                .setParameter("idUser", idUser)
+                .getResultStream().findFirst();
+    }
+
     public Optional<UserEntity> findByUsername(String usrn) {
         return em.createNamedQuery("User.findByUsername", UserEntity.class)
                 .setParameter("username", usrn)
@@ -80,5 +86,26 @@ public class UserService {
     public List<OptserviceEntity> choosableOptServices(int refPack){
         return em.createNamedQuery("Optional.findAllNotInPack", OptserviceEntity.class).setParameter(1, refPack).getResultList();
     }
+
+    public List<OrderEntity> findRejectedOrdersByUser(int user_id){
+        UserEntity user = findByUserID(user_id).get();
+        return em.createNamedQuery("Order.findRejectedOrdersOfUser", OrderEntity.class)
+                .setParameter("user", user)
+                .getResultList();
+    }
+
+    public Optional<OrderEntity> findOrderByID(int order_id) {
+        return em.createNamedQuery("Order.findByID", OrderEntity.class)
+                .setParameter("order_id", order_id)
+                .getResultStream().findFirst();
+    }
+
+    public List<OrderEntity> findAllOrdersByUser(int idUser){
+        List<OrderEntity> orders = em.createNamedQuery("Order.findAllOrderByUser", OrderEntity.class).
+                setParameter("user", findByUserID(idUser).get()).
+                getResultList();
+        return orders;
+    }
+
 
 }

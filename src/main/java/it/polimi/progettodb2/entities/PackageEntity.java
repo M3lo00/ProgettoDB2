@@ -3,6 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -12,6 +13,17 @@ import java.sql.Timestamp;
         name = "Package.findAll",
         query = "SELECT u " +
                 "FROM PackageEntity u "
+)
+
+@NamedQuery(
+        name = "ServicePackageToSelect.findAll",
+        query = "SELECT stp " +
+                "FROM PackageEntity stp "
+)
+
+@NamedQuery(
+        name = "Service.findAll",
+        query = "SELECT o FROM PackageEntity o "
 )
 
 @Table(name = "package", schema = "dbproj")
@@ -38,10 +50,10 @@ public class PackageEntity implements Serializable {
     private Integer mGiga;
     
     @Column(name = "extraMGiga")
-    private Double extraMGiga;
+    private Integer extraMGiga;
     
     @Column(name = "extraSMS")
-    private Double extraSms;
+    private Integer extraSms;
     
     @Column(name = "fixedPhone")
     private Byte fixedPhone;
@@ -50,7 +62,7 @@ public class PackageEntity implements Serializable {
     private Integer fGiga;
     
     @Column(name = "extraFGiga")
-    private Double extraFGiga;
+    private Integer extraFGiga;
 
     @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
@@ -61,6 +73,8 @@ public class PackageEntity implements Serializable {
     @JoinColumn(name = "refEmployee")
     private EmployeeEntity refEmployee;
 
+    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<OrderEntity> orders;
 
 
     public int getIdPackage() {
@@ -111,19 +125,19 @@ public class PackageEntity implements Serializable {
         this.mGiga = mGiga;
     }
 
-    public Double getExtraMGiga() {
+    public Integer getExtraMGiga() {
         return extraMGiga;
     }
 
-    public void setExtraMGiga(Double extraMGiga) {
+    public void setExtraMGiga(Integer extraMGiga) {
         this.extraMGiga = extraMGiga;
     }
 
-    public Double getExtraSms() {
+    public Integer getExtraSms() {
         return extraSms;
     }
 
-    public void setExtraSms(Double extraSms) {
+    public void setExtraSms(Integer extraSms) {
         this.extraSms = extraSms;
     }
 
@@ -143,13 +157,14 @@ public class PackageEntity implements Serializable {
         this.fGiga = fGiga;
     }
 
-    public Double getExtraFGiga() {
+    public Integer getExtraFGiga() {
         return extraFGiga;
     }
 
-    public void setExtraFGiga(Double extraFGiga) {
+    public void setExtraFGiga(Integer extraFGiga) {
         this.extraFGiga = extraFGiga;
     }
+
 
     @Override
     public boolean equals(Object o) {

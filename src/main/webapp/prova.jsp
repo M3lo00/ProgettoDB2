@@ -18,7 +18,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Hello, world!</title>
+    <title>Home-Telco</title>
 </head>
 
 
@@ -60,9 +60,12 @@
                                 <input type="text" name="email" class="form-control input-lg" placeholder="email" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="password" class="form-control input-lg" placeholder="password" required>
+                                <input type="password" name="password" class="form-control input-lg" placeholder="password" required>
                             </div>
-                            <br>${messageSignUp}
+
+                            <div class="row-md-2">
+                                <br>${messageSignUp}
+                            </div>
                             <button type="submit" class="btn btn-lg btn-primary">Sign Up</button>
 
 
@@ -114,12 +117,58 @@
                             <h4 class="dark-text mr-4" value="<%=pack.getIdPackage()%>"><%=pack.getName()%></h4>
 
                         </div>
+
+
+
+
+
                         <div class="row px-3">
-                            <p class="mb-1"><span class="fa fa-clock-o">Services</span></p>
+                            <% if (pack.getMinute() != null) { %>
+                            <div class="col-md-2"  value="<%=pack.getIdPackage()%>"><%=pack.getMinute()%> Minuti</div>
+                            <% } %>
+                            <div class="col-md-2">
+                                <% if (pack.getSms() != null) { %>
+                                <div class="row"  value="<%=pack.getIdPackage()%>"><%=pack.getSms()%> Sms</div>
+                                <% } %>
+                                <% if (pack.getExtraSms() != null) { %>
+                                <div class="row"  value="<%=pack.getIdPackage()%>"><%=pack.getExtraSms()%> ExtraSms</div>
+                                <% } %>
+                            </div>
+
+                            <div class="col-md-2">
+                                <% if (pack.getmGiga() != null) { %>
+                                <div class="row"  value="<%=pack.getIdPackage()%>"><%=pack.getmGiga()%> Giga</div>
+                                <% } %>
+                                <% if (pack.getExtraMGiga() != null) { %>
+                                <div class="row"  value="<%=pack.getIdPackage()%>"><%=pack.getExtraMGiga()%> ExtraGiga</div>
+                                <% } %>
+                            </div>
+
+                            <div class="col-md-1">
+                                <!-------null------>
+                            </div>
+
+
+                            <div class="col-md-2">
+                                <% if (pack.getfGiga() != null) { %>
+                                <div class="row"  value="<%=pack.getIdPackage()%>"><%=pack.getfGiga()%> Fisso Giga</div>
+                                <% } %>
+                                <% if (pack.getExtraFGiga() != null) { %>
+                                <div class="row"  value="<%=pack.getIdPackage()%>"><%=pack.getExtraFGiga()%> ExtraGiga Fisso </div>
+                                <% } %>
+                            </div>
+
+
                         </div>
+
+
+
                     </div>
                     <div class="v-line ml-auto"></div>
                     <div class="price">
+                        <div class="row px-3">
+
+                        </div>
                         <div class="row px-3">
                             <h4 class="blue-text mr-2">$ 380,00</h4>
                             <p class="mt-1 price-fall mr-5"><del>$ 760,00</del></p>

@@ -7,6 +7,42 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
+//cercare un ordine per idOrder
+@NamedQuery(
+        name = "Order.findByID",
+        query = "SELECT o FROM OrderEntity o " +
+                "WHERE o.idOrder = :idOrder"
+)
+//cercare tutti gli ordini relativi ad un user
+@NamedQuery(
+        name = "Order.findAllOrderByUser",
+        query = "SELECT o FROM OrderEntity o " +
+                "WHERE o.refUser = :user "
+)
+//cercare tutti gli ordini relativi ad un user che sono stati rifiutati
+@NamedQuery(
+        name = "Order.findRejectedOrdersOfUser",
+        query = "SELECT o FROM OrderEntity o " +
+                "WHERE o.refUser = :user AND " +
+                "o.valid=false"
+)
+
+
+/*
+@NamedQuery(
+        name = "Order.findOrdersToActivate",
+        query = "SELECT DISTINCT o FROM OrderEntity o " +
+                "JOIN o.refPack refPack " +
+                "WHERE o.refUser = :refUser AND " +
+                "o.valid=true AND " +
+                "o.startDate > CURRENT_TIMESTAMP "
+
+)
+
+ */
+
+
+
 @Table(name = "order", schema = "dbproj")
 public class OrderEntity implements Serializable {
 
@@ -16,9 +52,6 @@ public class OrderEntity implements Serializable {
     @Id
     @Column(name = "idOrder")
     private int idOrder;
-    
-    @Column(name = "refPack")
-    private int refPack;
     
     @Column(name = "creationDate")
     private Timestamp creationDate;
@@ -50,9 +83,18 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "refUser")
     private UserEntity refUser;
 
+    @ManyToOne(fetch=FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "refPack")
+    private PackageEntity refPack;
+
     public void OrderEntity(){}
 
-    public void OrderEntity(UserEntity refUser, int refPack, Timestamp creationDate, Date startDate, Boolean valid, int totalAmount, int nMobile, int nFixed){
+    public void OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, Boolean valid, int totalAmount, int nMobile, int nFixed){
             this.refUser=refUser;
             this.refPack=refPack;
             this.creationDate=creationDate;
@@ -79,11 +121,11 @@ public class OrderEntity implements Serializable {
         this.refUser = refUser;
     }
 
-    public int getRefPack() {
+    public PackageEntity getRefPack() {
         return refPack;
     }
 
-    public void setRefPack(int refPack) {
+    public void setRefPack(PackageEntity refPack) {
         this.refPack = refPack;
     }
 
@@ -168,7 +210,7 @@ public class OrderEntity implements Serializable {
     public int hashCode() {
         int result = idOrder;
         result = 31 * result + (refUser != null ? refUser.hashCode() : 0);
-        result = 31 * result + refPack;
+        result = 31 * result + (refPack != null ? refPack.hashCode() : 0);
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + periodo;

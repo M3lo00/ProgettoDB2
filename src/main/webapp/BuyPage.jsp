@@ -18,11 +18,6 @@
 
 
 <body>
-
-<%
-    int prova = 10;
-
-%>
 <%
     List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
     //List<OptserviceEntity> optSercices= (List<OptserviceEntity>) request.getSession().getAttribute("optionals");
@@ -101,12 +96,18 @@ Div per la scelta del periodo.
             }
         }
     %>
-</form>
+    <div class="position-relative">
+            <button type="submit" class="btn btn-primary position-absolute bottom-0 start-20" name="reset" value="reset" > Change Package </button>
+    </div>
+<%--</form>--%>
 <%
     if (request.getSession().getAttribute("chosenPack")!=null){
-%>
 
-    <form class="container" action="buy" method="post">
+        int prova =  10;//request.getSession().getAttribute("chosenPack").; mettere il prezzo del pacchetto
+
+    %>
+
+        <%--<form class="container" action="buy" method="post">--%>
 
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <div class="col">
@@ -166,9 +167,12 @@ Div per la scelta del periodo.
             </div>
         </div>
     </form>
+
 <%
     }
 %>
+
+
 <%--
 <container>
     <%

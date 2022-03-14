@@ -20,10 +20,11 @@ public class LogoutServlet extends HttpServlet{
             session.removeAttribute("customer");
             session.removeAttribute("employee");
             session.removeAttribute("rejectedOrders");
-            //session.removeAttribute("packages");
+            session.removeAttribute("packages");
             session.removeAttribute("allOrderByUser");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("prova.jsp");
-            dispatcher.forward(request, response);
         }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("prova.jsp");
+        dispatcher.forward(request, response);
+
     }
 }

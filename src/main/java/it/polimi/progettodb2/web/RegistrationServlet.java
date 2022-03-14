@@ -37,7 +37,7 @@ public class RegistrationServlet extends HttpServlet{
         String destServlet = "signup";
 
         boolean checkLength = username.length() != 0 && email.length() != 0 && password.length() != 0;
-        boolean checkAlreadySignup = userService.findByUsername(username).isPresent() || userService.findByEmail(email).isPresent();
+        boolean checkAlreadySignup = userService.findByUsername(username).isPresent() || userService.findByEmail(email).isPresent() || employeeService.findByUsername(username).isPresent();
                                     //employeeService.findByUsername(username).isPresent() || employeeService.findByEmail(email).isPresent()
                                     // in or con i precedenti
 

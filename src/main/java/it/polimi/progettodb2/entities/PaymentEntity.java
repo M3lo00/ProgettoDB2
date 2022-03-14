@@ -51,8 +51,6 @@ public class PaymentEntity implements Serializable {
     }
 
     public void getUser(){
-        System.out.println("User entity "+ refUser);
-        System.out.println("siamo qua"+ idPayments+ " "+ payTime);
         return;
     }
 

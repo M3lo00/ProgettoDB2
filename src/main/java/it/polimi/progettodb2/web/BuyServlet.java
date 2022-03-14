@@ -44,7 +44,6 @@ public class BuyServlet extends HttpServlet{
             req.setAttribute("monthChoice", "false");
         }else{req.setAttribute("monthChoice", "true");}
 
-        System.out.println(req.getSession().getAttribute("customer"));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);
@@ -54,19 +53,23 @@ public class BuyServlet extends HttpServlet{
         HttpSession session = req.getSession();
 
 
-        if (req.getSession().getAttribute("chosenPack")==null) req.getSession().setAttribute("chosenPack", req.getParameter("chosenPack"));
+        if (session.getAttribute("chosenPack")==null) session.setAttribute("chosenPack", req.getParameter("chosenPack"));
 
-        if (req.getSession().getAttribute("chosenPack")!=null && req.getParameter("chosenMonths")!=null){
+        if (session.getAttribute("chosenPack")!=null && req.getParameter("chosenMonths")!=null){
 
-            System.out.println((req.getSession().getAttribute("chosenPack").getClass()));
-            int refPack= Integer.parseInt((String) req.getSession().getAttribute("chosenPack"));
-
-            System.out.println(refPack);
+            int refPack= Integer.parseInt((String) session.getAttribute("chosenPack"));
 
             List<OptserviceEntity> optionals=userService.choosableOptServices(refPack);
             session.setAttribute("optionals", optionals);
-            System.out.println(optionals.toString());
 
+        }
+
+        System.out.println(req.getParameter("reset"));
+        if(req.getParameter("reset")!=null){
+            if (req.getParameter("reset").equals("reset")){
+                System.out.println("prova");
+                session.setAttribute("chosenPack", null);
+            }
         }
 
         res.sendRedirect("buy");

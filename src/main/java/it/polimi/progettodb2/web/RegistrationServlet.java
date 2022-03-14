@@ -3,6 +3,7 @@ package it.polimi.progettodb2.web;
 //import it.polimi.progettodb2.entities.EmployeeEntity;
 import it.polimi.progettodb2.entities.UserEntity;
 //import it.polimi.progettodb2.services.EmployeeService;
+import it.polimi.progettodb2.services.EmployeeService;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
@@ -23,10 +24,10 @@ public class RegistrationServlet extends HttpServlet{
     @EJB
     private UserService userService;
 
-    /*
+
     @EJB
     private EmployeeService employeeService;
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");

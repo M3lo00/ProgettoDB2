@@ -37,7 +37,9 @@ public class EmployeeServlet extends HttpServlet {
         req.setAttribute("findAllOptionalProduct", optionalProducts);
 
         if(session.getAttribute("employee")!=null){
+
             employee = (EmployeeEntity) session.getAttribute("employee");
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
             dispatcher.forward(req, res);
         }else{

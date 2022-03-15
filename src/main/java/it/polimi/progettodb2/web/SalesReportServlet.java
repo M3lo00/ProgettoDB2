@@ -27,8 +27,19 @@ public class SalesReportServlet extends HttpServlet{
     @EJB
     private EmployeeService employeeService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String destServlet = "report";
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+
+
+        if(req.getParameter("select1")!=null) {
+            String val = req.getParameter("select1");
+            //req.getParameter("select1").equals("select1");
+            session = req.getSession(true);
+            session.setAttribute("val", val);
+            res.sendRedirect("report");
+        }else{
+            res.sendRedirect("report");
+        }
     }
 
 
@@ -39,6 +50,9 @@ public class SalesReportServlet extends HttpServlet{
 
         if(session.getAttribute("employee")!=null){
             employee = (EmployeeEntity) session.getAttribute("employee");
+            if (session.getAttribute("val")==null){
+                session.setAttribute("val", "0");
+            }
             RequestDispatcher dispatcher = req.getRequestDispatcher("report.jsp");
             dispatcher.forward(req, res);
         }else{

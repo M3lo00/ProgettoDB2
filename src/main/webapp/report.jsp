@@ -43,13 +43,13 @@
 </div>
 
 
-<form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="buy" method="post">
+<form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="report" method="post">
 
    <%-- selettore --%>
     <div class="row d-flex justify-content-start card-strip">
-        <div class="form-floating">
-            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                <option selected>Sales Report menu</option>
+        <form class="form-floating" action="report" method="post">
+            <select name="select1" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <option selected disabled>Sales Report menu</option>
                 <option value="1">Total Purchases per Package</option>
                 <option value="2">Total Purchases per Package & Validity Period</option>
                 <option value="3">Sales per Package With  the Optional Products</option>
@@ -60,44 +60,47 @@
                 <option value="9">Alerts</option>
                 <option value="6">Best seller optional product</option>
             </select>
+            <input type="submit">
             <label for="floatingSelect">Works with selects</label>
+        </form>
+
+
+        <%  int result= Integer.parseInt((String) request.getSession().getAttribute("val"));
+
+            if( result == 1) {
+                System.out.println(result);%>
+
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+            </ol>
         </div>
+        <% } %>
+
+
+
     </div>
-
-
-
-
-
-       <%-- tabella sales report --%>
-    <div class="row d-flex justify-content-start card-strip">
-        <ol class="list-group list-group-numbered">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">Subheading</div>
-                    Content for list item
-                </div>
-                <span class="badge bg-primary rounded-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">Subheading</div>
-                    Content for list item
-                </div>
-                <span class="badge bg-primary rounded-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">Subheading</div>
-                    Content for list item
-                </div>
-                <span class="badge bg-primary rounded-pill">14</span>
-            </li>
-        </ol>
-    </div>
-
-
-
-
 </form>
 
 

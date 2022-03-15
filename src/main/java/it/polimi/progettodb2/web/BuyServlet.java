@@ -28,7 +28,7 @@ public class BuyServlet extends HttpServlet{
     private UserService userService;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        HttpSession session =req.getSession();
+        HttpSession session = req.getSession();
 
         List<PackageEntity> packages = userService.findAllPackages();
         session.setAttribute("packages", packages);
@@ -36,13 +36,10 @@ public class BuyServlet extends HttpServlet{
         List<FeeperiodEntity> fees = userService.findAllFees();
         session.setAttribute("fees", fees);
 
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        req.setAttribute("startDate", formatter.format(date));
-
-        if (req.getParameter("chosenPack")!=null){
-            req.setAttribute("monthChoice", "false");
-        }else{req.setAttribute("monthChoice", "true");}
+        session.setAttribute("chosenPack", null);
+        session.setAttribute("chosenMonths", null);
+        session.setAttribute("startDate", null);
+        session.setAttribute("optionals", null);
 
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
@@ -53,26 +50,43 @@ public class BuyServlet extends HttpServlet{
         HttpSession session = req.getSession();
 
 
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        if(session.getAttribute("startDate")==null) req.setAttribute("startDate", formatter.format(date));
+
+        if (req.getParameter("chosenPack")!=null){
+            req.setAttribute("monthChoice", "false");
+        }else{req.setAttribute("monthChoice", "true");}
+
+
         if (session.getAttribute("chosenPack")==null) session.setAttribute("chosenPack", req.getParameter("chosenPack"));
 
         if (session.getAttribute("chosenPack")!=null && req.getParameter("chosenMonths")!=null){
+
+            session.setAttribute("chosenMonths", req.getParameter("chosenMonths"));
+            session.setAttribute("startDate", req.getParameter("startDate"));
 
             int refPack= Integer.parseInt((String) session.getAttribute("chosenPack"));
 
             List<OptserviceEntity> optionals=userService.choosableOptServices(refPack);
             session.setAttribute("optionals", optionals);
-
         }
 
-        System.out.println(req.getParameter("reset"));
         if(req.getParameter("reset")!=null){
-            if (req.getParameter("reset").equals("reset")){
-                System.out.println("prova");
+            if (req.getParameter("reset").equals("reset")){;
+                session.setAttribute("optionals", null);
                 session.setAttribute("chosenPack", null);
+                session.setAttribute("chosenMonths", null);
+                session.setAttribute("startDate", null);
             }
         }
+        if(req.getParameter("chosenOpt")!=null){
+            session.setAttribute("chosenOptList", req.getParameterValues("chosenOpt")); //chosenOpt è un array che contiene gli id dei optserv selezionati
+        }
 
-        res.sendRedirect("buy");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
+        dispatcher.forward(req, res);
     }
 
 

@@ -54,6 +54,11 @@ body {
     color: #fff
 }
 
+.btn-red {
+    background-color: #ff0000;
+    color: #fff
+}
+
 @media screen and (max-width: 1012px) {
     .card-strip {
         width: 100%

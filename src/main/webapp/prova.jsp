@@ -96,10 +96,6 @@
     </div>
 
 
-
-
-
-
     <form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="buy" method="post">
 
 

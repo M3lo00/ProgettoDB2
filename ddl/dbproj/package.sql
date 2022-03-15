@@ -1,3 +1,5 @@
+use dbproj;
+
 create table package
 (
     idPackage   int auto_increment
@@ -7,11 +9,12 @@ create table package
     sms         int         null,
     minute      int         null,
     mGiga       int         null,
-    extraMGiga  int       null,
-    extraSMS    int       null,
+    extraMGiga  float       null,
+    extraSMS    float       null,
     fixedPhone  tinyint     null,
     fGiga       int         null,
-    extraFGiga  int       null,
+    extraFGiga  float       null,
+    price12M    float       not null,
     constraint name_UNIQUE
         unique (name),
     constraint fk_EmployeePack

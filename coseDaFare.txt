@@ -1,7 +1,10 @@
 --- Chiedere se fare la registrazione di employee
 --- Decidere se mettere required nel registration form o permettere di sign uppare per mostrare l'errore di campo vuoto
 --- button sign up: formnovalidate class="btn btn-success"
+
 dbproj
+NUMERO DI TELEFONO ASSOCIATO AD UN'OFFERTA:
+{
 ---Appena l'offerta è terminata è necessario eliminare la tupla dalla tab order per permettere ad un numero di comprare
 ---un altro pacchetto con lo stesso numero
 
@@ -10,8 +13,10 @@ dbproj
 
 --- uno stesso numero non può essere utilizzato da user diversi
 
-User:
+--- portabilità del numero
+} -> tutti questi problemi sono risolti se l'assegnazione del numero di telefono la facciamo fare automaticamente
 
+User:
 	BuyService
 	ConfirmationPage
 	bill the customer by calling an external service
@@ -20,7 +25,7 @@ User:
 Employee:
 	login
 	creation of service packages
-	
+
 	Number of total purchases per package.
 	Number of total purchases per package and validity period.
 	(chiedere al professore se va bene unire le due funzioni precedenti)
@@ -40,37 +45,15 @@ Employee:
     sommatoria costo mensile * mesi
 
 
---- user ed employee non possono avere lo stesso username
+--- user ed employee non possono avere lo stesso username //aggiurgere il controllo dell'username a livello di servlet insieme a quello dell'user
 
 Trigger quando viene rifiutato un pagamento per un pacchetto in cui la start date è stata superata aggiornare con la data del pagamento accettato
 
---- Facciamo il total amount come trigger ??
+PAGINE MANCANTI:
 
-add auto_increment to OptServices
-
-Trigger 5 insolvent list, conviene il trigger o l'attributo?
-
-
-
-
---- HomePage Customer
---- HomePage Employee
---- Public landing
---- Buy service
---- Confirmation
---- Login
---- Registration
---- Sales Report
 
 A livello di enity aggiugere "nullable" nella definizione delle colonne
 
 Capire a che serve @EJB
-
--DB in package mettere prezzo del pacchetto e cambiare gli int in float
-
-
---- portabilità del numero
-
---- registration servlet redeploy (session)
 
 URGENTE mettere tutte le relazioni

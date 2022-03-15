@@ -12,6 +12,13 @@ import java.util.List;
 @NamedQueries(
         {
                 @NamedQuery(
+                        name = "Employee.findByUsername",
+                        query = "SELECT u " +
+                                "FROM UserEntity u " +
+                                "WHERE u.username = :username"
+                ),
+
+                @NamedQuery(
                         name = "Employee.findByEmail",
                         query = "SELECT e FROM EmployeeEntity e " +
                                 "WHERE e.email = :email"

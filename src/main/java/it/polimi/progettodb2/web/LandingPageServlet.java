@@ -36,21 +36,18 @@ public class LandingPageServlet extends HttpServlet {
         List<PackageEntity> packages = userService.findAllPackages();
         session.setAttribute("packages", packages);
 
-
         RequestDispatcher dispatcher = null;
 
-        if(req.getSession().getAttribute("customer")!=null) {
+        if(session.getAttribute("customer")!=null) {
             res.sendRedirect("./customer"); //ti sposta di servlet
 
-        }else if(req.getSession().getAttribute("employee")!=null){
+        }else if(session.getAttribute("employee")!=null){
             res.sendRedirect("./employee"); //ti sposta di servlet
         }
         else{
             dispatcher= req.getRequestDispatcher("prova.jsp"); //compila il jsp con le req indicate nel get
             dispatcher.forward(req, res);
         }
-
-
 
     }
 

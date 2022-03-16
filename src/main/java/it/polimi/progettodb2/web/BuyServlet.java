@@ -1,6 +1,5 @@
 package it.polimi.progettodb2.web;
 
-import it.polimi.progettodb2.entities.FeeperiodEntity;
 import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.entities.PackageEntity;
 import it.polimi.progettodb2.services.UserService;
@@ -23,7 +22,6 @@ public class BuyServlet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
 
-
     @EJB
     private UserService userService;
 
@@ -32,9 +30,6 @@ public class BuyServlet extends HttpServlet{
 
         List<PackageEntity> packages = userService.findAllPackages();
         session.setAttribute("packages", packages);
-
-        List<FeeperiodEntity> fees = userService.findAllFees();
-        session.setAttribute("fees", fees);
 
         session.setAttribute("chosenPack", null);
         session.setAttribute("chosenMonths", null);
@@ -81,8 +76,11 @@ public class BuyServlet extends HttpServlet{
                 session.setAttribute("startDate", null);
             }
         }
+
         if(req.getParameter("chosenOpt")!=null){
+
             session.setAttribute("chosenOptList", req.getParameterValues("chosenOpt")); //chosenOpt è un array che contiene gli id dei optserv selezionati
+            System.out.println(req.getParameterValues("chosenOpt").length);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");

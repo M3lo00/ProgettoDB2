@@ -22,10 +22,6 @@ public class LandingPageServlet extends HttpServlet {
     @EJB
     private UserService userService;
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-        HttpSession session = req.getSession();
-    }
-
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
@@ -36,13 +32,15 @@ public class LandingPageServlet extends HttpServlet {
         List<PackageEntity> packages = userService.findAllPackages();
         session.setAttribute("packages", packages);
 
+        session.removeAttribute("chosenPack");
+
         RequestDispatcher dispatcher = null;
 
         if(session.getAttribute("customer")!=null) {
             res.sendRedirect("./customer"); //ti sposta di servlet
 
         }else if(session.getAttribute("employee")!=null){
-            res.sendRedirect("./employee"); //ti sposta di servlet
+            res.sendRedirect("./employee");
         }
         else{
             dispatcher= req.getRequestDispatcher("prova.jsp"); //compila il jsp con le req indicate nel get

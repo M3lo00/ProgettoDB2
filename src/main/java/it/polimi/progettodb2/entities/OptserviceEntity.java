@@ -27,18 +27,22 @@ public class OptserviceEntity implements Serializable {
     @Id
     @Column(name = "idOptService")
     private int idOptService;
-    
+    @Basic
     @Column(name = "name")
     private String name;
-    
+    @Basic
     @Column(name = "monthly")
-    private int monthly;
-    
+    private double monthly;
+    @Basic
     @Column(name = "refEmployee")
     private Integer refEmployee;
 
     public int getIdOptService() {
         return idOptService;
+    }
+
+    public void setIdOptService(Integer idOptService) {
+        this.idOptService = idOptService;
     }
 
     public void setIdOptService(int idOptService) {
@@ -53,11 +57,11 @@ public class OptserviceEntity implements Serializable {
         this.name = name;
     }
 
-    public int getMonthly() {
+    public double getMonthly() {
         return monthly;
     }
 
-    public void setMonthly(int monthly) {
+    public void setMonthly(double monthly) {
         this.monthly = monthly;
     }
 
@@ -88,7 +92,7 @@ public class OptserviceEntity implements Serializable {
     public int hashCode() {
         int result = idOptService;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + monthly;
+        result = 31 * result + (int)monthly;
         result = 31 * result + (refEmployee != null ? refEmployee.hashCode() : 0);
         return result;
     }

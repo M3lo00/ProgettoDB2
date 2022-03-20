@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 //cercare un ordine per idOrder
@@ -92,17 +93,25 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "refPack")
     private PackageEntity refPack;
 
-    public void OrderEntity(){}
+    @ManyToMany
+    @JoinTable(name="chosenoptional",
+            joinColumns = @JoinColumn(name="refOrder"),
+            inverseJoinColumns = @JoinColumn(name = "refOptService"))
+    private List<OptserviceEntity> optService;
 
-    public void OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, Boolean valid, int totalAmount, int nMobile, int nFixed){
+    public OrderEntity(){}
+
+    public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, int period, Boolean valid, int totalAmount, int nMobile, int nFixed, List<OptserviceEntity> optService){
             this.refUser=refUser;
             this.refPack=refPack;
             this.creationDate=creationDate;
             this.startDate=startDate;
+            this.periodo=period;
             this.valid=valid;
             this.totalAmount=totalAmount;
             this.nMobile=nMobile;
             this.nFixed=nFixed;
+            this.optService=optService;
     }
 
     public int getIdOrder() {

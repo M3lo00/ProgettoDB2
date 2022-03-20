@@ -7,13 +7,6 @@ import java.io.Serializable;
 @Entity
 
 @NamedQuery(
-        name="Optional.findAllNotInPack",
-        query = "SELECT o FROM OptserviceEntity o " +
-                "WHERE o.idOptService NOT IN (SELECT w.refOptService FROM OwnoptserviceEntity w" +
-                "                             WHERE w.refPack=?1)"
-)
-
-@NamedQuery(
         name="Optional.findAllOptionalProduct",
         query = "SELECT o FROM OptserviceEntity o "
 )

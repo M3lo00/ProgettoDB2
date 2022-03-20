@@ -60,3 +60,4 @@ URGENTE mettere tutte le relazioni
 
 aggiungere la visualizzazione degli optional services nei package (buy page sicuramente)
 
+cambiare total Order in float

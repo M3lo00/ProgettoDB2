@@ -63,6 +63,9 @@ public class PackageEntity implements Serializable {
     @Column(name = "extraFGiga")
     private Integer extraFGiga;
 
+    @Column(name = "price12M")
+    private double price12M;
+
     @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -76,8 +79,13 @@ public class PackageEntity implements Serializable {
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
-    @Column(name = "price12M")
-    private double price12M;
+    @ManyToMany
+    @JoinTable(name="ownoptservice",
+            joinColumns = @JoinColumn(name="refPack"),
+            inverseJoinColumns = @JoinColumn(name = "refOptService"))
+    private List<OptserviceEntity> optService;
+
+    public List<OptserviceEntity> getOptService(){return optService;}
 
     public int getIdPackage() {
         return idPackage;
@@ -102,8 +110,6 @@ public class PackageEntity implements Serializable {
     public EmployeeEntity getRefEmployee() {
         return refEmployee;
     }
-
-
 
     public void setRefEmployee(EmployeeEntity refEmployee) {
         this.refEmployee = refEmployee;

@@ -1,5 +1,6 @@
 package it.polimi.progettodb2.web;
 
+import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.entities.PackageEntity;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
@@ -25,6 +26,10 @@ public class LandingPageServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
+
+        //prova
+        //OrderEntity order = new OrderEntity(user, pack, crD, (java.sql.Date) startD, period, valid,(int) total, nMobile, nFixed, opts);
+        //fine prova
 
         String message = "Invalid email/password";
         if (req.getParameter("loginFailed") != null) req.setAttribute("messageLogin", message);

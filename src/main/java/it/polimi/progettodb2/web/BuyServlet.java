@@ -2,6 +2,7 @@ package it.polimi.progettodb2.web;
 
 import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.entities.PackageEntity;
+import it.polimi.progettodb2.entities.UserEntity;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
@@ -13,9 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @WebServlet("/buy")
 public class BuyServlet extends HttpServlet{
@@ -64,7 +69,7 @@ public class BuyServlet extends HttpServlet{
 
             int refPack= Integer.parseInt((String) session.getAttribute("chosenPack"));
 
-            List<OptserviceEntity> optionals=userService.choosableOptServices(refPack);
+            List<OptserviceEntity> optionals=userService.getAllBuyableOpt(refPack);
             session.setAttribute("optionals", optionals);
         }
 
@@ -79,8 +84,26 @@ public class BuyServlet extends HttpServlet{
 
         if(req.getParameter("chosenOpt")!=null){
 
-            session.setAttribute("chosenOptList", req.getParameterValues("chosenOpt")); //chosenOpt è un array che contiene gli id dei optserv selezionati
-            System.out.println(req.getParameterValues("chosenOpt").length);
+//            session.setAttribute("chosenOptList", req.getParameterValues("chosenOpt")); //chosenOpt è un array che contiene gli id dei optserv selezionati
+
+//            calcolo del totale
+            float total=0;
+
+            boolean valid=false;
+
+            Date start = null;
+            try {
+                start=(formatter.parse((String) session.getAttribute("startDate")));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            String[] chosenOpt = req.getParameterValues("chosenOpt");
+            List<OptserviceEntity> chosenO = (List<OptserviceEntity>) session.getAttribute("optionals");
+
+            chosenO.removeIf(opt->Arrays.stream(chosenOpt).noneMatch(str -> opt.getIdOptService()==Integer.parseInt(str)));
+
+            userService.newOrder((UserEntity) session.getAttribute("customer"), (PackageEntity) session.getAttribute("chosenPackObj"), date, start, Integer.parseInt((String) session.getAttribute("chosenMonths")), valid, total, chosenO);
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");

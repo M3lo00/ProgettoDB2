@@ -11,6 +11,7 @@ import jakarta.persistence.criteria.Order;
 import jakarta.validation.ConstraintViolationException;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -58,14 +59,25 @@ public class UserService {
 
     //public boolean checkPhone ()
 
-    public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total){
-        //generazione del numero di telefono
+    public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, boolean valid, float total, List<OptserviceEntity> opts){
 
+        //generazione del numero di telefono
         Random rd = new Random();
         int nMobile= 100+rd.nextInt();
-        OrderEntity order = new OrderEntity();
-        //valid impostato a 0
-        return null;
+        int nFixed=100+rd.nextInt();
+        Timestamp crD = new Timestamp(creationD.getTime());
+        java.sql.Date startDate= new java.sql.Date(startD.getTime());
+        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, valid,(int) total, nMobile, nFixed, opts);
+
+//        List<PackageEntity>
+
+        try{
+            em.persist(order);      //forza il db a creare una tupla
+            em.flush();             //forza il db a effettuare tutte le operazioni programmateù
+            return order;
+        }catch (ConstraintViolationException e){
+            return null;
+        }
     }
 
     public Optional<UserEntity> findByUserID(int idUser){
@@ -87,12 +99,7 @@ public class UserService {
     }
 
     public List<PackageEntity> findAllPackages(){
-
         return em.createNamedQuery("Package.findAll", PackageEntity.class).getResultList();
-    }
-
-    public List<OptserviceEntity> choosableOptServices(int refPack){
-        return em.createNamedQuery("Optional.findAllNotInPack", OptserviceEntity.class).setParameter(1, refPack).getResultList();
     }
 
     public List<OrderEntity> findRejectedOrdersByUser(int user_id){
@@ -115,5 +122,17 @@ public class UserService {
         return orders;
     }
 
+    public List<OptserviceEntity> getAllOptionals(int idPack){
+        PackageEntity pack = em.find(PackageEntity.class, idPack);
+        return pack.getOptService();
+    }
+
+    public List<OptserviceEntity> getAllBuyableOpt(int idPack){
+        List<OptserviceEntity> pack = em.find(PackageEntity.class, idPack).getOptService();
+        List<OptserviceEntity> opts = em.createNamedQuery("Optional.findAllOptionalProduct", OptserviceEntity.class).getResultList();
+        ArrayList<OptserviceEntity> difference = new ArrayList<>(opts);
+        difference.removeAll(pack);
+        return difference;
+    }
 
 }

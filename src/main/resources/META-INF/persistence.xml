@@ -6,11 +6,9 @@
     <persistence-unit name="dbproj">
 
         <class>it.polimi.progettodb2.entities.AuditEntity</class>
-        <class>it.polimi.progettodb2.entities.ChosenoptionalEntity</class>
         <class>it.polimi.progettodb2.entities.EmployeeEntity</class>
         <class>it.polimi.progettodb2.entities.OptserviceEntity</class>
         <class>it.polimi.progettodb2.entities.OrderEntity</class>
-        <class>it.polimi.progettodb2.entities.OwnoptserviceEntity</class>
         <class>it.polimi.progettodb2.entities.PackageEntity</class>
         <class>it.polimi.progettodb2.entities.PaymentEntity</class>
         <class>it.polimi.progettodb2.entities.UserEntity</class>

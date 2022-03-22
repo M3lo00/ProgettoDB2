@@ -26,6 +26,7 @@ import java.sql.Timestamp;
         query = "SELECT o FROM PackageEntity o "
 )
 
+
 @Table(name = "package", schema = "dbproj")
 public class PackageEntity implements Serializable {
 

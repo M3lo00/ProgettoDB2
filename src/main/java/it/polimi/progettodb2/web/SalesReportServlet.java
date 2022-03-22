@@ -1,9 +1,6 @@
 package it.polimi.progettodb2.web;
 
-import it.polimi.progettodb2.entities.EmployeeEntity;
-import it.polimi.progettodb2.entities.FeeperiodEntity;
-import it.polimi.progettodb2.entities.OptserviceEntity;
-import it.polimi.progettodb2.entities.PackageEntity;
+import it.polimi.progettodb2.entities.*;
 import it.polimi.progettodb2.services.EmployeeService;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
@@ -27,8 +24,16 @@ public class SalesReportServlet extends HttpServlet{
     @EJB
     private EmployeeService employeeService;
 
+    private TotpurchaseperpackandvalidityEntity totPurchaseXPackage;
+
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
+
+        //first query
+        String srvPackage = req.getParameter("srvPackage");
+        if(srvPackage!=null) totPurchaseXPackage = employeeService.purchasePerPackage(Integer.parseInt(srvPackage));
+
+
 
 
         if(req.getParameter("select1")!=null) {
@@ -43,10 +48,13 @@ public class SalesReportServlet extends HttpServlet{
     }
 
 
-        protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         EmployeeEntity employee = null;
         HttpSession session = req.getSession();
+
+        //first query
+        req.setAttribute("totPurchaseXPackage", totPurchaseXPackage);
 
         if(session.getAttribute("employee")!=null){
             employee = (EmployeeEntity) session.getAttribute("employee");

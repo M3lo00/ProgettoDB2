@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="it.polimi.progettodb2.entities.EmployeeEntity" %>
+<%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
+<%@ page import="java.util.List" %>
+<%@ page import="it.polimi.progettodb2.entities.TotpurchaseperpackandvalidityEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,7 +21,29 @@
 
     <title>Sales-Report</title>
 </head>
+
+<%
+    List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
+%>
+
 <body>
+<%
+    //list of all service packages
+    List<PackageEntity> servicePackagesToSelect = (List<PackageEntity>) request.getAttribute("servicePackagesToSelect");
+
+    PackageEntity servicePackageSelected = (PackageEntity) request.getAttribute("servicePackageSelected");
+
+    //first query
+    TotpurchaseperpackandvalidityEntity totPurchaseXPackage = (TotpurchaseperpackandvalidityEntity) request.getAttribute("totPurchaseXPackage");
+%>
+
+
+
+
+
+
+
+
 <%
     EmployeeEntity employee = null;
     String employeeUsername = null;
@@ -70,30 +95,24 @@
             if( result == 1) {
                 System.out.println(result);%>
 
+
+        <p><h4 class="dark-text mr-4">Total Purchase per Package</h4></p>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
+                <%
+                    for (PackageEntity pack: packageEntityList) {
+                %>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
+                        <div class="fw-bold" value="<%=pack.getIdPackage()%>"><%=pack.getName()%></div>
                         Content for list item
                     </div>
                     <span class="badge bg-primary rounded-pill">14</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
-                    </div>
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Subheading</div>
-                        Content for list item
-                    </div>
-                    <span class="badge bg-primary rounded-pill">14</span>
-                </li>
+                <%
+                    }
+                %>
             </ol>
         </div>
         <% } %>

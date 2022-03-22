@@ -1,9 +1,6 @@
 package it.polimi.progettodb2.services;
 
-import it.polimi.progettodb2.entities.EmployeeEntity;
-import it.polimi.progettodb2.entities.OptserviceEntity;
-import it.polimi.progettodb2.entities.PackageEntity;
-import it.polimi.progettodb2.entities.UserEntity;
+import it.polimi.progettodb2.entities.*;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NonUniqueResultException;
@@ -12,6 +9,7 @@ import jakarta.persistence.PersistenceException;
 import it.polimi.progettodb2.exceptions.CredentialsException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Stateless
@@ -43,6 +41,15 @@ public class EmployeeService {
                 .setParameter("username", usrn)
                 .getResultStream().findAny();
     }
+
+    public TotpurchaseperpackandvalidityEntity purchasePerPackage (int package_id){
+        TotpurchaseperpackandvalidityEntity totalPurchasesPerPackageEntity;
+        return totalPurchasesPerPackageEntity=em.createNamedQuery("TotalPurchasesPerPackage.findByPackage", TotpurchaseperpackandvalidityEntity.class)
+                .setParameter("package_id", package_id).getResultList().stream().findFirst().get();
+    }
+
+
+
 
 
 }

@@ -57,3 +57,6 @@ A livello di enity aggiugere "nullable" nella definizione delle colonne
 Capire a che serve @EJB
 
 URGENTE mettere tutte le relazioni
+
+aggiungere la visualizzazione degli optional services nei package (buy page sicuramente)
+

@@ -17,14 +17,9 @@ public class LogoutServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.removeAttribute("customer");
-            session.removeAttribute("employee");
-            session.removeAttribute("rejectedOrders");
-            session.removeAttribute("packages");
-            session.removeAttribute("allOrderByUser");
+            session.invalidate();
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("prova.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("./");
 
     }
 }

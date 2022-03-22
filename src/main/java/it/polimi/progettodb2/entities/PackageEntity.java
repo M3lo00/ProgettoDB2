@@ -35,32 +35,31 @@ public class PackageEntity implements Serializable {
     @Id
     @Column(name = "idPackage")
     private int idPackage;
-    
+
     @Column(name = "name")
     private String name;
 
-    
     @Column(name = "sms")
     private Integer sms;
-    
+
     @Column(name = "minute")
     private Integer minute;
-    
+
     @Column(name = "mGiga")
     private Integer mGiga;
-    
+
     @Column(name = "extraMGiga")
     private Integer extraMGiga;
-    
+
     @Column(name = "extraSMS")
     private Integer extraSms;
-    
+
     @Column(name = "fixedPhone")
     private Byte fixedPhone;
-    
+
     @Column(name = "fGiga")
     private Integer fGiga;
-    
+
     @Column(name = "extraFGiga")
     private Integer extraFGiga;
 
@@ -71,14 +70,21 @@ public class PackageEntity implements Serializable {
             CascadeType.DETACH
     })
     @JoinColumn(name = "refEmployee")
+    @Column(name = "refEmployee")
     private EmployeeEntity refEmployee;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
+    @Column(name = "price12M")
+    private double price12M;
 
     public int getIdPackage() {
         return idPackage;
+    }
+
+    public void setIdPackage(Integer idPackage) {
+        this.idPackage = idPackage;
     }
 
     public void setIdPackage(int idPackage) {
@@ -96,6 +102,8 @@ public class PackageEntity implements Serializable {
     public EmployeeEntity getRefEmployee() {
         return refEmployee;
     }
+
+
 
     public void setRefEmployee(EmployeeEntity refEmployee) {
         this.refEmployee = refEmployee;
@@ -129,6 +137,7 @@ public class PackageEntity implements Serializable {
         return extraMGiga;
     }
 
+
     public void setExtraMGiga(Integer extraMGiga) {
         this.extraMGiga = extraMGiga;
     }
@@ -136,6 +145,7 @@ public class PackageEntity implements Serializable {
     public Integer getExtraSms() {
         return extraSms;
     }
+
 
     public void setExtraSms(Integer extraSms) {
         this.extraSms = extraSms;
@@ -161,10 +171,10 @@ public class PackageEntity implements Serializable {
         return extraFGiga;
     }
 
+
     public void setExtraFGiga(Integer extraFGiga) {
         this.extraFGiga = extraFGiga;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -202,5 +212,13 @@ public class PackageEntity implements Serializable {
         result = 31 * result + (fGiga != null ? fGiga.hashCode() : 0);
         result = 31 * result + (extraFGiga != null ? extraFGiga.hashCode() : 0);
         return result;
+    }
+
+    public double getPrice12M() {
+        return price12M;
+    }
+
+    public void setPrice12M(double price12M) {
+        this.price12M = price12M;
     }
 }

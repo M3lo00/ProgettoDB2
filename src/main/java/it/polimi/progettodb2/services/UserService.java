@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.criteria.Order;
 import jakarta.validation.ConstraintViolationException;
 
 import java.sql.SQLException;
@@ -55,6 +56,18 @@ public class UserService {
         }
     }
 
+    //public boolean checkPhone ()
+
+    public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total){
+        //generazione del numero di telefono
+
+        Random rd = new Random();
+        int nMobile= 100+rd.nextInt();
+        OrderEntity order = new OrderEntity();
+        //valid impostato a 0
+        return null;
+    }
+
     public Optional<UserEntity> findByUserID(int idUser){
         return em.createNamedQuery("User.findByID", UserEntity.class)
                 .setParameter("idUser", idUser)
@@ -76,11 +89,6 @@ public class UserService {
     public List<PackageEntity> findAllPackages(){
 
         return em.createNamedQuery("Package.findAll", PackageEntity.class).getResultList();
-    }
-
-    public List<FeeperiodEntity> findAllFees(){
-        return em.createNamedQuery("Fee.findAll", FeeperiodEntity.class).getResultList();
-
     }
 
     public List<OptserviceEntity> choosableOptServices(int refPack){

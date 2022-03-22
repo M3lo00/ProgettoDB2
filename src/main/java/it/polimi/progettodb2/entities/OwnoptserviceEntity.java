@@ -11,29 +11,41 @@ public class OwnoptserviceEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
     @Id
-    @Column(name = "refPack")
-    private int refPack;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "refOptService")
-    private int refOptService;
+    @JoinColumn(name = "refPack")
+    private PackageEntity refPack;
 
-    public int getRefPack() {
+    @ManyToOne(fetch=FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @Id
+    @JoinColumn(name = "refOptService")
+    private OptserviceEntity refOptService;
+
+    public PackageEntity getRefPack() {
         return refPack;
     }
 
-    public void setRefPack(int refPack) {
+    public void setRefPack(PackageEntity refPack) {
         this.refPack = refPack;
     }
 
-    public int getRefOptService() {
+    public OptserviceEntity getRefOptService() {
         return refOptService;
     }
 
-    public void setRefOptService(int refOptService) {
+    public void setRefOptService(OptserviceEntity refOptService) {
         this.refOptService = refOptService;
+
     }
 
     @Override
@@ -49,10 +61,4 @@ public class OwnoptserviceEntity implements Serializable {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = refPack;
-        result = 31 * result + refOptService;
-        return result;
-    }
 }

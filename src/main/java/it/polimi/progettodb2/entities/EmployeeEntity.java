@@ -13,9 +13,9 @@ import java.util.List;
         {
                 @NamedQuery(
                         name = "Employee.findByUsername",
-                        query = "SELECT u " +
-                                "FROM UserEntity u " +
-                                "WHERE u.username = :username"
+                        query = "SELECT e " +
+                                "FROM EmployeeEntity e " +
+                                "WHERE e.username = :username"
                 ),
 
                 @NamedQuery(

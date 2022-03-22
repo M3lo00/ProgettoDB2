@@ -1,5 +1,6 @@
 <%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="it.polimi.progettodb2.entities.OptserviceEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -20,7 +21,9 @@
 <body>
 <%
     List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
-    //List<OptserviceEntity> optSercices= (List<OptserviceEntity>) request.getSession().getAttribute("optionals");
+
+    List<OptserviceEntity> optServices=null;
+    if (request.getSession().getAttribute("optionals")!=null) optServices = (List<OptserviceEntity>) request.getSession().getAttribute("optionals");
 %>
 
 
@@ -44,20 +47,19 @@
     <ul class="nav">
         <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit">Questo deve essere sostituito con un form per il login</button>
         </form>
     </ul>
 
     <%  }%>
 </div>
-<%--
-div della landing page con cui scegliamo un pacchetto,
-    questo deve essere disattivato quando scegliamo il pacchetto dalla LP
 
-Div per la scelta del periodo.
---%>
+<div class="d-flex justify-content-around my-3">
+    <h2 >Chose the package that fits you the best</h2>
+    <div></div>
+</div>
 
-<form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="buy" method="post">
+<form class="container-fluid" action="buy" method="post">
     <%
         PackageEntity chosen =null;
         if (request.getSession().getAttribute("chosenPack")!=null){ //lasciare in pack solo un pacchetto
@@ -86,40 +88,40 @@ Div per la scelta del periodo.
         <div class="v-line ml-auto"></div>
         <div class="price">
             <div class="row px-3">
-                <h4 class="blue-text mr-2">$ 380,00</h4>
-                <p class="mt-1 price-fall mr-5"><del>$ 760,00</del></p>
+                <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
+                <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
             </div>
+            <%if (request.getSession().getAttribute("chosenPack")!=null){%>
+            <button type="submit" class="btn btn-danger mt-4" name="reset" value="reset" > Change Package </button>
+            <%}else{%>
             <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
+            <%}%>
         </div>
     </div>
     <%
             }
         }
     %>
-    <div class="position-relative">
-            <button type="submit" class="btn btn-primary position-absolute bottom-0 start-20" name="reset" value="reset" > Change Package </button>
-    </div>
 <%--</form>--%>
-<%
-    if (request.getSession().getAttribute("chosenPack")!=null){
-
-        int prova =  10;//request.getSession().getAttribute("chosenPack").; mettere il prezzo del pacchetto
+    <%
+        if (request.getSession().getAttribute("chosenPack")!=null){
+            PackageEntity packagec= (PackageEntity) request.getSession().getAttribute("chosenPackObj");
+            double prova =  packagec.getPrice12M();
 
     %>
-
         <%--<form class="container" action="buy" method="post">--%>
 
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="row d-flex justify-content-start card-strip">
             <div class="col">
-                <p class="text-center">Inizio del servizio</p>
+                <h5 class="card-title">Offer Duration</h5>
             </div>
             <div class="col">
                 <div class="card h-80">
                     <div class="card-body">
                         <h5 class="card-title">Silver</h5>
-                        <p class="card-text"><%= prova*1 %>€/month</p>
+                        <p class="card-text"><%= String.format("%.2f",prova) %>€/month</p>
                         <input class="form-check-input stretched-link" type="radio" name="chosenMonths" value="12">
-                        <label class="form-check-label">12</label>
+                        <label class="form-check-label">12 Months</label>
                     </div>
                 </div>
             </div>
@@ -127,9 +129,9 @@ Div per la scelta del periodo.
                 <div class="card h-80">
                     <div class="card-body">
                         <h5 class="card-title">Gold</h5>
-                        <p class="card-text"><%= prova*0.9%>€/month</p>
+                        <p class="card-text"><%= String.format("%.2f",prova*0.9)%>€/month</p>
                         <input class="form-check-input stretched-link" type="radio" name="chosenMonths" value="24">
-                        <label class="form-check-label">24</label>
+                        <label class="form-check-label">24 Months</label>
                     </div>
                 </div>
             </div>
@@ -137,52 +139,61 @@ Div per la scelta del periodo.
                 <div class="card h-80">
                     <div class="card-body">
                         <h5 class="card-title">Platinum</h5>
-                        <p class="card-text"><%= (prova*0.8) %>€/month</p>
+                        <p class="card-text"><%= String.format("%.2f",prova*0.8) %>€/month</p>
                         <input class="form-check-input stretched-link" type="radio" name="chosenMonths" value="36">
-                        <label class="form-check-label">36</label>
+                        <label class="form-check-label">36 Months</label>
                     </div>
                 </div>
             </div>
         </div>
         <div><p> </p></div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="row d-flex justify-content-start card-strip">
             <div class="col">
-                <p class="text-center">Numero di mensilità</p>
+                <h5 class="card-title">Starting date</h5>
             </div>
             <div class="col">
             </div>
             <div class="col">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <input type="date" name="startDate" value="${startDate}" min="${startDate}">
-                    </div>
+                <div class="card-body">
+                    <input type="date" name="startDate" value="${startDate}" min="${startDate}">
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <button type="submit" class="btn btn-lg btn-primary">Submit</button>
-                    </div>
+                <div class="card-body">
+                    <button type="submit" class="btn btn-lg btn-primary">Continue</button>
                 </div>
             </div>
         </div>
-    </form>
-
 <%
     }
 %>
-
-
-<%--
-<container>
     <%
-        for (OptserviceEntity opt: optSercices) {
+        if (optServices !=null){
     %>
-
+    <div class="row d-flex justify-content-start card-strip">
+        <div class="card-title">
+            <h5>Choose optional services</h5>
+        </div>
+        <div class="col-9">
+            <%for (OptserviceEntity opt: optServices) {%>
+            <div class="form-check form-check-inline" >
+                <input class="form-check-input" type="checkbox" name="chosenOpt" id="opt<%=opt.getIdOptService()%>" value="<%=opt.getIdOptService()%>">
+                <label class="form-check-label" for="opt<%=opt.getIdOptService()%>">
+                    <%=opt.getName()%>
+                </label>
+            </div>
+            <% } %>
+        </div>
+        <div class="col-3 ">
+            <div class="card-body position-relative bottom-0 end-0">
+                <button type="submit" class="btn btn-lg btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
     <%
         }
     %>
-</container>
---%>
+</form>
+
 </body>
 </html>

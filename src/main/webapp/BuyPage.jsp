@@ -39,19 +39,22 @@
 
     <ul class="nav">
         <li class="nav-item"><a class="nav-link link-dark px-2">${customer.getUsername()}</a></li>
-        <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="${pageContext.request.contextPath}/logout">Logout</a></li>
+        <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="/dbproj/logout">Logout</a></li>
     </ul>
 
-    <%  }else{%>
+    <%}else
+    {%>
 
     <ul class="nav">
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Questo deve essere sostituito con un form per il login</button>
+        <form class="p-1 d-flex" method="post" action="buy">
+
+            <input type="text" class="form-control ${invalid}" name="username" placeholder="username">
+            <input type="password" class="form-control ${invalid}" name="password" placeholder="password">
+            <button type="submit" class="btn btn-sm btn-outline-primary">Login</button>
+
         </form>
     </ul>
-
-    <%  }%>
+    <%}%>
 </div>
 
 <div class="d-flex justify-content-around my-3">
@@ -167,13 +170,19 @@
 <%
     }
 %>
-    <%
-        if (optServices !=null){
-    %>
+</form>
+<form class="container-fluid" action="confirm" method="get">
+
+<%
+    if (optServices !=null){
+%>
     <div class="row d-flex justify-content-start card-strip">
         <div class="card-title">
             <h5>Choose optional services</h5>
         </div>
+        <%--<div class="form-check form-check-inline" >
+            <input class="form-check-input" type="checkbox" name="chosenOpt" id="opt<%=opt.getIdOptService()%>" value="0" checked>
+        </div>--%>
         <div class="col-9">
             <%for (OptserviceEntity opt: optServices) {%>
             <div class="form-check form-check-inline" >
@@ -190,10 +199,12 @@
             </div>
         </div>
     </div>
-    <%
-        }
-    %>
+<%
+    }
+%>
+
 </form>
+
 
 </body>
 </html>

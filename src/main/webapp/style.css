@@ -1,3 +1,8 @@
+.btn-red {
+    background-color: #ff0000;
+    color: #fff
+}
+
 body {
     color: #616161;
     overflow-x: hidden;
@@ -29,11 +34,11 @@ body {
     color: #E0E0E0
 }
 
+
+
 .fa-star.active {
     color: #FFC400
 }
-
-
 
 .v-line {
     width: 1px;
@@ -54,36 +59,25 @@ body {
     color: #fff
 }
 
-.btn-red {
-    background-color: #ff0000;
-    color: #fff
-}
-
 @media screen and (max-width: 1012px) {
     .card-strip {
-        width: 100%
-    }
+    width: 100%
+}
 }
 
 @media screen and (max-width: 859px) {
+
     .v-line {
         display: none
     }
-
     .price {
         width: 100%;
-        margin-left: 95px
-    }
+    margin-left: 95px
+}
 }
 
 @media screen and (max-width: 529px) {
     .price {
-        margin-left: 0px
+    margin-left: 0px
     }
 }
-
-
-
-
-
-

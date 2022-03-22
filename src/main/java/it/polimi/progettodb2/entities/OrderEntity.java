@@ -229,4 +229,18 @@ public class OrderEntity implements Serializable {
         result = 31 * result + (nFixed != null ? nFixed.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return this.refUser+" "+
+        this.refPack+" "+
+        this.creationDate+" "+
+        this.startDate+" "+
+        this.periodo+" "+
+        this.valid+" "+
+        this.totalAmount+" "+
+        this.nMobile+" "+
+        this.nFixed+" "+
+        this.optService;
+    }
 }

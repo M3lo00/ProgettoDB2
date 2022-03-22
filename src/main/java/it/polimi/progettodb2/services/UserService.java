@@ -24,12 +24,14 @@ public class UserService {
     public UserService() {
     }
 
-    /*
         public boolean randomPayment(){
             Random rd = new Random();
-            return rd.nextBoolean();
+            if (rd.nextInt(3)==0){
+                return false;
+            }
+            return true;
         }
-    */
+
     public UserEntity checkCredentials(String usrn, String pwd) throws CredentialsException, NonUniqueResultException {
         List<UserEntity> uList = null;
         try {
@@ -59,25 +61,27 @@ public class UserService {
 
     //public boolean checkPhone ()
 
-    public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, boolean valid, float total, List<OptserviceEntity> opts){
+    public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total, List<OptserviceEntity> opts){
 
         //generazione del numero di telefono
         Random rd = new Random();
-        int nMobile= 100+rd.nextInt();
-        int nFixed=100+rd.nextInt();
+        int nMobile= rd.nextInt(1000);
+        int nFixed=rd.nextInt(1000);
+
         Timestamp crD = new Timestamp(creationD.getTime());
         java.sql.Date startDate= new java.sql.Date(startD.getTime());
-        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, valid,(int) total, nMobile, nFixed, opts);
-
-//        List<PackageEntity>
-
+        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, this.randomPayment(),(int) total, nMobile, nFixed, opts);
+        System.out.println(order);
+        System.out.println("Ordine creato");
+        return null;
+        /*
         try{
             em.persist(order);      //forza il db a creare una tupla
             em.flush();             //forza il db a effettuare tutte le operazioni programmateù
             return order;
         }catch (ConstraintViolationException e){
             return null;
-        }
+        }*/
     }
 
     public Optional<UserEntity> findByUserID(int idUser){

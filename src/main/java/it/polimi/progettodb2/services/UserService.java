@@ -76,8 +76,8 @@ public class UserService {
         return null;
         /*
         try{
-            em.persist(order);      //forza il db a creare una tupla
-            em.flush();             //forza il db a effettuare tutte le operazioni programmateù
+            em.persist(order);
+            em.flush;
             return order;
         }catch (ConstraintViolationException e){
             return null;

@@ -73,7 +73,6 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    //costruttore entity
     public UserEntity(String username, String email, String password) {
         this.username = username;
         this.email = email;

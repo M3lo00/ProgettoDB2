@@ -31,13 +31,18 @@ public class BuyServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
 
-        List<PackageEntity> packages = userService.findAllPackages();
+        try{
+            List<PackageEntity> packages = userService.findAllPackages();
+            session.setAttribute("packages", packages);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        session.setAttribute("packages", packages);
-        session.setAttribute("chosenPack", null);
+        session.setAttribute("chosenPackObj", null);
         session.setAttribute("chosenMonths", null);
         session.setAttribute("startDate", null);
         session.setAttribute("optionals", null);
+        session.setAttribute("chosenOptObj", null);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);
@@ -46,29 +51,28 @@ public class BuyServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
 
-        Boolean non_entra = req.getParameter("username")!=null;
-        System.out.println(req.getParameter("password"));
-
-        if (non_entra){
-
-            System.out.println("sistemiamo sto login");
-
-            String username = req.getParameter("username");
-            String password = req.getParameter("password");
-
-            UserEntity user = null;
-
+        if(session.getAttribute("packages")==null){
             try {
-                user = userService.checkCredentials(username, password);
-            } catch (CredentialsException e) {
+                List<PackageEntity> packages = userService.findAllPackages();
+                session.setAttribute("packages", packages);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(user!=null){
-                session.setAttribute("customer", user);
-            }else{
-                req.setAttribute("invalid", "is-invalid");
-                req.setAttribute("messageLogin", "Invalid username/password, retry");
-            }
+        }
+
+        if (req.getParameter("chosenPack")!=null){
+
+            Integer chosenPack_Id= Integer.parseInt(req.getParameter("chosenPack").toString());
+
+            PackageEntity chosen =null;
+            List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
+
+            chosen = packageEntityList.stream()
+                    .filter(pack -> chosenPack_Id.equals(pack.getIdPackage()))
+                    .findFirst()
+                    .orElse(null);
+
+            session.setAttribute("chosenPackObj", chosen);
         }
 
         Date date = new Date();
@@ -82,16 +86,15 @@ public class BuyServlet extends HttpServlet{
             req.setAttribute("monthChoice", "true");
         }
 
-        if (session.getAttribute("chosenPack")==null) session.setAttribute("chosenPack", req.getParameter("chosenPack"));
 
-        if (session.getAttribute("chosenPack")!=null && req.getParameter("chosenMonths")!=null){
+        if (session.getAttribute("chosenPackObj")!=null && req.getParameter("chosenMonths")!=null){
 
             session.setAttribute("chosenMonths", req.getParameter("chosenMonths"));
             session.setAttribute("startDate", req.getParameter("startDate"));
 
-            int refPack= Integer.parseInt((String) session.getAttribute("chosenPack"));
+            PackageEntity pack= (PackageEntity) session.getAttribute("chosenPackObj");
 
-            List<OptserviceEntity> optionals=userService.getAllBuyableOpt(refPack);
+            List<OptserviceEntity> optionals=userService.getAllBuyableOpt(pack.getIdPackage());
             session.setAttribute("optionals", optionals);
             if (optionals.size()==0){
                 res.sendRedirect("./confirmation");
@@ -101,12 +104,12 @@ public class BuyServlet extends HttpServlet{
         if(req.getParameter("reset")!=null){
             if (req.getParameter("reset").equals("reset")){;
                 session.setAttribute("optionals", null);
-                session.setAttribute("chosenPack", null);
+                session.setAttribute("chosenPackObj", null);
                 session.setAttribute("chosenMonths", null);
                 session.setAttribute("startDate", null);
+                session.setAttribute("chosenOptObj", null);
             }
         }
-
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);

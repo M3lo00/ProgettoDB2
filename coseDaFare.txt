@@ -60,4 +60,4 @@ aggiungere la visualizzazione degli optional services nei package (buy page sicu
 
 cambiare total Order in float
 
-sistemare il passaggio in Buy di Package, far si che nell'attributo chosenPack vi sia l'oggetto package e non il suo id(trovi il modo in BuyPage.jsp)
+Sistemare Exceptions!!! Guardare esempi professore

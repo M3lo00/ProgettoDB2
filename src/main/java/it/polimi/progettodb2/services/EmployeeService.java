@@ -32,6 +32,12 @@ public class EmployeeService {
         throw new NonUniqueResultException("More than one user registered with same credentials");
     }
 
+    /*public void newPack(){
+
+        PackageEntity pack = new PackageEntity(String name, Integer sms, );
+
+    }*/
+
     public List<OptserviceEntity> findAllOptionalProduct(){
         return em.createNamedQuery("Optional.findAllOptionalProduct", OptserviceEntity.class).getResultList();
     }

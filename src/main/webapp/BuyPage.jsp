@@ -14,14 +14,15 @@
     <link rel="stylesheet" href="style.css">
     <title>Hello, world!</title>
 
-
+    <script>
+        history.forward();
+    </script>
 </head>
 
 
 <body>
 <%
-    List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
-
+    List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
     List<OptserviceEntity> optServices=null;
     if (request.getSession().getAttribute("optionals")!=null) optServices = (List<OptserviceEntity>) request.getSession().getAttribute("optionals");
 %>
@@ -42,18 +43,6 @@
         <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="/dbproj/logout">Logout</a></li>
     </ul>
 
-    <%}else
-    {%>
-
-    <ul class="nav">
-        <form class="p-1 d-flex" method="post" action="buy">
-
-            <input type="text" class="form-control ${invalid}" name="username" placeholder="username">
-            <input type="password" class="form-control ${invalid}" name="password" placeholder="password">
-            <button type="submit" class="btn btn-sm btn-outline-primary">Login</button>
-
-        </form>
-    </ul>
     <%}%>
 </div>
 
@@ -64,24 +53,17 @@
 
 <form class="container-fluid" action="buy" method="post">
     <%
-        PackageEntity chosen =null;
-        if (request.getSession().getAttribute("chosenPack")!=null){ //lasciare in pack solo un pacchetto
+        PackageEntity chosen= null;
 
-            Integer chosenPack_Id= Integer.parseInt(request.getSession().getAttribute("chosenPack").toString());
-
-            chosen = packageEntityList.stream()
-                    .filter(pack -> chosenPack_Id.equals(pack.getIdPackage()))
-                    .findFirst()
-                    .orElse(null);
-            request.getSession().setAttribute("chosenPackObj", chosen);
-        }
+        if (session.getAttribute("chosenPackObj")!=null) chosen= (PackageEntity) session.getAttribute("chosenPackObj");
+        System.out.println(session.getAttribute("chosenPackObj"));
         for (PackageEntity pack: packageEntityList) {
-            if(request.getSession().getAttribute("chosenPack")!=null && pack==chosen || request.getSession().getAttribute("chosenPack")==null){
+            if(chosen == null || pack == chosen){
     %>
     <div class="row d-flex justify-content-start card-strip">
         <div class="info">
             <div class="row px-3 mb-2">
-                <h4 class="dark-text mr-4" value="<%=pack.getIdPackage()%>"><%=pack.getName()%></h4>
+                <h4 class="dark-text mr-4"><%=pack.getName()%></h4>
 
             </div>
             <div class="row px-3">
@@ -94,7 +76,7 @@
                 <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
                 <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
             </div>
-            <%if (request.getSession().getAttribute("chosenPack")!=null){%>
+            <%if (chosen!=null){%>
             <button type="submit" class="btn btn-danger mt-4" name="reset" value="reset" > Change Package </button>
             <%}else{%>
             <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
@@ -104,15 +86,12 @@
     <%
             }
         }
-    %>
-<%--</form>--%>
-    <%
-        if (request.getSession().getAttribute("chosenPack")!=null){
-            PackageEntity packagec= (PackageEntity) request.getSession().getAttribute("chosenPackObj");
-            double prova =  packagec.getPrice12M();
+
+        if (chosen!=null && session.getAttribute("chosenMonths")==null){
+
+            double prova =  chosen.getPrice12M();
 
     %>
-        <%--<form class="container" action="buy" method="post">--%>
 
         <div class="row d-flex justify-content-start card-strip">
             <div class="col">
@@ -123,8 +102,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Silver</h5>
                         <p class="card-text"><%= String.format("%.2f",prova) %>€/month</p>
-                        <input class="form-check-input stretched-link" type="radio" name="chosenMonths" value="12">
-                        <label class="form-check-label">12 Months</label>
+                        <input id="chosen1" class="form-check-input stretched-link" type="radio" name="chosenMonths" value="12" <%if(session.getAttribute("chosenMonths")=="12"){%>checked<%}%>>
+                        <label for="chosen1" class="form-check-label">12 Months</label>
                     </div>
                 </div>
             </div>
@@ -133,8 +112,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Gold</h5>
                         <p class="card-text"><%= String.format("%.2f",prova*0.9)%>€/month</p>
-                        <input class="form-check-input stretched-link" type="radio" name="chosenMonths" value="24">
-                        <label class="form-check-label">24 Months</label>
+                        <input id="chosen2" class="form-check-input stretched-link" type="radio" name="chosenMonths" value="24" <%if(session.getAttribute("chosenMonths")=="24"){%>checked<%}%>>
+                        <label for="chosen2" class="form-check-label">24 Months</label>
                     </div>
                 </div>
             </div>
@@ -143,8 +122,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Platinum</h5>
                         <p class="card-text"><%= String.format("%.2f",prova*0.8) %>€/month</p>
-                        <input class="form-check-input stretched-link" type="radio" name="chosenMonths" value="36">
-                        <label class="form-check-label">36 Months</label>
+                        <input id="chosen3" class="form-check-input stretched-link" type="radio" name="chosenMonths" value="36" <%if(session.getAttribute("chosenMonths")=="36"){%>checked<%}%>>
+                        <label for="chosen3" class="form-check-label">36 Months</label>
                     </div>
                 </div>
             </div>
@@ -158,7 +137,8 @@
             </div>
             <div class="col">
                 <div class="card-body">
-                    <input type="date" name="startDate" value="${startDate}" min="${startDate}">
+                    <input id="sDate" type="date" name="startDate" value="${startDate}" min="${startDate}">
+                    <label for="sDate">choose a Date</label>
                 </div>
             </div>
             <div class="col">
@@ -171,7 +151,7 @@
     }
 %>
 </form>
-<form class="container-fluid" action="confirm" method="get">
+<form class="container-fluid" action="confirm" method="post">
 
 <%
     if (optServices !=null){
@@ -180,9 +160,6 @@
         <div class="card-title">
             <h5>Choose optional services</h5>
         </div>
-        <%--<div class="form-check form-check-inline" >
-            <input class="form-check-input" type="checkbox" name="chosenOpt" id="opt<%=opt.getIdOptService()%>" value="0" checked>
-        </div>--%>
         <div class="col-9">
             <%for (OptserviceEntity opt: optServices) {%>
             <div class="form-check form-check-inline" >

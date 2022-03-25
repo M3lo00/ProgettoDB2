@@ -88,6 +88,13 @@ public class PackageEntity implements Serializable {
 
     public List<OptserviceEntity> getOptService(){return optService;}
 
+    public PackageEntity() {
+    }
+
+    public PackageEntity(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Integer extraSms, Boolean fixedPhone, Integer fGiga, Float extraFGiga, Float price12M) {
+
+    }
+
     public int getIdPackage() {
         return idPackage;
     }

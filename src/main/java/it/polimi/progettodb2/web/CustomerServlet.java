@@ -28,12 +28,18 @@ public class CustomerServlet extends HttpServlet {
         UserEntity user = null;
         HttpSession session = req.getSession();
 
-
         List<OrderEntity> rejectedOrders = null;
         List<OrderEntity> allOrderByUser = null;
 
 
         if(session.getAttribute("customer")!=null){
+
+            session.setAttribute("chosenPackObj", null);
+            session.setAttribute("chosenMonths", null);
+            session.setAttribute("startDate", null);
+            session.setAttribute("optionals", null);
+            session.setAttribute("chosenOptObj", null);
+
             user = (UserEntity) session.getAttribute("customer");
 
             if(user.getUsername()!=null) rejectedOrders = userService.findRejectedOrdersByUser(user.getIdUser());
@@ -45,7 +51,7 @@ public class CustomerServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("customer.jsp");
             dispatcher.forward(req, res);
         }else{
-            res.sendRedirect("./"); //ti sposta di servlet
+            res.sendRedirect("./");
         }
 
     }

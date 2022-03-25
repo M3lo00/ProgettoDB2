@@ -48,11 +48,24 @@ public class EmployeeService {
                 .getResultStream().findAny();
     }
 
-    public TotpurchaseperpackandvalidityEntity purchasePerPackage (int package_id){
-        TotpurchaseperpackandvalidityEntity totalPurchasesPerPackageEntity;
-        return totalPurchasesPerPackageEntity=em.createNamedQuery("TotalPurchasesPerPackage.findByPackage", TotpurchaseperpackandvalidityEntity.class)
-                .setParameter("package_id", package_id).getResultList().stream().findFirst().get();
+    public List<TotpurchaseperpackandvalidityEntity> findAllTot (){
+
+        return em.createNamedQuery("TotalPurchasesPerPackage.findAllTot", TotpurchaseperpackandvalidityEntity.class).getResultList();
+
+                //.setParameter("package_id", package_id).getResultList().stream().findFirst().get();
     }
+
+
+
+
+/*
+    public TotpurchaseperpackandvalidityEntity purchasePackage (){
+        TotpurchaseperpackandvalidityEntity totalPurchasesPerPackageEntity;
+        return totalPurchasesPerPackageEntity= (TotpurchaseperpackandvalidityEntity) em.createNamedQuery("TotalPurchase.purchasePackage", TotpurchaseperpackandvalidityEntity.class);
+
+    }
+
+ */
 
 
 

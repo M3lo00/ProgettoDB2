@@ -22,19 +22,14 @@
     <title>Sales-Report</title>
 </head>
 
-<%
-    List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
-%>
+
 
 <body>
 <%
     //list of all service packages
-    List<PackageEntity> servicePackagesToSelect = (List<PackageEntity>) request.getAttribute("servicePackagesToSelect");
+    List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
 
-    PackageEntity servicePackageSelected = (PackageEntity) request.getAttribute("servicePackageSelected");
-
-    //first query
-    TotpurchaseperpackandvalidityEntity totPurchaseXPackage = (TotpurchaseperpackandvalidityEntity) request.getAttribute("totPurchaseXPackage");
+     List<TotpurchaseperpackandvalidityEntity> findByPackage = (List<TotpurchaseperpackandvalidityEntity>) request.getAttribute("findByPackage");
 %>
 
 
@@ -73,7 +68,7 @@
    <%-- selettore --%>
     <div class="row d-flex justify-content-start card-strip">
         <form class="form-floating" action="report" method="post">
-            <select name="select1" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            <select name="select1"  class="form-select" id="floatingSelect" aria-label="Floating label select example">
                 <option selected disabled>Sales Report menu</option>
                 <option value="1">Total Purchases per Package</option>
                 <option value="2">Total Purchases per Package & Validity Period</option>
@@ -96,6 +91,7 @@
                 System.out.println(result);%>
 
 
+
         <p><h4 class="dark-text mr-4">Total Purchase per Package</h4></p>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
@@ -103,10 +99,73 @@
                 <%
                     for (PackageEntity pack: packageEntityList) {
                 %>
+
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold" value="<%=pack.getIdPackage()%>"><%=pack.getName()%></div>
-                        Content for list item
+                        <div class="fw-bold"><%=pack.getName() %></div>
+                        <div class="fw-bold"><%=pack.getTotpurch().get(0).getTotalPurchases() + pack.getTotpurch().get(1).getTotalPurchases()%></div>
+
+                        <%-- <div ><%=pack.getIdTotalPurchase %></div>--%>
+                        <%--Content for list item--%>
+
+                        <%--
+                        <div><%=pack.getIdPackage() %></div>
+                        <%
+                            //System.out.println(pack.getTotpurch());
+                            int i=0;
+                        //for (TotpurchaseperpackandvalidityEntity purch: findByPackage) {
+                        %>
+
+                        <%
+                         //   if(purch.getPackageId() == pack.getIdPackage()){
+                        %>
+
+
+                        <%// i+=purch.getTotalPurchases();
+                            //}
+                        %>
+                        <%
+                            //}
+                        %>
+                        <p class="cyanText"><%=i%></p>
+
+                        --%>
+                        <%--
+
+                        <br>
+                        <div class="shadowDiv">
+                            <h3>Number of total purchases per package</h3>
+
+                            <form action="report" method="post">
+
+                                <label for="srvPackage">Choose a service package:</label>
+                                <select name="srvPackage" id="srvPackage">
+                                    <%
+                                        for (PackageEntity servicePackageToSelect: packageEntityList) {
+                                    %>
+                                    <option value="<%=servicePackageToSelect.getIdPackage()%>"><%=servicePackageToSelect.getName() %></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                                <br><br>
+
+                                <br><br>
+                                <%
+                                    if(totPurchaseXPackage !=null){
+                                %>
+                                <p class="cyanText"><%=totPurchaseXPackage.getTotalPurchases()%></p>
+                                <%
+                                    }
+                                %>
+
+                            </form>
+
+                        </div>
+
+                        <br><br>
+--%>
+
                     </div>
                     <span class="badge bg-primary rounded-pill">14</span>
                 </li>
@@ -120,6 +179,7 @@
 
 
     </div>
+
 </form>
 
 

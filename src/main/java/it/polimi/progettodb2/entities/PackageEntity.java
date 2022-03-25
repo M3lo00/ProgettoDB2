@@ -32,6 +32,7 @@ public class PackageEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idPackage")
@@ -74,11 +75,13 @@ public class PackageEntity implements Serializable {
             CascadeType.DETACH
     })
     @JoinColumn(name = "refEmployee")
-    @Column(name = "refEmployee")
     private EmployeeEntity refEmployee;
 
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
+
+    @OneToMany(targetEntity = TotpurchaseperpackandvalidityEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TotpurchaseperpackandvalidityEntity> totpurch;
 
     @ManyToMany
     @JoinTable(name="ownoptservice",
@@ -94,6 +97,8 @@ public class PackageEntity implements Serializable {
     public PackageEntity(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Integer extraSms, Boolean fixedPhone, Integer fGiga, Float extraFGiga, Float price12M) {
 
     }
+
+    public List<TotpurchaseperpackandvalidityEntity> getTotpurch(){return totpurch;}
 
     public int getIdPackage() {
         return idPackage;

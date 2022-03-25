@@ -28,12 +28,18 @@ public class SalesReportServlet extends HttpServlet{
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
+/*
         //first query
-        String srvPackage = req.getParameter("srvPackage");
-        if(srvPackage!=null) totPurchaseXPackage = employeeService.purchasePerPackage(Integer.parseInt(srvPackage));
+        String select2 = req.getParameter("select2");
+        if(select2!=null) totPurchaseXPackage = employeeService.purchasePackage();
 
 
+ */
+        /*
+        totPurchaseXPackage = employeeService.purchasePackage();
+
+
+         */
 
 
         if(req.getParameter("select1")!=null) {
@@ -54,7 +60,10 @@ public class SalesReportServlet extends HttpServlet{
         HttpSession session = req.getSession();
 
         //first query
-        req.setAttribute("totPurchaseXPackage", totPurchaseXPackage);
+        List<TotpurchaseperpackandvalidityEntity> findAllTot = employeeService.findAllTot();
+        req.setAttribute("findAllTot", findAllTot);
+
+
 
         if(session.getAttribute("employee")!=null){
             employee = (EmployeeEntity) session.getAttribute("employee");

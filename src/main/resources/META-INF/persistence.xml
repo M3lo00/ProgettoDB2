@@ -12,6 +12,9 @@
         <class>it.polimi.progettodb2.entities.PackageEntity</class>
         <class>it.polimi.progettodb2.entities.PaymentEntity</class>
         <class>it.polimi.progettodb2.entities.UserEntity</class>
+        <class>it.polimi.progettodb2.entities.AvgproductperserviceEntity</class>
+        <class>it.polimi.progettodb2.entities.TotpurchaseperpackandvalidityEntity</class>
+
 
     </persistence-unit>
 </persistence>

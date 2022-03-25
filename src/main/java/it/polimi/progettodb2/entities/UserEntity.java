@@ -61,7 +61,7 @@ public class UserEntity implements Serializable {
     @Column(name = "failedPay")
     private Integer failedPay;
 
-    @OneToMany(targetEntity = OrderEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = OrderEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
     @OneToMany(targetEntity = PaymentEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)

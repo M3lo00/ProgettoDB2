@@ -6,35 +6,62 @@ import jakarta.persistence.*;
 
 //Seleziona tutte le tuple che hanno il packageid dato in ingresso
 @NamedQuery(
-        name = "TotalPurchasesPerPackage.findByPackage",
-        query = "SELECT n FROM TotpurchaseperpackandvalidityEntity n " +
-                "WHERE n.packageId = :package_id"
+        name = "TotalPurchasesPerPackage.findAllTot",
+        query = "SELECT n FROM TotpurchaseperpackandvalidityEntity n " //+
+                //"WHERE n.packageId = :package_id"
 )
 
 
 
 
+
+
+
+
 @Table(name = "totpurchaseperpackandvalidity", schema = "dbproj")
-@IdClass(TotpurchaseperpackandvalidityEntityPK.class)
+
 public class TotpurchaseperpackandvalidityEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "package_id")
-    private int packageId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+    @Column (name = "idTotalPurchase")
+    private int idTotalPurchase;
+
+    @ManyToOne(fetch=FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "package_id")
+    private PackageEntity package_id;
+
+
+
     @Column(name = "periodo")
     private int periodo;
+
     @Basic
     @Column(name = "totalPurchases")
+
+
+
+
     private int totalPurchases;
 
-    public int getPackageId() {
-        return packageId;
+    public int getIdTotalPurchase() {
+        return idTotalPurchase;
     }
 
-    public void setPackageId(int packageId) {
-        this.packageId = packageId;
+    public void setIdTotalPurchase(Integer idTotalPurchase) {
+        this.idTotalPurchase = idTotalPurchase;
+    }
+
+    public PackageEntity getPackageId() {
+        return package_id;
+    }
+
+    public void setPackageId(PackageEntity packageId) {
+        this.package_id = packageId;
     }
 
     public int getPeriodo() {
@@ -60,18 +87,22 @@ public class TotpurchaseperpackandvalidityEntity {
 
         TotpurchaseperpackandvalidityEntity that = (TotpurchaseperpackandvalidityEntity) o;
 
-        if (packageId != that.packageId) return false;
+        if (idTotalPurchase != that.idTotalPurchase) return false;
+        if (package_id != that.package_id) return false;
         if (periodo != that.periodo) return false;
         if (totalPurchases != that.totalPurchases) return false;
 
         return true;
     }
 
+    /*
     @Override
     public int hashCode() {
-        int result = packageId;
+        int result = this.package_id;
         result = 31 * result + periodo;
         result = 31 * result + totalPurchases;
         return result;
     }
+
+     */
 }

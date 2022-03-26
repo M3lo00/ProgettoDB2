@@ -4,6 +4,7 @@ import it.polimi.progettodb2.entities.*;
 import it.polimi.progettodb2.services.EmployeeService;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
+import jakarta.persistence.criteria.Order;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -60,8 +61,37 @@ public class SalesReportServlet extends HttpServlet{
         HttpSession session = req.getSession();
 
         //first query
+
         List<TotpurchaseperpackandvalidityEntity> findAllTot = employeeService.findAllTot();
         req.setAttribute("findAllTot", findAllTot);
+
+        //second query
+        List<AvgproductperserviceEntity> findAllAvg = employeeService.findAllAvg();
+        req.setAttribute("findAllAvg", findAllAvg);
+
+        //Third query
+        List<PackagePerSalesEntity> findAllSales = employeeService.findAllSales();
+        req.setAttribute("findAllSales", findAllSales);
+
+        List<InsolventUserEntity> findAllInsolvent = employeeService.findAllInsolvent();
+        req.setAttribute("findAllInsolvent", findAllInsolvent);
+
+        List<UserEntity> findAllUser = employeeService.findAllUser();
+        req.setAttribute("findAllUser", findAllUser);
+
+        List<OrderEntity> findAllOrder = employeeService.findAllOrder();
+        req.setAttribute("findAllOrder", findAllOrder);
+
+        List<SuspendedOrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
+        req.setAttribute("findAllSuspendedOrder", findAllSuspendedOrder);
+
+
+        //if
+
+        /*if (session.getAttribute("val")!=null && Integer.parseInt(session.getAttribute("val").toString())==5){
+            List<UserEntity> findAllUser = employeeService.findAllUser();
+            req.setAttribute("findAllUser", findAllUser);
+        }*/
 
 
 

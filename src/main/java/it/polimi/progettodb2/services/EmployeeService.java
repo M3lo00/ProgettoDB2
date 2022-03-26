@@ -7,6 +7,7 @@ import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import it.polimi.progettodb2.exceptions.CredentialsException;
+import jakarta.persistence.criteria.Order;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -51,26 +52,31 @@ public class EmployeeService {
     }
 
     public List<TotpurchaseperpackandvalidityEntity> findAllTot (){
-
         return em.createNamedQuery("TotalPurchasesPerPackage.findAllTot", TotpurchaseperpackandvalidityEntity.class).getResultList();
-
-                //.setParameter("package_id", package_id).getResultList().stream().findFirst().get();
     }
 
-
-
-
-/*
-    public TotpurchaseperpackandvalidityEntity purchasePackage (){
-        TotpurchaseperpackandvalidityEntity totalPurchasesPerPackageEntity;
-        return totalPurchasesPerPackageEntity= (TotpurchaseperpackandvalidityEntity) em.createNamedQuery("TotalPurchase.purchasePackage", TotpurchaseperpackandvalidityEntity.class);
-
+    public List<AvgproductperserviceEntity> findAllAvg (){
+        return em.createNamedQuery("AvgProductPerService.findAllAvg", AvgproductperserviceEntity.class).getResultList();
     }
 
- */
+    public List<InsolventUserEntity> findAllInsolvent (){
+        return em.createNamedQuery("InsolventUser.findAllInsolvent", InsolventUserEntity.class).getResultList();
+    }
 
+    public List<PackagePerSalesEntity> findAllSales (){
+        return em.createNamedQuery("PackagePerSales.findAllSales", PackagePerSalesEntity.class).getResultList();
+    }
 
+    public List<UserEntity> findAllUser() {
+        return em.createNamedQuery("User.findAllUser", UserEntity.class).getResultList();
+    }
 
+    public List<OrderEntity> findAllOrder() {
+        return em.createNamedQuery("Order.findAllOrder", OrderEntity.class).getResultList();
+    }
 
+    public List<SuspendedOrderEntity> findAllSuspendedOrder() {
+        return em.createNamedQuery("SuspendedOrder.findAllSuspendedOrder", SuspendedOrderEntity.class).getResultList();
+    }
 
 }

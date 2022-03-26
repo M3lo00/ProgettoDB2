@@ -1,13 +1,4 @@
 USE dbproj;
-create table avgproductperservice
-(
-    package_id          int not null primary key ,
-    avgnumber           float not null default 0,
-    numoptservice       int not null default 0,
-    numpackage          int not null default 0,
-    constraint package_id_fk1
-        foreign key (package_id) references package (idPackage)
-);
 
 
 CREATE TRIGGER newPackage4
@@ -17,19 +8,20 @@ BEGIN
         VALUE (NEW.idPackage);
 END;
 
+drop trigger addOrderAvg;
 
 CREATE TRIGGER addOrderAvg
-    AFTER UPDATE ON `order` for each row
+    AFTER INSERT ON `order` for each row
 BEGIN
     DECLARE temporaryChosAdd, x, temporaryChosPack, y  int;
     IF NEW.valid = 1 THEN
-        SELECT count(*), o.idOrder INTO temporaryChosAdd
+        SELECT count(*), o.idOrder INTO temporaryChosAdd, x
         FROM dbproj.order as o
                  INNER JOIN ownoptservice o2 on o.refPack = o2.refPack
         WHERE o.refPack = NEW.refPack
         GROUP BY o.idOrder;
 
-        SELECT count(*), o1.idOrder INTO temporaryChosPack
+        SELECT count(*), o1.idOrder INTO temporaryChosPack, y
         FROM dbproj.order as o1
                  INNER JOIN ownoptservice o2 on o1.refPack = o2.refPack
         WHERE o1.refPack = NEW.refPack

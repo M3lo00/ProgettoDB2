@@ -3,12 +3,31 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 @Entity
+
+
+@NamedQuery(
+        name = "AvgProductPerService.findAllAvg",
+        query = "SELECT a FROM AvgproductperserviceEntity a "
+)
+
+
 @Table(name = "avgproductperservice", schema = "dbproj")
 public class AvgproductperserviceEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @Column(name = "package_id")
-    private int packageId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idAvgProduct")
+    private int idAvgProduct;
+
+    @ManyToOne(fetch=FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "package_id")
+    private PackageEntity package_id;
+
     @Basic
     @Column(name = "avgnumber")
     private double avgnumber;
@@ -19,12 +38,20 @@ public class AvgproductperserviceEntity {
     @Column(name = "numpackage")
     private int numpackage;
 
-    public int getPackageId() {
-        return packageId;
+    public int getIdAvgProduct() {
+        return idAvgProduct;
     }
 
-    public void setPackageId(int packageId) {
-        this.packageId = packageId;
+    public void setIdAvgProduct(int idAvgProduct) {
+        this.idAvgProduct = idAvgProduct;
+    }
+
+    public PackageEntity getPackageId() {
+        return package_id;
+    }
+
+    public void setPackageId(PackageEntity packageId) {
+        this.package_id = packageId;
     }
 
     public double getAvgnumber() {
@@ -58,7 +85,8 @@ public class AvgproductperserviceEntity {
 
         AvgproductperserviceEntity that = (AvgproductperserviceEntity) o;
 
-        if (packageId != that.packageId) return false;
+        if (idAvgProduct != that.idAvgProduct) return false;
+        //if (packageId != that.packageId) return false;
         if (Double.compare(that.avgnumber, avgnumber) != 0) return false;
         if (numoptservice != that.numoptservice) return false;
         if (numpackage != that.numpackage) return false;
@@ -70,7 +98,8 @@ public class AvgproductperserviceEntity {
     public int hashCode() {
         int result;
         long temp;
-        result = packageId;
+        //result = packageId;
+        result = 0;
         temp = Double.doubleToLongBits(avgnumber);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + numoptservice;

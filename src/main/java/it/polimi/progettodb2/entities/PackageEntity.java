@@ -7,6 +7,7 @@ import java.util.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+
 @Entity
 
 @NamedQuery(
@@ -83,6 +84,12 @@ public class PackageEntity implements Serializable {
     @OneToMany(targetEntity = TotpurchaseperpackandvalidityEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TotpurchaseperpackandvalidityEntity> totpurch;
 
+    @OneToMany(targetEntity = PackagePerSalesEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PackagePerSalesEntity> packagesales;
+
+    @OneToMany(targetEntity = AvgproductperserviceEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AvgproductperserviceEntity> avgproduct;
+
     @ManyToMany
     @JoinTable(name="ownoptservice",
             joinColumns = @JoinColumn(name="refPack"),
@@ -110,6 +117,8 @@ public class PackageEntity implements Serializable {
     }
 
     public List<TotpurchaseperpackandvalidityEntity> getTotpurch(){return totpurch;}
+    public List<AvgproductperserviceEntity> getAvgproduct(){return avgproduct;}
+    public List<PackagePerSalesEntity> getPackageSales(){return packagesales;}
 
     public int getIdPackage() {
         return idPackage;

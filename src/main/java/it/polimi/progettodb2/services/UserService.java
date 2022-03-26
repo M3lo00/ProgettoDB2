@@ -61,7 +61,7 @@ public class UserService {
         Timestamp crD = new Timestamp(creationD.getTime());
         java.sql.Date startDate= new java.sql.Date(startD.getTime());
 
-        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, rd.nextBoolean(), total, nMobile, nFixed, opts);
+        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, /*rd.nextBoolean()*/true, total, nMobile, nFixed, opts);
 
         System.out.println(order);
         System.out.println("Ordine creato");

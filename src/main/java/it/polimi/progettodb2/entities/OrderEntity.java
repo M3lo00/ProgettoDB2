@@ -28,6 +28,11 @@ import java.util.List;
                 "o.valid=false"
 )
 
+@NamedQuery(
+        name = "Order.findAllOrder",
+        query = "SELECT o FROM OrderEntity o "
+)
+
 
 /*
 @NamedQuery(
@@ -84,6 +89,8 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "refUser")
     private UserEntity refUser;
 
+
+
     @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -99,6 +106,10 @@ public class OrderEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "refOptService"))
     private List<OptserviceEntity> optService;
 
+
+    @OneToOne(targetEntity = SuspendedOrderEntity.class, fetch = FetchType.EAGER, mappedBy="order_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SuspendedOrderEntity supsendedorder;
+
     public OrderEntity(){}
 
     public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, int period, Boolean valid, Float totalAmount, int nMobile, int nFixed, List<OptserviceEntity> optService){
@@ -113,6 +124,9 @@ public class OrderEntity implements Serializable {
             this.nFixed=nFixed;
             this.optService=optService;
     }
+
+    public SuspendedOrderEntity getIdSuspended(){ return supsendedorder;}
+
 
     public int getIdOrder() {
         return idOrder;

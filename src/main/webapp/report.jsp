@@ -5,10 +5,8 @@
   Time: 16:33
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="it.polimi.progettodb2.entities.EmployeeEntity" %>
-<%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="it.polimi.progettodb2.entities.TotpurchaseperpackandvalidityEntity" %>
+<%@ page import="it.polimi.progettodb2.entities.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,8 +26,16 @@
 <%
     //list of all service packages
     List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
+    List<UserEntity> userEntityList = (List<UserEntity>) request.getAttribute("findAllUser");
+    List<OrderEntity> orderEntityList =  (List<OrderEntity>) request.getAttribute("findAllorder");
 
-     List<TotpurchaseperpackandvalidityEntity> findByPackage = (List<TotpurchaseperpackandvalidityEntity>) request.getAttribute("findByPackage");
+    List<TotpurchaseperpackandvalidityEntity> findByPackage = (List<TotpurchaseperpackandvalidityEntity>) request.getAttribute("findByPackage");
+    List<AvgproductperserviceEntity> findAllAvg = (List<AvgproductperserviceEntity>) request.getAttribute("findAllAvg");
+    List<PackagePerSalesEntity> findAllSales = (List<PackagePerSalesEntity>) request.getAttribute("findAllSales");
+
+
+    List<InsolventUserEntity> findAllInsolvent = (List<InsolventUserEntity>) request.getAttribute("findAllInsolvent");
+    List<SuspendedOrderEntity> findAllSuspendedOrder = (List<SuspendedOrderEntity>) request.getAttribute("findAllSuspendedOrder");
 %>
 
 
@@ -104,68 +110,6 @@
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
                         <div class="fw-bold"><%=pack.getTotpurch().get(0).getTotalPurchases() + pack.getTotpurch().get(1).getTotalPurchases() + pack.getTotpurch().get(2).getTotalPurchases()%></div>
-
-                        <%-- <div ><%=pack.getIdTotalPurchase %></div>--%>
-                        <%--Content for list item--%>
-
-                        <%--
-                        <div><%=pack.getIdPackage() %></div>
-                        <%
-                            //System.out.println(pack.getTotpurch());
-                            int i=0;
-                        //for (TotpurchaseperpackandvalidityEntity purch: findByPackage) {
-                        %>
-
-                        <%
-                         //   if(purch.getPackageId() == pack.getIdPackage()){
-                        %>
-
-
-                        <%// i+=purch.getTotalPurchases();
-                            //}
-                        %>
-                        <%
-                            //}
-                        %>
-                        <p class="cyanText"><%=i%></p>
-
-                        --%>
-                        <%--
-
-                        <br>
-                        <div class="shadowDiv">
-                            <h3>Number of total purchases per package</h3>
-
-                            <form action="report" method="post">
-
-                                <label for="srvPackage">Choose a service package:</label>
-                                <select name="srvPackage" id="srvPackage">
-                                    <%
-                                        for (PackageEntity servicePackageToSelect: packageEntityList) {
-                                    %>
-                                    <option value="<%=servicePackageToSelect.getIdPackage()%>"><%=servicePackageToSelect.getName() %></option>
-                                    <%
-                                        }
-                                    %>
-                                </select>
-                                <br><br>
-
-                                <br><br>
-                                <%
-                                    if(totPurchaseXPackage !=null){
-                                %>
-                                <p class="cyanText"><%=totPurchaseXPackage.getTotalPurchases()%></p>
-                                <%
-                                    }
-                                %>
-
-                            </form>
-
-                        </div>
-
-                        <br><br>
---%>
-
                     </div>
                     <span class="badge bg-primary rounded-pill">14</span>
                 </li>
@@ -175,6 +119,180 @@
             </ol>
         </div>
         <% } %>
+
+        <%if( result == 2) {
+        System.out.println(result);%>
+
+
+
+        <p><h4 class="dark-text mr-4">Total Purchase per Package & Validity Period</h4></p>
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <%
+                    for (PackageEntity pack: packageEntityList) {
+                %>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><%=pack.getName() %></div>
+                        <a>12 months    </a><div class="badge bg-primary rounded-pill"><%=pack.getTotpurch().get(0).getTotalPurchases()%></div>
+                        <br>
+                        <a>24 months    </a><div class="badge bg-primary rounded-pill"><%=pack.getTotpurch().get(1).getTotalPurchases()%></div>
+                        <br>
+                        <a>36 months    </a><div class="badge bg-primary rounded-pill"><%=pack.getTotpurch().get(2).getTotalPurchases()%></div>
+                    </div>
+
+                </li>
+                <%
+                    }
+                %>
+            </ol>
+        </div>
+        <% } %>
+
+
+        <%if( result == 4) {
+            System.out.println(result);%>
+
+
+
+        <p><h4 class="dark-text mr-4">Average number of optional products sold together with each service package</h4></p>
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <%
+                    for (PackageEntity pack: packageEntityList) {
+                %>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><%=pack.getName() %></div>
+                        <a>Average number of optional products sold    </a><div class="badge bg-primary rounded-pill"><%=pack.getAvgproduct().get(0).getAvgnumber()%></div>
+                    </div>
+
+                </li>
+                <%
+                    }
+                %>
+            </ol>
+        </div>
+        <% } %>
+
+
+        <%if( result == 3) {
+            System.out.println(result);%>
+
+
+
+        <p><h4 class="dark-text mr-4">Sales per Package With  the Optional Products</h4></p>
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <%
+                    for (PackageEntity pack: packageEntityList) {
+                %>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><%=pack.getName() %></div>
+                        <a>Sales With  the Optional Products    </a><div class="badge bg-primary rounded-pill"><%=pack.getPackageSales().get(0).getWithOpt()%></div>
+                    </div>
+
+                </li>
+                <%
+                    }
+                %>
+            </ol>
+        </div>
+        <% } %>
+
+        <%if( result == 7) {
+            System.out.println(result);%>
+
+
+
+        <p><h4 class="dark-text mr-4">Sales per Package Without  the Optional Products</h4></p>
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <%
+                    for (PackageEntity pack: packageEntityList) {
+                %>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><%=pack.getName() %></div>
+                        <a>Sales Without  the Optional Products    </a><div class="badge bg-primary rounded-pill"><%=pack.getPackageSales().get(0).getJustPack()%></div>
+                    </div>
+
+                </li>
+                <%
+                    }
+                %>
+            </ol>
+        </div>
+        <% } %>
+
+
+        <%if( result == 5) {
+            System.out.println(result);%>
+
+
+
+        <p><h4 class="dark-text mr-4">Insolvent Users</h4></p>
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <%
+                    for (InsolventUserEntity user: findAllInsolvent) {
+                %>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><%=user.getInsolventId().getUsername() %></div>
+                        <%--<a>Sales Without  the Optional Products    </a><div class="badge bg-primary rounded-pill"><%=pack.getPackageSales().get(0).getJustPack()%></div>--%>
+                    </div>
+
+                </li>
+                <%
+                    }
+                %>
+            </ol>
+        </div>
+        <% } %>
+
+
+        <%if( result == 8) {
+            System.out.println(result);%>
+
+
+
+        <p><h4 class="dark-text mr-4">Suspended Orders</h4></p>
+        <%-- tabella sales report --%>
+        <div class="row d-flex justify-content-start card-strip">
+            <ol class="list-group list-group-numbered">
+                <%
+                    for (SuspendedOrderEntity susp: findAllSuspendedOrder) {
+                %>
+
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><%=susp.getOrder_id().getIdOrder()%> <%=susp.getOrder_id().getRefUser().getUsername()%></div>
+                        <%--<a>Sales Without  the Optional Products    </a><div class="badge bg-primary rounded-pill"><%=pack.getPackageSales().get(0).getJustPack()%></div>--%>
+                    </div>
+
+                </li>
+                <%
+                    }
+                %>
+            </ol>
+        </div>
+        <% } %>
+
+
+
+
 
 
 

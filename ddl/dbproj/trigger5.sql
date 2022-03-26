@@ -1,14 +1,15 @@
-create table insolventUser
-(
-    insolvent_id        int not null primary key,
-    constraint insolvent_fk
-        foreign key (insolvent_id) references user (idUser)
-);
+use dbproj;
+
 
 create trigger newInsolvent
     after insert on `order` for each row
 BEGIN
-    IF NEW.valid=0 THEN
+    DECLARE alreadyIns int;
+    SET alreadyIns=(
+    SELECT COUNT(*)
+    FROM dbproj.insolventUser
+    WHERE insolvent_id=NEW.refUser);
+    IF NEW.valid=0 AND alreadyIns=0 THEN
         INSERT INTO insolventUser(insolvent_id)
         VALUES (NEW.refUser);
     end if;

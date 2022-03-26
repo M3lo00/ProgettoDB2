@@ -33,12 +33,13 @@ public class EmployeeServlet extends HttpServlet {
         EmployeeEntity employee = null;
         HttpSession session = req.getSession();
 
-
         session.setAttribute("findAllOptionalProduct", optionalProducts);
 
         System.out.println("ok");
 
         if(session.getAttribute("employee")!=null){
+
+            session.removeAttribute("val");
 
             employee = (EmployeeEntity) session.getAttribute("employee");
 
@@ -53,12 +54,24 @@ public class EmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 
+        req.getParameter("packagename");
+        req.getParameter("sms");
+        req.getParameter("minute");
+        req.getParameter("gigamobile");
+        req.getParameter("extragigamobile");
+        req.getParameter("extrasms");
+        req.getParameter("gigafixed");
+        req.getParameter("extragigafixed");
+        req.getParameter("fixedphone");
+        req.getParameter("quantityserv");
 
         System.out.println("sms "+req.getParameter("sms"));
 
-        if(req.getParameter("sms")==""){
+        if(req.getParameter("sms")=="" || Integer.parseInt(req.getParameter("sms")) == 0 ){
             System.out.println("è null");
         }
+
+
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
         dispatcher.forward(req, res);

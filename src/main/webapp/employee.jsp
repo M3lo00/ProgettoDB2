@@ -54,72 +54,53 @@
         <div class="form-row mb-3">
             <div class="form-group ">
                 <label for="packageName">Package Name</label>
-                <input type="text" class="form-control" id="packageName" placeholder="Es. RED Pro" required>
+                <input type="text" class="form-control" name="packagename" id="packageName" placeholder="Es. RED Pro" required>
 
             </div>
         </div>
         <label for="packageName">SMS</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity" name="sms" min="1" class="form-control" aria-label="Text input with checkbox" >
+
+            <input type="number" id="quantity" name="sms" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Minute</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity1" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
+
+            <input type="number" id="quantity1" name="minute" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Giga Mobile</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity2" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
+
+            <input type="number" id="quantity2" name="gigamobile" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox">
         </div>
         <label for="packageName">Extra Giga Mobile</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity3" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
+
+            <input type="number" id="quantity3" name="extragigamobile" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Extra SMS</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity4" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
+
+            <input type="number" id="quantity4" name="extrasms" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
         </div>
-        <label for="packageName">Extra Giga Mobile</label>
-        <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity5" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
-        </div>
+
         <label for="packageName">Giga Fixed</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity6" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
+
+            <input type="number" id="quantity6" name="gigafixed" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Extra Giga Fixed</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input type="number" id="quantity7" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
+
+            <input type="number" id="quantity7" name="extragigafixed" placeholder="Insert value" min="0" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Fixed Phone</label>
         <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-            </div>
-            <input id="quantity8"  class="form-control" aria-label="Text input with checkbox" disabled>
+            <select class="form-select form-select-lg " name="fixedphone"  aria-label=".form-select-lg example">
+                <option selected>Is a Fixed-Phone Service ?</option>
+                <option value="fixedyes">YES</option>
+                <option value="fixedno">NO</option>
+            </select>
         </div>
 
 
@@ -137,7 +118,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
             <span class="input-group-text">0.00</span>
-            <input type="number" name="quantity" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
+            <input type="number" name="quantityserv" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
         </div>
 
 
@@ -159,7 +140,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
             <span class="input-group-text">0.00</span>
-            <input type="number" name="quantity" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
+            <input type="number" name="quantityopt" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>

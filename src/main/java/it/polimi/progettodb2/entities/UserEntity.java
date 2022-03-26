@@ -37,6 +37,14 @@ import java.util.Objects;
                 "WHERE u.idUser = : idUser"
 )
 
+
+@NamedQuery(
+        name = "User.findAllUser",
+        query = "SELECT u " +
+                "FROM UserEntity u "
+)
+
+
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +78,9 @@ public class UserEntity implements Serializable {
     @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private OrderEntity audits;
 
+    @OneToOne(targetEntity = InsolventUserEntity.class, fetch = FetchType.EAGER, mappedBy="insolvent_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private InsolventUserEntity insolventuser;
+
     public UserEntity() {
     }
 
@@ -80,6 +91,10 @@ public class UserEntity implements Serializable {
         failedPay=0;
         insolvent=false;
     }
+
+    public InsolventUserEntity getInsolventuser(){ return insolventuser;}
+
+
     public int getIdUser() {
         return idUser;
     }

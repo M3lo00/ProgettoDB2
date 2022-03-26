@@ -2,6 +2,8 @@
 #incrementare il pack ogni volta che viene acquistato
 #Due modalità di acquisto ( valid, valid dopo not valid)
 
+
+
 CREATE TRIGGER newPackage
     AFTER INSERT ON package FOR EACH ROW
 BEGIN

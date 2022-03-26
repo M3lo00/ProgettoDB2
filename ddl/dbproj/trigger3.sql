@@ -1,5 +1,5 @@
 #Total value of sales per package with and without the optional products.
-
+use dbproj;
 create table packagesales
 (
     package_id          int not null primary key ,

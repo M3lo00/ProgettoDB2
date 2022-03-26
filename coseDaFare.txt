@@ -61,3 +61,6 @@ aggiungere la visualizzazione degli optional services nei package (buy page sicu
 cambiare total Order in float
 
 Sistemare Exceptions!!! Guardare esempi professore
+
+
+Sistemare Override nelle nuove entity create

@@ -23,19 +23,14 @@
 <body>
 
 <%
-
-
     EmployeeEntity employee = null;
     String employeeUsername = null;
     if(request.getSession().getAttribute("employee")!=null){
-        employee = (EmployeeEntity) request.getSession().getAttribute("employee");
+        employee = (EmployeeEntity) session.getAttribute("employee");
         employeeUsername = employee.getUsername();
     }
-    List<OptserviceEntity> findAllOptionalProduct = (List<OptserviceEntity>) request.getAttribute("findAllOptionalProduct");
+    List<OptserviceEntity> findAllOptionalProduct = (List<OptserviceEntity>) session.getAttribute("findAllOptionalProduct");
 %>
-
-
-
 
 
 <div class="container d-flex flex-wrap">
@@ -46,7 +41,7 @@
     </ul>
     <ul class="nav">
         <% if (employee!=null) { %>
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2" value="<%=employee.getIdEmployee()%>"><%=employee.getUsername()%></a></li>
+        <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><%=employee.getUsername()%></a></li>
         <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="${pageContext.request.contextPath}/logout">Logout</a></li>
         <% } %>
     </ul>
@@ -55,7 +50,7 @@
 <%-- Name, SMs, minute, mGiga, extraMGiga, extraSms, fixedPhone, fGiga, extraFgiga --%>
 <div class="container-fluid px-1 px-sm-4 py-5 col-md-6">
         <h4 class="dark-text mr-4">Create a new Service Package</h4>
-    <form>
+    <form method="post" action="employee">
         <div class="form-row mb-3">
             <div class="form-group ">
                 <label for="packageName">Package Name</label>
@@ -68,56 +63,56 @@
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity" name="sms" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Minute</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity1" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity1" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Giga Mobile</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity2" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox"required>
+            <input type="number" id="quantity2" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox">
         </div>
         <label for="packageName">Extra Giga Mobile</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity3" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity3" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Extra SMS</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity4" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity4" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Extra Giga Mobile</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity5" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity5" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Giga Fixed</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity6" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity6" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Extra Giga Fixed</label>
         <div class="input-group mb-3">
             <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
             </div>
-            <input type="number" id="quantity7" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" required>
+            <input type="number" id="quantity7" name="quantity" min="1" class="form-control" aria-label="Text input with checkbox" >
         </div>
         <label for="packageName">Fixed Phone</label>
         <div class="input-group mb-3">
@@ -130,7 +125,7 @@
 
         <%for (OptserviceEntity opt: findAllOptionalProduct) {%>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="opt<%=opt.getIdOptService()%>" value="<%=opt.getName()%>">
+                <input class="form-check-input" type="checkbox" id="opt<%=opt.getIdOptService()%>" value="<%=opt.getIdOptService()%>">
                 <label class="form-check-label" for="opt<%=opt.getIdOptService()%>">
                     <%=opt.getName()%>
                 </label>
@@ -144,10 +139,6 @@
             <span class="input-group-text">0.00</span>
             <input type="number" name="quantity" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
         </div>
-
-
-
-
 
 
         <button type="submit" class="btn btn-primary">Create</button>

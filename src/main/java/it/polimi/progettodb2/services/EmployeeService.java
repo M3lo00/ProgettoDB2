@@ -32,11 +32,13 @@ public class EmployeeService {
         throw new NonUniqueResultException("More than one user registered with same credentials");
     }
 
-    /*public void newPack(){
+    public void newPack(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Float extraSms, Byte fixedPhone, Integer fGiga, Float extraFGiga, Float price12M, List<OptserviceEntity> opts){
 
-        PackageEntity pack = new PackageEntity(String name, Integer sms, );
 
-    }*/
+        PackageEntity pack = new PackageEntity(name, sms, minute, mGiga, extraMGiga, extraSms, fixedPhone, fGiga, extraFGiga, price12M);
+        pack.setOptService(opts);
+
+    }
 
     public List<OptserviceEntity> findAllOptionalProduct(){
         return em.createNamedQuery("Optional.findAllOptionalProduct", OptserviceEntity.class).getResultList();

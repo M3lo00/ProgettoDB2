@@ -51,10 +51,10 @@ public class PackageEntity implements Serializable {
     private Integer mGiga;
 
     @Column(name = "extraMGiga")
-    private Integer extraMGiga;
+    private Float extraMGiga;
 
     @Column(name = "extraSMS")
-    private Integer extraSms;
+    private Float extraSms;
 
     @Column(name = "fixedPhone")
     private Byte fixedPhone;
@@ -63,7 +63,7 @@ public class PackageEntity implements Serializable {
     private Integer fGiga;
 
     @Column(name = "extraFGiga")
-    private Integer extraFGiga;
+    private Float extraFGiga;
 
     @Column(name = "price12M")
     private double price12M;
@@ -91,11 +91,22 @@ public class PackageEntity implements Serializable {
 
     public List<OptserviceEntity> getOptService(){return optService;}
 
+    public void setOptService(List<OptserviceEntity> opts){this.optService=opts;}
+
     public PackageEntity() {
     }
 
-    public PackageEntity(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Integer extraSms, Boolean fixedPhone, Integer fGiga, Float extraFGiga, Float price12M) {
-
+    public PackageEntity(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Float extraSms, Byte fixedPhone, Integer fGiga, Float extraFGiga, Float price12M) {
+        this.name=name;
+        this.sms=sms;
+        this.minute=minute;
+        this.mGiga=mGiga;
+        this.extraMGiga=extraMGiga;
+        this.extraSms=extraSms;
+        this.fixedPhone=fixedPhone;
+        this.fGiga=fGiga;
+        this.extraFGiga=extraFGiga;
+        this.price12M=price12M;
     }
 
     public List<TotpurchaseperpackandvalidityEntity> getTotpurch(){return totpurch;}
@@ -152,21 +163,21 @@ public class PackageEntity implements Serializable {
         this.mGiga = mGiga;
     }
 
-    public Integer getExtraMGiga() {
+    public Float getExtraMGiga() {
         return extraMGiga;
     }
 
 
-    public void setExtraMGiga(Integer extraMGiga) {
+    public void setExtraMGiga(Float extraMGiga) {
         this.extraMGiga = extraMGiga;
     }
 
-    public Integer getExtraSms() {
+    public Float getExtraSms() {
         return extraSms;
     }
 
 
-    public void setExtraSms(Integer extraSms) {
+    public void setExtraSms(Float extraSms) {
         this.extraSms = extraSms;
     }
 
@@ -186,12 +197,12 @@ public class PackageEntity implements Serializable {
         this.fGiga = fGiga;
     }
 
-    public Integer getExtraFGiga() {
+    public Float getExtraFGiga() {
         return extraFGiga;
     }
 
 
-    public void setExtraFGiga(Integer extraFGiga) {
+    public void setExtraFGiga(Float extraFGiga) {
         this.extraFGiga = extraFGiga;
     }
 

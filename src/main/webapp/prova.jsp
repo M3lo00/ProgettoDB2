@@ -117,7 +117,7 @@
                                 <% if (pack.getSms() != null) { %>
                                 <div class="row"><%=pack.getSms()%> Sms</div>
                                 <% } %>
-                                <% if (pack.getExtraSms() != null) { %>
+                                <% if (/*pack.getExtraSms() != null*/true) { %>
                                 <div class="row"><%=pack.getExtraSms()%> ExtraSms</div>
                                 <% } %>
                             </div>

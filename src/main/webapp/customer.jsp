@@ -35,8 +35,8 @@
         user = (UserEntity) request.getSession().getAttribute("customer");
         userUsername = user.getUsername();
     }
-    List<OrderEntity> rejectedOrders = (List<OrderEntity>) request.getSession().getAttribute("rejectedOrders");
-    List<OrderEntity> allOrderByUser = (List<OrderEntity>) request.getSession().getAttribute("allOrderByUser");
+    List<OrderEntity> rejectedOrders = (List<OrderEntity>) session.getAttribute("rejectedOrders");
+    List<OrderEntity> allOrderByUser = (List<OrderEntity>) session.getAttribute("allOrderByUser");
 %>
 <%--
     if(user!=null){
@@ -54,16 +54,14 @@ else{
 e --%>
 
 
-
-
 <div class="container d-flex flex-wrap">
     <a class="navbar-brand" href="#">TELCO COMPANY</a>
     <ul class="nav me-auto">
-        <li class="nav-item"><a href="./buy" class="nav-link link-dark px-2">Buy Service</a></li>
+        <li class="nav-item"><a href="buy" class="nav-link link-dark px-2">Buy Service</a></li>
     </ul>
     <ul class="nav">
         <% if (user!=null) { %>
-            <li class="nav-item"><a class="nav-link link-dark px-2" value="<%=user.getIdUser()%>"><%=user.getUsername()%></a></li>
+            <li class="nav-item"><a class="nav-link link-dark px-2" ><%=user.getUsername()%></a></li>
             <li class="nav-item"><a class="nav-link font-weight-bold px-2" href="${pageContext.request.contextPath}/logout">Logout</a></li>
         <% } %>
     </ul>
@@ -80,49 +78,54 @@ e --%>
 <% } %>
 <% } %>
 
+<div class="alert alert-warning alert-dismissible fade show" role="alert" <%=request.getAttribute("success")%>>
+    <strong>Error!</strong> An error occurred during your payment
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
 
 <div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
     <%for (OrderEntity order: allOrderByUser) {%>
     <div class="row d-flex justify-content-start card-strip">
         <div class="info">
             <div class="row px-3 mb-2">
-                <h4 class="dark-text mr-4" value="<%=order.getIdOrder()%>"><%=order.getIdOrder()%> Order</h4>
-                <% if (order.getValid() == true) { %>
+                <h4 class="dark-text mr-4"><%=order.getIdOrder()%> Order</h4>
+                <% if (order.getValid()) { %>
                     <h4 class="text-success mr-2">Completed</h4>
                 <% } %>
-                <% if (order.getValid() == false) { %>
+                <% if (!order.getValid()) { %>
                 <h4 class="text-danger mr-2">Failed</h4>
                 <% } %>
             </div>
             <div class="row px-3">
                 <div class="col-md-2">
                     <div class="row">Start</div>
-                    <div class="row dark-text"  value="<%=order.getIdOrder()%>"><%=order.getStartDate()%> </div>
+                    <div class="row dark-text"><%=order.getStartDate()%> </div>
                 </div>
                 <div class="col-md-2">
                     <div class="row">Period</div>
-                    <div class="row dark-text"  value="<%=order.getIdOrder()%>"><%=order.getPeriodo()%> Months</div>
+                    <div class="row dark-text"><%=order.getPeriodo()%> Months</div>
                 </div>
                 <div class="col-md-2">
                     <div class="row">Price</div>
-                    <div class="row dark-text"  value="<%=order.getIdOrder()%>"><%=order.getTotalAmount()%>$</div>
+                    <div class="row dark-text"><%=order.getTotalAmount()%>$</div>
                 </div>
                 <% if (order.getnMobile() != null) { %>
                 <div class="col-md-2">
                     <div class="row">Mobile Number</div>
-                    <div class="row dark-text"  value="<%=order.getIdOrder()%>"><%=order.getnMobile()%> </div>
+                    <div class="row dark-text"><%=order.getnMobile()%> </div>
                 </div>
                 <% } %>
                 <% if (order.getnFixed() != null) { %>
                 <div class="col-md-2">
                     <div class="row">Fixed Number</div>
-                    <div class="row dark-text"  value="<%=order.getIdOrder()%>"><%=order.getnFixed()%> </div>
+                    <div class="row dark-text"><%=order.getnFixed()%> </div>
                 </div>
                 <% } %>
             </div>
 
         </div>
-        <% if (order.getValid() == false) { %>
+        <% if (!order.getValid()) { %>
             <div class="btn btn-orange mt-4">Retry Payment</div>
         <% } %>
     </div>

@@ -7,11 +7,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
-import jakarta.persistence.criteria.Order;
 import jakarta.validation.ConstraintViolationException;
 
 import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -23,14 +21,6 @@ public class UserService {
 
     public UserService() {
     }
-
-        public boolean randomPayment(){
-            Random rd = new Random();
-            if (rd.nextInt(3)==0){
-                return false;
-            }
-            return true;
-        }
 
     public UserEntity checkCredentials(String usrn, String pwd) throws CredentialsException, NonUniqueResultException {
         List<UserEntity> uList = null;
@@ -70,18 +60,19 @@ public class UserService {
 
         Timestamp crD = new Timestamp(creationD.getTime());
         java.sql.Date startDate= new java.sql.Date(startD.getTime());
-        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, this.randomPayment(),(int) total, nMobile, nFixed, opts);
+
+        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, rd.nextBoolean(), total, nMobile, nFixed, opts);
+
         System.out.println(order);
         System.out.println("Ordine creato");
-        return null;
-        /*
+
         try{
             em.persist(order);
-            em.flush;
+            em.flush();
             return order;
-        }catch (ConstraintViolationException e){
+        }catch (ConstraintViolationException e) {
             return null;
-        }*/
+        }
     }
 
     public Optional<UserEntity> findByUserID(int idUser){

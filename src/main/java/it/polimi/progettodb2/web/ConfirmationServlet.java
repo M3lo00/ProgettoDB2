@@ -1,6 +1,7 @@
 package it.polimi.progettodb2.web;
 
 import it.polimi.progettodb2.entities.OptserviceEntity;
+import it.polimi.progettodb2.entities.OrderEntity;
 import it.polimi.progettodb2.entities.PackageEntity;
 import it.polimi.progettodb2.entities.UserEntity;
 import it.polimi.progettodb2.exceptions.CredentialsException;
@@ -95,10 +96,32 @@ public class ConfirmationServlet extends HttpServlet{
                 e.printStackTrace();
             }
 
+            int chosenMonths=Integer.parseInt((String) session.getAttribute("chosenMonths"));
+
+            PackageEntity pack= (PackageEntity) session.getAttribute("chosenPackObj");
+
+            if(chosenMonths==24){
+                total+=pack.getPrice12M()*0.9;
+            }else if (chosenMonths==36){
+                total+=pack.getPrice12M()*0.8;
+            }else{
+                total+=pack.getPrice12M();
+            }
+
             List<OptserviceEntity> chosenOpt = (List<OptserviceEntity>) session.getAttribute("chosenOptObj");
 
-            userService.newOrder((UserEntity) session.getAttribute("customer"), (PackageEntity) session.getAttribute("chosenPackObj"), date,
-                    start, Integer.parseInt((String) session.getAttribute("chosenMonths")), total, chosenOpt);
+            if (!chosenOpt.isEmpty()){
+                for (OptserviceEntity opt:chosenOpt){
+                    total+=opt.getMonthly();
+                }
+            }
+
+            OrderEntity order = userService.newOrder((UserEntity) session.getAttribute("customer"), pack, date,
+                    start, chosenMonths, total, chosenOpt);
+
+            if (order!=null){
+                session.setAttribute("success", order.getValid());
+            }
 
             res.sendRedirect("customer");
         }

@@ -1,6 +1,6 @@
 create table totpurchaseperpackandvalidity
 (
-    idTotalPurchase int          not null,
+    idTotalPurchase int           auto_increment,
     package_id      int           not null,
     periodo         int           not null,
     totalPurchases  int default 0 not null,

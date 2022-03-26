@@ -27,10 +27,6 @@ public class LandingPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         HttpSession session = req.getSession();
 
-        //prova
-        //OrderEntity order = new OrderEntity(user, pack, crD, (java.sql.Date) startD, period, valid,(int) total, nMobile, nFixed, opts);
-        //fine prova
-
         String message = "Invalid email/password";
         if (req.getParameter("loginFailed") != null) req.setAttribute("messageLogin", message);
 
@@ -38,6 +34,11 @@ public class LandingPageServlet extends HttpServlet {
         session.setAttribute("packages", packages);
 
         session.removeAttribute("chosenPack");
+        session.removeAttribute("chosenPackObj");
+        session.removeAttribute("chosenMonths");
+        session.removeAttribute("startDate");
+        session.removeAttribute("optionals");
+        session.removeAttribute("chosenOptObj");
 
         RequestDispatcher dispatcher = null;
 

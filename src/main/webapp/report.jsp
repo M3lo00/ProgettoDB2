@@ -103,7 +103,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
-                        <div class="fw-bold"><%=pack.getTotpurch().get(0).getTotalPurchases() + pack.getTotpurch().get(1).getTotalPurchases()%></div>
+                        <div class="fw-bold"><%=pack.getTotpurch().get(0).getTotalPurchases() + pack.getTotpurch().get(1).getTotalPurchases() + pack.getTotpurch().get(2).getTotalPurchases()%></div>
 
                         <%-- <div ><%=pack.getIdTotalPurchase %></div>--%>
                         <%--Content for list item--%>

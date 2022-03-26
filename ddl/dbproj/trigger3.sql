@@ -20,12 +20,19 @@ CREATE TRIGGER newPackage1
 CREATE TRIGGER newOrderTotalValue
     AFTER INSERT ON `order` for each row
 BEGIN
+    DECLARE sconto float default 1;
+    IF NEW.periodo=24 THEN
+        SET sconto =0.9;
+    end if;
+    IF NEW.periodo=36 THEN
+        SET sconto =0.8;
+    end if;
     IF NEW.valid = 1 THEN
         UPDATE packagesales
         SET withOpt = withOpt + New.totalAmount,
-            justPack = justPack + ( SELECT f.fee
-                                    FROM feeperiod f
-                                    WHERE f.refPackage=NEW.refPack and f.periodo=NEW.periodo)
+            justPack = justPack + ( SELECT p.price12M
+                                    FROM package p
+                                    WHERE p.idPackage=NEW.refPack) * sconto
         WHERE package_id =NEW.refPack;
     END IF;
 end;
@@ -33,12 +40,19 @@ end;
 CREATE TRIGGER upOrderTotalValue
     AFTER UPDATE ON `order` for each row
 BEGIN
+    DECLARE sconto float default 1;
+    IF NEW.periodo=24 THEN
+        SET sconto =0.9;
+    end if;
+    IF NEW.periodo=36 THEN
+        SET sconto =0.8;
+    end if;
     IF NEW.valid = 1 THEN
         UPDATE packagesales
         SET withOpt = withOpt + New.totalAmount,
-            justPack = justPack + ( SELECT f.fee
-                                    FROM feeperiod f
-                                    WHERE f.refPackage=NEW.refPack and f.periodo=NEW.periodo)
+            justPack = justPack + ( SELECT p.price12M
+                                    FROM package p
+                                    WHERE p.idPackage=NEW.refPack) * sconto
         WHERE package_id =NEW.refPack;
     END IF;
 end;

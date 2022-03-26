@@ -1,3 +1,5 @@
+use dbproj;
+
 create table `order`
 (
     idOrder      int auto_increment
@@ -8,7 +10,7 @@ create table `order`
     startDate    date                      null,
     periodo      int                       not null,
     valid        tinyint unsigned zerofill null,
-    totalAmount  int                       not null,
+    totalAmount  float                       not null,
     nMobile      int                       null,
     nFixed       int                       null,
     constraint fk_Package3

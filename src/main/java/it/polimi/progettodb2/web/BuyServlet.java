@@ -2,8 +2,6 @@ package it.polimi.progettodb2.web;
 
 import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.entities.PackageEntity;
-import it.polimi.progettodb2.entities.UserEntity;
-import it.polimi.progettodb2.exceptions.CredentialsException;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.RequestDispatcher;
@@ -14,9 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -38,11 +34,12 @@ public class BuyServlet extends HttpServlet{
             e.printStackTrace();
         }
 
-        session.setAttribute("chosenPackObj", null);
-        session.setAttribute("chosenMonths", null);
-        session.setAttribute("startDate", null);
-        session.setAttribute("optionals", null);
-        session.setAttribute("chosenOptObj", null);
+        session.removeAttribute("chosenPack");
+        session.removeAttribute("chosenPackObj");
+        session.removeAttribute("chosenMonths");
+        session.removeAttribute("startDate");
+        session.removeAttribute("optionals");
+        session.removeAttribute("chosenOptObj");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);
@@ -62,7 +59,7 @@ public class BuyServlet extends HttpServlet{
 
         if (req.getParameter("chosenPack")!=null){
 
-            Integer chosenPack_Id= Integer.parseInt(req.getParameter("chosenPack").toString());
+            Integer chosenPack_Id= Integer.parseInt(req.getParameter("chosenPack"));
 
             PackageEntity chosen =null;
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
@@ -103,11 +100,12 @@ public class BuyServlet extends HttpServlet{
 
         if(req.getParameter("reset")!=null){
             if (req.getParameter("reset").equals("reset")){;
-                session.setAttribute("optionals", null);
-                session.setAttribute("chosenPackObj", null);
-                session.setAttribute("chosenMonths", null);
-                session.setAttribute("startDate", null);
-                session.setAttribute("chosenOptObj", null);
+                session.removeAttribute("chosenPack");
+                session.removeAttribute("chosenPackObj");
+                session.removeAttribute("chosenMonths");
+                session.removeAttribute("startDate");
+                session.removeAttribute("optionals");
+                session.removeAttribute("chosenOptObj");
             }
         }
 

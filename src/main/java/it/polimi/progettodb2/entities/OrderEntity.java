@@ -67,7 +67,7 @@ public class OrderEntity implements Serializable {
     private Boolean valid;
     
     @Column(name = "totalAmount")
-    private int totalAmount;
+    private float totalAmount;
     
     @Column(name = "nMobile")
     private Integer nMobile;
@@ -101,7 +101,7 @@ public class OrderEntity implements Serializable {
 
     public OrderEntity(){}
 
-    public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, int period, Boolean valid, int totalAmount, int nMobile, int nFixed, List<OptserviceEntity> optService){
+    public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, int period, Boolean valid, Float totalAmount, int nMobile, int nFixed, List<OptserviceEntity> optService){
             this.refUser=refUser;
             this.refPack=refPack;
             this.creationDate=creationDate;
@@ -170,11 +170,11 @@ public class OrderEntity implements Serializable {
         this.valid = valid;
     }
 
-    public int getTotalAmount() {
+    public float getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -224,7 +224,7 @@ public class OrderEntity implements Serializable {
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + periodo;
         result = 31 * result + (valid != null ? valid.hashCode() : 0);
-        result = 31 * result + totalAmount;
+        result = 31 * result + (int) totalAmount;
         result = 31 * result + (nMobile != null ? nMobile.hashCode() : 0);
         result = 31 * result + (nFixed != null ? nFixed.hashCode() : 0);
         return result;

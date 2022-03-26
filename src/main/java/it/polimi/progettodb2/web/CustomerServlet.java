@@ -46,8 +46,18 @@ public class CustomerServlet extends HttpServlet {
 
             if(user.getUsername()!=null) allOrderByUser = userService.findAllOrderByUser(user.getIdUser());
 
-            req.getSession().setAttribute("rejectedOrders", rejectedOrders);
-            req.getSession().setAttribute("allOrderByUser", allOrderByUser);
+            session.setAttribute("rejectedOrders", rejectedOrders);
+            session.setAttribute("allOrderByUser", allOrderByUser);
+
+            if(session.getAttribute("success")!=null && !(Boolean) session.getAttribute("success")){
+                    System.out.println("TRUE");
+                    session.removeAttribute("success");
+
+            }else{
+                System.out.println("ELSE");
+                req.setAttribute("success","hidden");
+            }
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("customer.jsp");
             dispatcher.forward(req, res);
         }else{

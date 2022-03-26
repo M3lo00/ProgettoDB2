@@ -177,7 +177,7 @@
                             <p class="bold card-title">Phone</p>
                         </div>
                         <div class="row my-2">
-                            <p class="card-text fw-bold"><%=(pack.getFixedPhone()==null)? " ": "Included"%></p>
+                            <p class="card-text fw-bold"><%=(pack.getFixedPhone()==null)? "Not Included": "Included"%></p>
                         </div>
                         <div class="row my-2">
                             <p class="card-title">Internet</p>

@@ -55,25 +55,25 @@
 
 
 <% if (user!=null && rejectedOrders!=null && rejectedOrders.size()>0) { %>
-<%for (OrderEntity order: rejectedOrders) {%>
-<div class="alert alert-danger alert-dismissible fade show">
-    <strong>Warning!</strong> The payment relating to the order: <strong><%=order.getIdOrder()%></strong> is failed.
-    <button  type="button" class="btn btn-outline-danger">Retry Payment</button>
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-<% } %>
+    <%for (OrderEntity order: rejectedOrders) {%>
+    <div class="alert alert-danger alert-dismissible fade show">
+        <form action="customer" method="post">
+            <strong>Warning!</strong> The payment related to the order: <strong><%=order.getIdOrder()%></strong> is failed.
+            <button type="submit"  class="btn btn-outline-danger mx-2" name="retry" value="<%=order.getIdOrder()%>">Retry Payment</button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </form>
+    </div>
+    <% } %>
 <% } %>
 
-<div class="alert alert-warning alert-dismissible fade show" role="alert" <%=request.getAttribute("success")%>>
-    <strong>Error!</strong> An error occurred during your payment
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+
 
 
 <div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
-
-    <h4>My Orders</h4>
-
+    <div class="d-flex justify-content-around my-3">
+        <h2 >My Orders</h2>
+        <div></div>
+    </div>
     <%for (OrderEntity order: allOrderByUser) {%>
     <div class="row d-flex justify-content-start card-strip">
         <div class="info">
@@ -115,7 +115,9 @@
 
         </div>
         <% if (!order.getValid()) { %>
-            <div class="btn btn-orange mt-4">Retry Payment</div>
+        <form action="customer" method="post">
+            <button type="submit"  class="btn btn-orange mt-4" name="retry" value="<%=order.getIdOrder()%>">Retry Payment</button>
+        </form>
         <% } %>
     </div>
     <% } %>

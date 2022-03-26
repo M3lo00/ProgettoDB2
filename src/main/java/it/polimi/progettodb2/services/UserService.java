@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public UserEntity checkCredentials(String usrn, String pwd) throws CredentialsException, NonUniqueResultException {
-        List<UserEntity> uList = null;
+        List<UserEntity> uList;
         try {
             uList = em.createNamedQuery("User.checkCredentials", UserEntity.class).setParameter(1, usrn).setParameter(2, pwd)
                     .getResultList();
@@ -49,11 +49,8 @@ public class UserService {
         }
     }
 
-    //public boolean checkPhone ()
-
     public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total, List<OptserviceEntity> opts){
 
-        //generazione del numero di telefono
         Random rd = new Random();
         int nMobile= rd.nextInt(1000);
         int nFixed=rd.nextInt(1000);
@@ -61,7 +58,7 @@ public class UserService {
         Timestamp crD = new Timestamp(creationD.getTime());
         java.sql.Date startDate= new java.sql.Date(startD.getTime());
 
-        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, /*rd.nextBoolean()*/false, total, nMobile, nFixed, opts);
+        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, rd.nextBoolean(), total, nMobile, nFixed, opts);
 
         System.out.println(order);
 
@@ -110,15 +107,9 @@ public class UserService {
     }
 
     public List<OrderEntity> findAllOrderByUser(int idUser){
-        List<OrderEntity> orders = em.createNamedQuery("Order.findAllOrderByUser", OrderEntity.class).
+        return em.createNamedQuery("Order.findAllOrderByUser", OrderEntity.class).
                 setParameter("user", findByUserID(idUser).get()).
                 getResultList();
-        return orders;
-    }
-
-    public List<OptserviceEntity> getAllOptionals(int idPack){
-        PackageEntity pack = em.find(PackageEntity.class, idPack);
-        return pack.getOptService();
     }
 
     public List<OptserviceEntity> getAllBuyableOpt(int idPack){
@@ -127,6 +118,23 @@ public class UserService {
         ArrayList<OptserviceEntity> difference = new ArrayList<>(opts);
         difference.removeAll(pack);
         return difference;
+    }
+
+    public boolean retryPayment (int idOrder){
+        Random rd = new Random();
+        Date d = new Date();
+        Timestamp dateTime= new Timestamp(d.getTime());
+
+        try {
+            OrderEntity order = em.find(OrderEntity.class, idOrder);
+            order.setValid(rd.nextBoolean());
+            order.setPaymentDate(dateTime);
+            em.flush();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 }

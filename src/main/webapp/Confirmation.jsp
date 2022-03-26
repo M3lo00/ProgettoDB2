@@ -66,7 +66,7 @@
             <form class="row g-3" method="post" action="confirm">
                 <div class="col-md-9">
                     <label for="validationCustom01" class="form-label">Card Number</label>
-                    <input type="text" class="form-control" id="validationCustom01" required>
+                    <input type="text" class="form-control" id="validationCustom01" pattern="\d*" maxlength="16" minlength="16" required>
                 </div>
                 <div class="col-md-3">
                     <label for="validationCustom04" class="form-label">CVC</label>
@@ -78,7 +78,7 @@
                         <option selected disabled value="">Choose...</option>
                         <%for(int i=1;i<8;i++){
                         %>
-                        <option><%=2021+i%></option>
+                        <option><%=2022+i%></option>
                         <%}
                         %>
                     </select>
@@ -121,7 +121,7 @@
                 <div class="p-2 d-flex flex-row justify-content-between">
                     <p>Periodo:</p>
                     <p><%=session.getAttribute("chosenMonths")%> months</p>
-                    <p>${savings}</p>
+                    <p>-<%=String.format("%.2f", ((session.getAttribute("savings")!=null)?Float.parseFloat(session.getAttribute("savings").toString()):0))%></p>
                 </div>
                 <hr class="my-1"/>
 
@@ -142,7 +142,7 @@
                 %>
                 <div class="p-2 d-flex flex-row justify-content-between">
                     <p>Totale:</p>
-                    <p>${totale}</p>
+                    <p><%=String.format("%.2f", Float.parseFloat(session.getAttribute("total").toString()))%>€</p>
                 </div>
             </div>
             <h5>Order Review</h5>

@@ -138,7 +138,7 @@
                         <p class="bold card-title">Phone</p>
                     </div>
                     <div class="row my-2">
-                        <p class="card-text fw-bold"><%=(pack.getFixedPhone()==null)? " ": "Included"%></p>
+                        <p class="card-text fw-bold"><%=(pack.getFixedPhone()==null)? "Not Included": "Included"%></p>
                     </div>
                     <div class="row my-2">
                         <p class="card-title">Internet</p>
@@ -160,11 +160,8 @@
     <%
             }
         }
-
         if (chosen!=null && session.getAttribute("chosenMonths")==null){
-
             double prova =  chosen.getPrice12M();
-
     %>
 
         <div class="row d-flex justify-content-start card-strip">

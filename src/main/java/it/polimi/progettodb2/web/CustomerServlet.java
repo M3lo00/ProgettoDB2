@@ -63,4 +63,12 @@ public class CustomerServlet extends HttpServlet {
         }
 
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("retry")!=null){
+            System.out.println(userService.retryPayment(Integer.parseInt(req.getParameter("retry"))));
+        }
+        resp.sendRedirect("customer");
+    }
 }

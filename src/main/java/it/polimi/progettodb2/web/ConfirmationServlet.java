@@ -78,7 +78,7 @@ public class ConfirmationServlet extends HttpServlet{
                 totale+=opt.getMonthly();
             }
 
-            session.setAttribute("totale", totale);
+            session.setAttribute("total", totale);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("Confirmation.jsp");
             dispatcher.forward(req, res);
@@ -116,12 +116,8 @@ public class ConfirmationServlet extends HttpServlet{
                 }
             }
 
-            OrderEntity order = userService.newOrder((UserEntity) session.getAttribute("customer"), pack, date,
+            userService.newOrder((UserEntity) session.getAttribute("customer"), pack, date,
                     start, chosenMonths, total, chosenOpt);
-
-            if (order!=null){
-                session.setAttribute("success", order.getValid());
-            }
 
             res.sendRedirect("customer");
         }

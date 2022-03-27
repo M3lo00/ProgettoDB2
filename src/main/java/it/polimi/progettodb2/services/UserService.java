@@ -64,7 +64,6 @@ public class UserService {
         OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, /*rd.nextBoolean()*/true, total, nMobile, nFixed, opts);
 
         System.out.println(order);
-        System.out.println("Ordine creato");
 
         try{
             em.persist(order);

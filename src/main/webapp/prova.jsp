@@ -98,75 +98,86 @@
 
     <form class="container-fluid px-1 px-sm-4 py-5 mx-auto" action="buy" method="post">
 
-
-                <%
-                    for (PackageEntity pack: packageEntityList) {
-                %>
-                <div class="row d-flex justify-content-start card-strip">
-                    <div class="info">
-                        <div class="row px-3 mb-2">
-                            <h4 class="dark-text mr-4"><%=pack.getName()%></h4>
-
-                        </div>
-
-                        <div class="row px-3">
-                            <% if (pack.getMinute() != null) { %>
-                            <div class="col-md-2"><%=pack.getMinute()%> Minuti</div>
-                            <% } %>
-                            <div class="col-md-2">
-                                <% if (pack.getSms() != null) { %>
-                                <div class="row"><%=pack.getSms()%> Sms</div>
-                                <% } %>
-                                <% if (/*pack.getExtraSms() != null*/true) { %>
-                                <div class="row"><%=pack.getExtraSms()%> ExtraSms</div>
-                                <% } %>
-                            </div>
-
-                            <div class="col-md-2">
-                                <% if (pack.getmGiga() != null) { %>
-                                <div class="row"><%=pack.getmGiga()%> Giga</div>
-                                <% } %>
-                                <% if (pack.getExtraMGiga() != null) { %>
-                                <div class="row"><%=pack.getExtraMGiga()%> ExtraGiga</div>
-                                <% } %>
-                            </div>
-
-                            <div class="col-md-1">
-                                <!-------null------>
-                            </div>
-
-
-                            <div class="col-md-2">
-                                <% if (pack.getfGiga() != null) { %>
-                                <div class="row"><%=pack.getfGiga()%> Fisso Giga</div>
-                                <% } %>
-                                <% if (pack.getExtraFGiga() != null) { %>
-                                <div class="row"><%=pack.getExtraFGiga()%> ExtraGiga Fisso </div>
-                                <% } %>
-                            </div>
-
-
-                        </div>
-
-
-
+        <%
+            for (PackageEntity pack: packageEntityList) {
+        %>
+        <div class="row d-flex justify-content-start card-strip">
+            <div class="col-3">
+                <div>
+                    <div class="row px-3 mb-2">
+                        <h4 class="dark-text mr-4"><%=pack.getName()%></h4>
                     </div>
-                    <div class="v-line ml-auto"></div>
-                    <div class="price">
-                        <div class="row px-3">
 
+
+                    <div class="row p-4 "></div>
+                    <div class="row px-3">
+                        <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
+                        <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
+                    </div>
+                    <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Mobile Service</h5>
+                        <div class="row my-3">
+                            <p class="bold card-title">Minutes</p>
+                            <p class="card-text"><%=pack.getMinute()%></p>
                         </div>
-                        <div class="row px-3">
-                            <h4 class="blue-text mr-2">$ 380,00</h4>
-                            <p class="mt-1 price-fall mr-5"><del>$ 760,00</del></p>
+                        <div class="row my-3">
+                            <p class="bold card-title">Sms </p>
+                            <p class="card-text"><%=pack.getSms()%></p>
                         </div>
-                        <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
+                        <div class="row my-3">
+                            <p class="bold card-title">Giga</p>
+                            <p class="card-text"><%=pack.getmGiga()%></p>
+                        </div>
                     </div>
                 </div>
-                <%
-                    }
-                %>
+            </div>
+            <div class="col-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Extra Fees</h5>
+                        <div class="row my-3">
+                            <p class="bold card-title"> </p>
+                            <p class="card-text">€/min</p>
+                        </div>
+                        <div class="row my-3">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text">€/sms</p>
+                        </div>
+                        <div class="row my-3">
+                            <h6 class="card-title"></h6>
+                            <p class="card-text">€/month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Fixed Service</h5>
+                        <div class="row my-3">
+                            <p>Phone</p>
+                            <p class="card-text">€/month</p>
+                        </div>
+                        <div class="row my-3">
 
+                            <p class="card-text">€/month</p>
+                        </div>
+                        <div class="row my-3">
+                            <p class="card-text">€/month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%
+            }
+        %>
 
     </form>
 

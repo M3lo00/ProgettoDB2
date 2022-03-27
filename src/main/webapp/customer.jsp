@@ -55,7 +55,7 @@ e --%>
 
 
 <div class="container d-flex flex-wrap">
-    <a class="navbar-brand" href="#">TELCO COMPANY</a>
+    <a class="navbar-brand" href="">TELCO COMPANY</a>
     <ul class="nav me-auto">
         <li class="nav-item"><a href="buy" class="nav-link link-dark px-2">Buy Service</a></li>
     </ul>

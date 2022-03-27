@@ -50,11 +50,9 @@ public class CustomerServlet extends HttpServlet {
             session.setAttribute("allOrderByUser", allOrderByUser);
 
             if(session.getAttribute("success")!=null && !(Boolean) session.getAttribute("success")){
-                    System.out.println("TRUE");
                     session.removeAttribute("success");
 
             }else{
-                System.out.println("ELSE");
                 req.setAttribute("success","hidden");
             }
 

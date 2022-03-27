@@ -70,14 +70,5 @@ body {
     .v-line {
         display: none
     }
-    .price {
-        width: 100%;
-    margin-left: 95px
-}
-}
 
-@media screen and (max-width: 529px) {
-    .price {
-    margin-left: 0px
-    }
 }

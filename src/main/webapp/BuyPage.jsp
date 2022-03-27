@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="v-line ml-auto"></div>
-        <div class="price">
+        <div class="">
             <div class="row px-3">
                 <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
                 <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>

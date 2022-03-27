@@ -18,12 +18,14 @@ BEGIN
         VALUE (NEW.idOptService);
 END;
 
-CREATE TRIGGER addTotalValue
-    AFTER INSERT ON `chosenoptional` for each row
+create trigger addTotalValue
+    after insert
+    on chosenoptional
+    for each row
 BEGIN
     UPDATE bestOpt
-    SET totalValue = bestOpt.totalValue + ( SELECT o.monthly
-                                            FROM optservice o
-                                            WHERE opt_id=NEW.refOptService)
+    SET totalValue = totalValue + ( SELECT o.monthly
+                                    FROM optservice o
+                                    WHERE o.idOptService=NEW.refOptService)
     WHERE opt_id = NEW.refOptService;
 END;

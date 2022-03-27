@@ -9,6 +9,7 @@ create table package
     sms         int         null,
     minute      int         null,
     mGiga       int         null,
+    extraMinute float       null,
     extraMGiga  float       null,
     extraSMS    float       null,
     fixedPhone  tinyint     null,

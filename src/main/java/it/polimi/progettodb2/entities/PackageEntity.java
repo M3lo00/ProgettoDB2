@@ -51,6 +51,9 @@ public class PackageEntity implements Serializable {
     @Column(name = "mGiga")
     private Integer mGiga;
 
+    @Column(name = "extraMinute")
+    private Float extraMinute;
+
     @Column(name = "extraMGiga")
     private Float extraMGiga;
 
@@ -67,7 +70,7 @@ public class PackageEntity implements Serializable {
     private Float extraFGiga;
 
     @Column(name = "price12M")
-    private double price12M;
+    private Float price12M;
 
     @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
@@ -108,28 +111,26 @@ public class PackageEntity implements Serializable {
     public PackageEntity() {
     }
 
-    public PackageEntity(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Float extraSms, Byte fixedPhone, Integer fGiga, Float extraFGiga, Float price12M) {
+    public PackageEntity(EmployeeEntity emp, String name, Integer sms, Integer minute, Integer mGiga, Float extraMinute, Float extraMGiga, Float extraSms, Byte fixedPhone, Integer fGiga, Float extraFGiga, Float price12M) {
+        this.refEmployee=emp;
         this.name=name;
-        this.sms=sms;
-        this.minute=minute;
-        this.mGiga=mGiga;
-        this.extraMGiga=extraMGiga;
-        this.extraSms=extraSms;
-        this.fixedPhone=fixedPhone;
-        this.fGiga=fGiga;
-        this.extraFGiga=extraFGiga;
+        if(sms==0){ this.sms=null; }else{this.sms = sms;}
+        if(minute==0){ this.minute=null; }else{this.minute=minute;}
+        if(mGiga==0){ this.mGiga=null; }else{this.mGiga=mGiga;}
+        if(extraMinute==0){ this.extraMinute=null; }else{this.extraMinute=extraMinute;}
+        if(extraMGiga==0){ this.extraMGiga=null; }else{this.extraMGiga=extraMGiga;}
+        if(extraSms==0){ this.extraSms=null; }else{this.extraSms=extraSms;}
+        if(fixedPhone==0){ this.fixedPhone=null; }else{this.fixedPhone=fixedPhone;}
+        if(fGiga==0){ this.fGiga=null; }else{this.fGiga=fGiga;}
+        if(extraFGiga==0){ this.extraFGiga=null; }else{this.extraFGiga=extraFGiga;}
         this.price12M=price12M;
     }
 
     public List<TotpurchaseperpackandvalidityEntity> getTotpurch(){return totpurch;}
 
-
     public AvgproductperserviceEntity getAvgproduct(){ return avgproduct;}
 
     public PackagePerSalesEntity getPackageSales(){ return packagesales;}
-
-
-
 
 
     public int getIdPackage() {
@@ -191,8 +192,16 @@ public class PackageEntity implements Serializable {
 
     public void setExtraMGiga(Float extraMGiga) {
         this.extraMGiga = extraMGiga;
+
+    }
+    public Float getExtraMinute() {
+        return extraMinute;
     }
 
+
+    public void setExtraMinute(Float extraMinute) {
+        this.extraMinute = extraMinute;
+    }
     public Float getExtraSms() {
         return extraSms;
     }
@@ -265,11 +274,11 @@ public class PackageEntity implements Serializable {
         return result;
     }
 
-    public double getPrice12M() {
+    public float getPrice12M() {
         return price12M;
     }
 
-    public void setPrice12M(double price12M) {
+    public void setPrice12M(Float price12M) {
         this.price12M = price12M;
     }
 }

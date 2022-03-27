@@ -19,7 +19,8 @@ create trigger noMoreInsolvent
     after update on `order` for each row
 BEGIN
     IF NEW.valid=1 THEN
-        DELETE FROM insolventUser i WHERE i.insolvent_id = NEW.refUser;
+        DELETE FROM insolventUser i
+        WHERE i.insolvent_id = NEW.refUser;
     end if;
 end;
 

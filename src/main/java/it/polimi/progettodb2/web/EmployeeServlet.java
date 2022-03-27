@@ -28,20 +28,14 @@ public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-        List<OptserviceEntity> optionalProducts = employeeService.findAllOptionalProduct();
-        EmployeeEntity employee = null;
         HttpSession session = req.getSession();
-
-        session.setAttribute("findAllOptionalProduct", optionalProducts);
-
-        System.out.println("ok");
 
         if(session.getAttribute("employee")!=null){
 
-            session.removeAttribute("val");
+            List<OptserviceEntity> optionalProducts = employeeService.findAllOptionalProduct();
+            session.setAttribute("findAllOptionalProduct", optionalProducts);
 
-            employee = (EmployeeEntity) session.getAttribute("employee");
+            session.removeAttribute("val");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
             dispatcher.forward(req, res);
@@ -64,14 +58,6 @@ public class EmployeeServlet extends HttpServlet {
         req.getParameter("extragigafixed");
         req.getParameter("fixedphone");
         req.getParameter("quantityserv");
-
-        System.out.println("sms "+req.getParameter("sms"));
-
-        if(req.getParameter("sms")=="" || Integer.parseInt(req.getParameter("sms")) == 0 ){
-            System.out.println("è null");
-        }
-
-
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
         dispatcher.forward(req, res);

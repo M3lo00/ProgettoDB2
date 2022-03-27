@@ -84,11 +84,16 @@ public class PackageEntity implements Serializable {
     @OneToMany(targetEntity = TotpurchaseperpackandvalidityEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TotpurchaseperpackandvalidityEntity> totpurch;
 
-    @OneToMany(targetEntity = PackagePerSalesEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PackagePerSalesEntity> packagesales;
 
-    @OneToMany(targetEntity = AvgproductperserviceEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AvgproductperserviceEntity> avgproduct;
+    @OneToOne(targetEntity = PackagePerSalesEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PackagePerSalesEntity packagesales;
+
+
+    @OneToOne(targetEntity = AvgproductperserviceEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AvgproductperserviceEntity avgproduct;
+
+
+
 
     @ManyToMany
     @JoinTable(name="ownoptservice",
@@ -117,8 +122,15 @@ public class PackageEntity implements Serializable {
     }
 
     public List<TotpurchaseperpackandvalidityEntity> getTotpurch(){return totpurch;}
-    public List<AvgproductperserviceEntity> getAvgproduct(){return avgproduct;}
-    public List<PackagePerSalesEntity> getPackageSales(){return packagesales;}
+
+
+    public AvgproductperserviceEntity getAvgproduct(){ return avgproduct;}
+
+    public PackagePerSalesEntity getPackageSales(){ return packagesales;}
+
+
+
+
 
     public int getIdPackage() {
         return idPackage;

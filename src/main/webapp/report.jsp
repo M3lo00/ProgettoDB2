@@ -24,21 +24,10 @@
 
 <body>
 <%
-    //list of all service packages
-    List<PackageEntity> packageEntityList = (List<PackageEntity>) request.getSession().getAttribute("packages");
-    List<UserEntity> userEntityList = (List<UserEntity>) request.getAttribute("findAllUser");
-    List<OrderEntity> orderEntityList =  (List<OrderEntity>) request.getAttribute("findAllorder");
-
-    List<TotpurchaseperpackandvalidityEntity> findByPackage = (List<TotpurchaseperpackandvalidityEntity>) request.getAttribute("findByPackage");
-    List<AvgproductperserviceEntity> findAllAvg = (List<AvgproductperserviceEntity>) request.getAttribute("findAllAvg");
-    List<PackagePerSalesEntity> findAllSales = (List<PackagePerSalesEntity>) request.getAttribute("findAllSales");
 
 
-    List<InsolventUserEntity> findAllInsolvent = (List<InsolventUserEntity>) request.getAttribute("findAllInsolvent");
-    List<SuspendedOrderEntity> findAllSuspendedOrder = (List<SuspendedOrderEntity>) request.getAttribute("findAllSuspendedOrder");
-    List<AuditEntity> findAllAudit = (List<AuditEntity>) request.getAttribute("findAllAudit");
-    List<BestOptionalEntity> findAllBestOptional = (List<BestOptionalEntity>) request.getAttribute("findAllBestOptional");
-    List<OptserviceEntity> findAllOptionalProduct = (List<OptserviceEntity>) request.getAttribute("findAllOptionalProduct");
+
+
 
 %>
 
@@ -52,8 +41,8 @@
 <%
     EmployeeEntity employee = null;
     String employeeUsername = null;
-    if(request.getSession().getAttribute("employee")!=null){
-        employee = (EmployeeEntity) request.getSession().getAttribute("employee");
+    if(session.getAttribute("employee")!=null){
+        employee = (EmployeeEntity) session.getAttribute("employee");
         employeeUsername = employee.getUsername();
     }
 %>
@@ -95,9 +84,10 @@
         </form>
 
 
-        <%  int result= Integer.parseInt((String) request.getSession().getAttribute("val"));
+        <%  int result= Integer.parseInt((String) session.getAttribute("val"));
 
             if( result == 1) {
+                List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
                 System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Total Purchase per Package</h4></p>
         <%-- tabella sales report --%>
@@ -122,7 +112,8 @@
 
 
         <%if( result == 2) {
-        System.out.println(result);%>
+            List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
+            System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Total Purchase per Package & Validity Period</h4></p>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
@@ -149,6 +140,7 @@
 
 
         <%if( result == 4) {
+            List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
             System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Average number of optional products sold together with each service package</h4></p>
         <%-- tabella sales report --%>
@@ -160,7 +152,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
-                        <div class="card-body">Average number of optional products sold: <%=pack.getAvgproduct().get(0).getAvgnumber()%></div>
+                        <div class="card-body">Average number of optional products sold: <%=pack.getAvgproduct().getAvgnumber()%></div>
                     </div>
 
                 </li>
@@ -176,8 +168,9 @@
 
 
         <%if( result == 3) {
+            List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
             System.out.println(result);%>
-        <p><h4 class="dark-text mr-4">Sales per Package With  the Optional Products</h4></p>
+        <p><h4 class="dark-text mr-4">Sales per Package With the Optional Products</h4></p>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
@@ -187,7 +180,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
-                        <div class="card-body">Sales with the optional products: <%=pack.getPackageSales().get(0).getWithOpt()%> €</div>
+                        <div class="card-body">Sales with the optional products: <%=pack.getPackageSales().getWithOpt()%> €</div>
                     </div>
 
                 </li>
@@ -202,8 +195,9 @@
 
 
         <%if( result == 7) {
+            List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
             System.out.println(result);%>
-        <p><h4 class="dark-text mr-4">Sales per Package Without  the Optional Products</h4></p>
+        <p><h4 class="dark-text mr-4">Sales per Package Without the Optional Products</h4></p>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
@@ -213,7 +207,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
-                        <div class="card-body">Sales without the optional products: <%=pack.getPackageSales().get(0).getJustPack()%> €</div>
+                        <div class="card-body">Sales without the optional products: <%=pack.getPackageSales().getJustPack()%> €</div>
                     </div>
 
                 </li>
@@ -228,6 +222,7 @@
 
 
         <%if( result == 5) {
+            List<InsolventUserEntity> findAllInsolvent = (List<InsolventUserEntity>) request.getAttribute("findAllInsolvent");
             System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Insolvent Users</h4></p>
         <%-- tabella sales report --%>
@@ -248,6 +243,7 @@
 
 
         <%if( result == 8) {
+            List<SuspendedOrderEntity> findAllSuspendedOrder = (List<SuspendedOrderEntity>) request.getAttribute("findAllSuspendedOrder");
             System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Suspended Orders</h4></p>
         <%-- tabella sales report --%>
@@ -269,6 +265,7 @@
 
 
         <%if( result == 9) {
+            List<AuditEntity> findAllAudit = (List<AuditEntity>) request.getAttribute("findAllAudit");
             System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Alert</h4></p>
         <%-- tabella sales report --%>
@@ -294,6 +291,7 @@
 
 
         <%if( result == 6) {
+            List<BestOptionalEntity> findAllBestOptional = (List<BestOptionalEntity>) request.getAttribute("findAllBestOptional");
             System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Best seller optional product</h4></p>
         <%-- tabella sales report --%>
@@ -302,7 +300,9 @@
                 <%
                     for (BestOptionalEntity best: findAllBestOptional) {
                 %>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="card-body"><%=best.getOpt_id().getName()%>: <%=best.getTotalValue()%>€</div>
+                </li>
                 <%
                     }
                 %>

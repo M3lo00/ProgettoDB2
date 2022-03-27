@@ -15,13 +15,13 @@ public class PackagePerSalesEntity {
     @Column(name = "idSales")
     private int idSales;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade = {
+    @OneToOne(targetEntity = PackageEntity.class, fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
-            CascadeType.DETACH
-    })
-    @JoinColumn(name = "package_id")
+            CascadeType.DETACH}
+    )
+    @JoinColumn(name = "package_id", referencedColumnName = "idPackage")
     private PackageEntity package_id;
 
     @Basic

@@ -29,19 +29,6 @@ public class SalesReportServlet extends HttpServlet{
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
-/*
-        //first query
-        String select2 = req.getParameter("select2");
-        if(select2!=null) totPurchaseXPackage = employeeService.purchasePackage();
-
-
- */
-        /*
-        totPurchaseXPackage = employeeService.purchasePackage();
-
-
-         */
-
 
         if(req.getParameter("select1")!=null) {
             String val = req.getParameter("select1");
@@ -60,54 +47,24 @@ public class SalesReportServlet extends HttpServlet{
         EmployeeEntity employee = null;
         HttpSession session = req.getSession();
 
-        //first query
-
-        List<TotpurchaseperpackandvalidityEntity> findAllTot = employeeService.findAllTot();
-        req.setAttribute("findAllTot", findAllTot);
-
-        //second query
-        List<AvgproductperserviceEntity> findAllAvg = employeeService.findAllAvg();
-        req.setAttribute("findAllAvg", findAllAvg);
-
-        //Third query
-        List<PackagePerSalesEntity> findAllSales = employeeService.findAllSales();
-        req.setAttribute("findAllSales", findAllSales);
-
-        List<InsolventUserEntity> findAllInsolvent = employeeService.findAllInsolvent();
-        req.setAttribute("findAllInsolvent", findAllInsolvent);
-
-        List<UserEntity> findAllUser = employeeService.findAllUser();
-        req.setAttribute("findAllUser", findAllUser);
-
-        List<OrderEntity> findAllOrder = employeeService.findAllOrder();
-        req.setAttribute("findAllOrder", findAllOrder);
-
-        List<SuspendedOrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
-        req.setAttribute("findAllSuspendedOrder", findAllSuspendedOrder);
-
-        List<AuditEntity> findAllAudit = employeeService.findAllAudit();
-        req.setAttribute("findAllAudit", findAllAudit);
-
-        List<BestOptionalEntity> findAllBestOptional = employeeService.findAllBestOptional();
-        req.setAttribute("findAllBestOptional", findAllBestOptional);
-
-        List<OptserviceEntity> findAllOptionalProduct = employeeService.findAllOptionalProduct();
-        req.setAttribute("findAllOptionalProduct", findAllOptionalProduct);
-
-
-        //if
-
-        /*if (session.getAttribute("val")!=null && Integer.parseInt(session.getAttribute("val").toString())==5){
-            List<UserEntity> findAllUser = employeeService.findAllUser();
-            req.setAttribute("findAllUser", findAllUser);
-        }*/
-
-
-
         if(session.getAttribute("employee")!=null){
             employee = (EmployeeEntity) session.getAttribute("employee");
             if (session.getAttribute("val")==null){
                 session.setAttribute("val", "0");
+            }else{
+                if(Integer.parseInt((String) session.getAttribute("val"))==5){
+                    List<InsolventUserEntity> findAllInsolvent = employeeService.findAllInsolvent();
+                    req.setAttribute("findAllInsolvent", findAllInsolvent);
+                }else if(Integer.parseInt((String) session.getAttribute("val"))==8){
+                    List<SuspendedOrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
+                    req.setAttribute("findAllSuspendedOrder", findAllSuspendedOrder);
+                }else if(Integer.parseInt((String) session.getAttribute("val"))==9){
+                    List<AuditEntity> findAllAudit = employeeService.findAllAudit();
+                    req.setAttribute("findAllAudit", findAllAudit);
+                }else if(Integer.parseInt((String) session.getAttribute("val"))==6){
+                    List<BestOptionalEntity> findAllBestOptional = employeeService.findAllBestOptional();
+                    req.setAttribute("findAllBestOptional", findAllBestOptional);
+                }
             }
             RequestDispatcher dispatcher = req.getRequestDispatcher("report.jsp");
             dispatcher.forward(req, res);

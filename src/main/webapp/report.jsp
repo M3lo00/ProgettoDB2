@@ -19,24 +19,7 @@
 
     <title>Sales-Report</title>
 </head>
-
-
-
 <body>
-<%
-
-
-
-
-
-%>
-
-
-
-
-
-
-
 
 <%
     EmployeeEntity employee = null;
@@ -89,7 +72,7 @@
             if( result == 1) {
                 List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
                 System.out.println(result);%>
-        <p><h4 class="dark-text mr-4">Total Purchase per Package</h4></p>
+        <h4 class="dark-text mt-3">Total Purchase per Package</h4>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
@@ -114,7 +97,7 @@
         <%if( result == 2) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
             System.out.println(result);%>
-        <p><h4 class="dark-text mr-4">Total Purchase per Package & Validity Period</h4></p>
+        <h4 class="dark-text mt-3">Total Purchase per Package & Validity Period</h4>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
@@ -142,7 +125,7 @@
         <%if( result == 4) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
             System.out.println(result);%>
-        <p><h4 class="dark-text mr-4">Average number of optional products sold together with each service package</h4></p>
+        <h4 class="dark-text mt-3">Average number of optional products sold together with each service package</h4>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
@@ -313,16 +296,7 @@
 
 
 
-
-
-
     </div>
-
 </form>
-
-
-
-
-
 </body>
 </html>

@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet("/employee")
+@WebServlet("/newpack")
 public class NewServicePackageServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

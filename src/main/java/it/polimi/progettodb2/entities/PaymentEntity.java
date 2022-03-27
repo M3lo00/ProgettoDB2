@@ -34,9 +34,8 @@ public class PaymentEntity implements Serializable {
     @Column(name = "payTime")
     private Timestamp payTime;
 
-    /*@OneToOne(targetEntity = AuditEntity.class, mappedBy = "refLastRejection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private AuditEntity audit;
-    */
+
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "refUser", referencedColumnName = "idUser")

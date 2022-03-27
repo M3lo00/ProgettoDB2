@@ -85,6 +85,15 @@ public class SalesReportServlet extends HttpServlet{
         List<SuspendedOrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
         req.setAttribute("findAllSuspendedOrder", findAllSuspendedOrder);
 
+        List<AuditEntity> findAllAudit = employeeService.findAllAudit();
+        req.setAttribute("findAllAudit", findAllAudit);
+
+        List<BestOptionalEntity> findAllBestOptional = employeeService.findAllBestOptional();
+        req.setAttribute("findAllBestOptional", findAllBestOptional);
+
+        List<OptserviceEntity> findAllOptionalProduct = employeeService.findAllOptionalProduct();
+        req.setAttribute("findAllOptionalProduct", findAllOptionalProduct);
+
 
         //if
 

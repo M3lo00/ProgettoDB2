@@ -79,4 +79,13 @@ public class EmployeeService {
         return em.createNamedQuery("SuspendedOrder.findAllSuspendedOrder", SuspendedOrderEntity.class).getResultList();
     }
 
+    public List<AuditEntity> findAllAudit() {
+        return em.createNamedQuery("Audit.findAllAudit", AuditEntity.class).getResultList();
+    }
+
+    public List<BestOptionalEntity> findAllBestOptional() {
+        return em.createNamedQuery("BestOptional.findAllBestOptional", BestOptionalEntity.class).getResultList();
+    }
+
+
 }

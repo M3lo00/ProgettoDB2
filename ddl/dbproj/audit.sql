@@ -3,15 +3,15 @@ create table audit
     idAudit          int auto_increment
         primary key,
     refUser          int not null,
-    refLastRejection int not null,
+    refOrder         int not null,
+
     constraint refUser
         unique (refUser),
-    constraint fk_Payment
-        foreign key (refLastRejection) references payment (idPayments),
     constraint fk_User2
-        foreign key (refUser) references user (idUser)
+        foreign key (refUser) references user (idUser),
+    constraint fk_Order3
+            foreign key (refOrder) references order (idOrder)
 );
 
-create index fk_Payment_idx
-    on audit (refLastRejection);
+
 

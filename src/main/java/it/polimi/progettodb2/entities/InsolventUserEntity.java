@@ -38,13 +38,9 @@ public class InsolventUserEntity {
         this.idInsolventUser = idInsolventUser;
     }
 
-    public UserEntity getInsolventId() {
-        return insolvent_id;
-    }
+    public UserEntity getInsolventId() {return insolvent_id;}
 
-    public void setInsolventId(UserEntity packageId) {
-        this.insolvent_id = insolvent_id;
-    }
+    public void setInsolventId(UserEntity packageId) {this.insolvent_id = insolvent_id;}
 
 
 

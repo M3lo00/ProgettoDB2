@@ -30,6 +30,9 @@ public class OptserviceEntity implements Serializable {
     @Column(name = "refEmployee")
     private Integer refEmployee;
 
+    @OneToOne(targetEntity = BestOptionalEntity.class, mappedBy = "opt_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private BestOptionalEntity best;
+
     public int getIdOptService() {
         return idOptService;
     }

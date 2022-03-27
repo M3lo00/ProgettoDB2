@@ -110,6 +110,11 @@ public class OrderEntity implements Serializable {
     @OneToOne(targetEntity = SuspendedOrderEntity.class, fetch = FetchType.EAGER, mappedBy="order_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private SuspendedOrderEntity supsendedorder;
 
+    @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private AuditEntity audit;
+
+
+
     public OrderEntity(){}
 
     public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, int period, Boolean valid, Float totalAmount, int nMobile, int nFixed, List<OptserviceEntity> optService){

@@ -1,13 +1,9 @@
 package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "user", schema = "dbproj")
@@ -76,7 +72,7 @@ public class UserEntity implements Serializable {
     private Collection<PaymentEntity> pay;
 
     @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private OrderEntity audits;
+    private AuditEntity audits;
 
     @OneToOne(targetEntity = InsolventUserEntity.class, fetch = FetchType.EAGER, mappedBy="insolvent_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private InsolventUserEntity insolventuser;
@@ -93,6 +89,8 @@ public class UserEntity implements Serializable {
     }
 
     public InsolventUserEntity getInsolventuser(){ return insolventuser;}
+
+    public AuditEntity getIdAudit(){ return audits;}
 
 
     public int getIdUser() {

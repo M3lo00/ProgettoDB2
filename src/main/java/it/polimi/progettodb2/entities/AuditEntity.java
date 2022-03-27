@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
+
+@NamedQuery(
+        name = "Audit.findAllAudit",
+        query = "SELECT a FROM AuditEntity a "
+)
+
 @Table(name = "audit", schema = "dbproj")
 public class AuditEntity implements Serializable {
 
@@ -15,7 +21,7 @@ public class AuditEntity implements Serializable {
     @Column(name = "idAudit")
     private int idAudit;
 
-    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY, cascade = {
+    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
@@ -24,14 +30,14 @@ public class AuditEntity implements Serializable {
     @JoinColumn(name = "refUser", referencedColumnName = "idUser")
     private UserEntity refUser;
 
-    @OneToOne(targetEntity = PaymentEntity.class, fetch = FetchType.LAZY, cascade = {
+    @OneToOne(targetEntity = OrderEntity.class, fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.DETACH}
     )
-    @JoinColumn(name="refLastRejection", referencedColumnName = "idPayments")
-    private PaymentEntity refLastRejection;
+    @JoinColumn(name="refOrder", referencedColumnName = "idOrder")
+    private OrderEntity refOrder;
 
 
     public int getIdAudit() {
@@ -50,12 +56,12 @@ public class AuditEntity implements Serializable {
         this.refUser = refUser;
     }
 
-    public PaymentEntity getRefLastRejection() {
-        return refLastRejection;
+    public OrderEntity getRefOrder() {
+        return refOrder;
     }
 
-    public void setRefLastRejection(PaymentEntity refLastRejection) {
-        this.refLastRejection = refLastRejection;
+    public void setRefOrder(OrderEntity refOrder) {
+        this.refOrder = refOrder;
     }
 
     @Override
@@ -67,7 +73,7 @@ public class AuditEntity implements Serializable {
 
         if (idAudit != that.idAudit) return false;
         if (refUser != that.refUser) return false;
-        if (refLastRejection != that.refLastRejection) return false;
+        if (refOrder != that.refOrder) return false;
 
         return true;
     }
@@ -76,7 +82,7 @@ public class AuditEntity implements Serializable {
     public int hashCode() {
         int result = idAudit;
         result = 31 * result + (refUser != null ? refUser.hashCode() : 0);
-        result = 31 * result + (refLastRejection != null ? refLastRejection.hashCode() : 0);
+        result = 31 * result + (refOrder != null ? refOrder.hashCode() : 0);
         return result;
     }
 }

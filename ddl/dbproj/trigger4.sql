@@ -17,7 +17,6 @@ BEGIN
         VALUE (NEW.idPackage);
 END;
 
-drop trigger addOrderAvg;
 
 CREATE TRIGGER addOrderAvg
     AFTER INSERT ON `order` for each row

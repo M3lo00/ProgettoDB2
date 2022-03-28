@@ -69,7 +69,11 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
+
 <div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
+
+    <h4>My Orders</h4>
+
     <%for (OrderEntity order: allOrderByUser) {%>
     <div class="row d-flex justify-content-start card-strip">
         <div class="info">

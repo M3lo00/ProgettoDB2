@@ -1,5 +1,3 @@
-use dbproj;
-
 create table `order`
 (
     idOrder      int auto_increment
@@ -7,10 +5,11 @@ create table `order`
     refUser      int                       not null,
     refPack      int                       not null,
     creationDate datetime                  not null,
+    paymentDate  datetime                  null,
     startDate    date                      null,
     periodo      int                       not null,
     valid        tinyint unsigned zerofill null,
-    totalAmount  float                       not null,
+    totalAmount  float                     not null,
     nMobile      int                       null,
     nFixed       int                       null,
     constraint fk_Package3
@@ -18,6 +17,9 @@ create table `order`
     constraint fk_User
         foreign key (refUser) references user (idUser)
 );
+
+create index alert_idx
+    on `order` (idOrder);
 
 create index fk_Package_idx
     on `order` (refPack);

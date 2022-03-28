@@ -61,6 +61,10 @@ public class OrderEntity implements Serializable {
     
     @Column(name = "creationDate")
     private Timestamp creationDate;
+
+
+    @Column(name = "paymentDate")
+    private Timestamp paymentDate;
     
     @Column(name = "startDate")
     private Date startDate;
@@ -121,6 +125,7 @@ public class OrderEntity implements Serializable {
             this.refUser=refUser;
             this.refPack=refPack;
             this.creationDate=creationDate;
+            this.paymentDate=paymentDate;
             this.startDate=startDate;
             this.periodo=period;
             this.valid=valid;
@@ -163,6 +168,14 @@ public class OrderEntity implements Serializable {
 
     public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Timestamp getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Timestamp paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     public Date getStartDate() {
@@ -226,6 +239,7 @@ public class OrderEntity implements Serializable {
         if (periodo != that.periodo) return false;
         if (totalAmount != that.totalAmount) return false;
         if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
+        if (paymentDate != null ? !paymentDate.equals(that.paymentDate) : that.paymentDate != null) return false;
         if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
         if (valid != null ? !valid.equals(that.valid) : that.valid != null) return false;
         if (nMobile != null ? !nMobile.equals(that.nMobile) : that.nMobile != null) return false;
@@ -240,6 +254,7 @@ public class OrderEntity implements Serializable {
         result = 31 * result + (refUser != null ? refUser.hashCode() : 0);
         result = 31 * result + (refPack != null ? refPack.hashCode() : 0);
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (paymentDate != null ? paymentDate.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + periodo;
         result = 31 * result + (valid != null ? valid.hashCode() : 0);
@@ -254,6 +269,7 @@ public class OrderEntity implements Serializable {
         return this.refUser+" "+
         this.refPack+" "+
         this.creationDate+" "+
+        this.paymentDate+" "+
         this.startDate+" "+
         this.periodo+" "+
         this.valid+" "+

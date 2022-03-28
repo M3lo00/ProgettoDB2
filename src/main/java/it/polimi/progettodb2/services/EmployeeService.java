@@ -96,16 +96,16 @@ public class EmployeeService {
         return em.createNamedQuery("Order.findAllOrder", OrderEntity.class).getResultList();
     }
 
-    public List<SuspendedOrderEntity> findAllSuspendedOrder() {
-        return em.createNamedQuery("SuspendedOrder.findAllSuspendedOrder", SuspendedOrderEntity.class).getResultList();
-    }
-
     public List<AuditEntity> findAllAudit() {
         return em.createNamedQuery("Audit.findAllAudit", AuditEntity.class).getResultList();
     }
 
     public List<BestOptionalEntity> findAllBestOptional() {
         return em.createNamedQuery("BestOptional.findAllBestOptional", BestOptionalEntity.class).getResultList();
+    }
+
+    public List<OrderEntity> findAllSuspendedOrder() {
+        return em.createNamedQuery("Order.findAllSuspendedOrder", OrderEntity.class).getResultList();
     }
 
 

@@ -226,18 +226,18 @@
 
 
         <%if( result == 8) {
-            List<SuspendedOrderEntity> findAllSuspendedOrder = (List<SuspendedOrderEntity>) request.getAttribute("findAllSuspendedOrder");
+            List<OrderEntity> findAllSuspendedOrder = (List<OrderEntity>) request.getAttribute("findAllSuspendedOrder");
             System.out.println(result);%>
         <p><h4 class="dark-text mr-4">Suspended Orders</h4></p>
         <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
-                    for (SuspendedOrderEntity susp: findAllSuspendedOrder) {
+                    for (OrderEntity susp: findAllSuspendedOrder) {
                 %>
 
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="card-body">#Order: <%=susp.getOrder_id().getIdOrder()%>   (#User: <%=susp.getOrder_id().getRefUser().getUsername()%>)</div>
+                        <div class="card-body">#Order: <%=susp.getIdOrder()%>   (User: <%=susp.getRefUser().getUsername()%>)</div>
                 </li>
                 <%
                     }

@@ -33,6 +33,14 @@ import java.util.List;
         query = "SELECT o FROM OrderEntity o "
 )
 
+@NamedQuery(
+        name = "Order.findAllSuspendedOrder",
+        query = "SELECT o FROM OrderEntity o "+
+                "WHERE o.valid = false "
+)
+
+
+
 
 /*
 @NamedQuery(
@@ -111,8 +119,7 @@ public class OrderEntity implements Serializable {
     private List<OptserviceEntity> optService;
 
 
-    @OneToOne(targetEntity = SuspendedOrderEntity.class, fetch = FetchType.EAGER, mappedBy="order_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private SuspendedOrderEntity supsendedorder;
+
 
     @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audit;
@@ -134,8 +141,6 @@ public class OrderEntity implements Serializable {
             this.nFixed=nFixed;
             this.optService=optService;
     }
-
-    public SuspendedOrderEntity getIdSuspended(){ return supsendedorder;}
 
 
     public int getIdOrder() {

@@ -15,7 +15,6 @@
         <class>it.polimi.progettodb2.entities.PackageEntity</class>
         <class>it.polimi.progettodb2.entities.PackagePerSalesEntity</class>
         <class>it.polimi.progettodb2.entities.PaymentEntity</class>
-        <class>it.polimi.progettodb2.entities.SuspendedOrderEntity</class>
         <class>it.polimi.progettodb2.entities.TotpurchaseperpackandvalidityEntity</class>
         <class>it.polimi.progettodb2.entities.UserEntity</class>
 

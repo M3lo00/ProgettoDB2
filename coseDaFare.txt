@@ -73,8 +73,18 @@ sistemare il riporto dei dati nella creazione di package
 Da togliere:
     -InsolventUser
     -BestOptional
-    -SuspendedOrder
+    -SuspendedOrder (fatto)
     -Totpurch
     Da fare come MatViews:
         -Avgprod
         -Packpersales
+
+Dobbiamo fare le exception .. try catch
+
+Secondo me Totpurch dobbiamo lasciarlo in una tab
+Perché per farlo:
+    -devo fare inizialmente una query dove raggruppo i package per idPackage
+    -devo poi ciclare per tutti i PackageEntity per determinare le liste per ogni idPackage
+    -dopodiché devo farmi un count
+    -e dobbiamo ricordarci che le query sulle entity vengono fatte per tornare entity
+Fammi sapere cosa ne pensi

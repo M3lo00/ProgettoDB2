@@ -56,7 +56,7 @@ public class SalesReportServlet extends HttpServlet{
                     List<InsolventUserEntity> findAllInsolvent = employeeService.findAllInsolvent();
                     req.setAttribute("findAllInsolvent", findAllInsolvent);
                 }else if(Integer.parseInt((String) session.getAttribute("val"))==8){
-                    List<SuspendedOrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
+                    List<OrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
                     req.setAttribute("findAllSuspendedOrder", findAllSuspendedOrder);
                 }else if(Integer.parseInt((String) session.getAttribute("val"))==9){
                     List<AuditEntity> findAllAudit = employeeService.findAllAudit();

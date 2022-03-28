@@ -93,6 +93,10 @@ public class UserService {
         return em.createNamedQuery("Package.findAll", PackageEntity.class).getResultList();
     }
 
+    public List<PackageEntity> findAllPackagesOptional(){
+        return em.createNamedQuery("PackageOpts.findAll", PackageEntity.class).getResultList();
+    }
+
     public List<OrderEntity> findRejectedOrdersByUser(int user_id){
         UserEntity user = findByUserID(user_id).get();
         return em.createNamedQuery("Order.findRejectedOrdersOfUser", OrderEntity.class)

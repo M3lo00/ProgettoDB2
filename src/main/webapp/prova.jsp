@@ -7,6 +7,9 @@
 --%>
 <%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="it.polimi.progettodb2.entities.OptserviceEntity" %>
+<%@ page import="java.util.stream.Collectors" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -194,6 +197,13 @@
                     </div>
                 </div>
             </div>
+            <%if (pack.getOptService().size()!=0){%>
+            <div class="col-12 pt-2">
+                <div class="card h-40">
+                    <p><strong>Bundled Optional Products</strong> <%=pack.getListOptName()%></p>
+                </div>
+            </div>
+            <%}%>
         </div>
         <%
             }

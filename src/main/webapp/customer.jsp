@@ -66,11 +66,8 @@
     <% } %>
 <% } %>
 
-
-
-
-<div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
-    <div class="d-flex justify-content-around my-3">
+<div class="container-fluid px-1 px-sm-4 py-3 mx-auto">
+    <div class="d-flex justify-content-around">
         <h2 >My Orders</h2>
         <div></div>
     </div>

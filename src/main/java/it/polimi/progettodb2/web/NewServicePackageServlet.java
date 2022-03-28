@@ -45,33 +45,31 @@ public class NewServicePackageServlet extends HttpServlet {
 
         if(!req.getParameter("minute").equals("") && Integer.parseInt(req.getParameter("minute"))!=0){
             minute=Integer.parseInt(req.getParameter("minute"));
+            req.setAttribute("minute",minute);
             if(!req.getParameter("extraminute").equals("") && Float.parseFloat(req.getParameter("extraminute"))!=0){
                 extraFeeMinute=Float.parseFloat(req.getParameter("extraminute"));
             }else{
-                req.setAttribute("minute",minute);
                 req.setAttribute("minuteV", "is-invalid");
-                System.out.println("minute invalid");
                 valid=false;
             }
         }
 
         if(!req.getParameter("sms").equals("") && Integer.parseInt(req.getParameter("sms"))!=0){
             sms=Integer.parseInt(req.getParameter("sms"));
+            req.setAttribute("sms",sms);
             if(!req.getParameter("extrasms").equals("") && Float.parseFloat(req.getParameter("extrasms"))!=0){
                 extraFeeSms=Float.parseFloat(req.getParameter("extrasms"));
             }else{
-                req.setAttribute("sms",sms);
                 req.setAttribute("smsV", "is-invalid");
-                System.out.println("sms invalid");
                 valid=false;
             }
         }
         if(!req.getParameter("gigamobile").equals("") && Integer.parseInt(req.getParameter("gigamobile"))!=0){
             gigaMobile=Integer.parseInt(req.getParameter("gigamobile"));
+            req.setAttribute("gigamobile",gigaMobile);
             if(!req.getParameter("extragigamobile").equals("") && Float.parseFloat(req.getParameter("extragigamobile"))!=0){
                 extraFeeGigaMobile=Float.parseFloat(req.getParameter("extragigamobile"));
             }else{
-                req.setAttribute("gigamobile",gigaMobile);
                 req.setAttribute("gigamobileV", "is-invalid");
                 valid=false;
             }
@@ -79,18 +77,16 @@ public class NewServicePackageServlet extends HttpServlet {
 
         if(!req.getParameter("gigafixed").equals("") && Integer.parseInt(req.getParameter("gigafixed"))!=0){
             gigaFixed=Integer.parseInt(req.getParameter("gigafixed"));
+            req.setAttribute("gigaFixed",gigaFixed);
             if(!req.getParameter("extragigafixed").equals("") && Float.parseFloat(req.getParameter("extragigafixed"))!=0){
                 extraFeeGigaFixed=Float.parseFloat(req.getParameter("extragigafixed"));
             }else{
-                req.setAttribute("gigaFixed",gigaFixed);
                 req.setAttribute("gigaFixedV", "is-invalid");
                 valid=false;
             }
         }
 
         if(req.getParameterValues("chosenOpt")!=null){
-            System.out.println("chosenopt è entrato");
-
             optionals.addAll((List<OptserviceEntity>) session.getAttribute("findAllOptionalProduct"));
 
             String[] optIndex = req.getParameterValues("chosenOpt");

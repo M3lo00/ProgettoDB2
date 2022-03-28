@@ -61,28 +61,102 @@
             if(chosen == null || pack == chosen){
     %>
     <div class="row d-flex justify-content-start card-strip">
-        <div class="info">
-            <div class="row px-3 mb-2">
-                <h4 class="dark-text mr-4"><%=pack.getName()%></h4>
-
-            </div>
-            <div class="row px-3">
-                <p class="mb-1"><span class="fa fa-clock-o">Services</span></p>
+        <div class="col-3">
+            <div>
+                <div class="row px-3 mb-2">
+                    <h4 class="dark-text mr-4"><%=pack.getName()%></h4>
+                </div>
+                <div class="row p-4 "></div>
+                <div class="row px-3">
+                    <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
+                    <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
+                </div>
+                <%if (chosen!=null){%>
+                <button type="submit" class="btn btn-danger mt-4" name="reset" value="reset" > Change Package </button>
+                <%}else{%>
+                <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
+                <%}%>
             </div>
         </div>
-        <div class="v-line ml-auto"></div>
-        <div class="">
-            <div class="row px-3">
-                <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
-                <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
+
+        <div class="col-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Mobile Service</h5>
+                    <div class="row my-2">
+                        <p class="bold card-title">Minutes</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getMinute()==null)? " ": pack.getMinute()%></p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="bold card-title">Sms </p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getSms()==null)? " ": pack.getSms()%></p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="bold card-title">Giga</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getmGiga()==null)? " ": pack.getmGiga()%></p>
+                    </div>
+                </div>
             </div>
-            <%if (chosen!=null){%>
-            <button type="submit" class="btn btn-danger mt-4" name="reset" value="reset" > Change Package </button>
-            <%}else{%>
-            <button class="btn btn-orange mt-4" type="submit" name="chosenPack" value="<%=pack.getIdPackage()%>">Get started</button>
-            <%}%>
+        </div>
+        <div class="col-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Extra Fees</h5>
+                    <div class="row my-2">
+                        <p class="bold card-title">Extra minutes</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getExtraMinute()==null)? " ": pack.getExtraMinute()+"€/min"%></p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-title">Extra sms</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getExtraSms()==null)? " ": pack.getExtraSms()+"€/sms"%></p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-title">Extra GB</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getExtraMGiga()==null)? " ": pack.getExtraMGiga()+"€/GB"%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Fixed Service</h5>
+                    <div class="row my-2">
+                        <p class="bold card-title">Phone</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getFixedPhone()==null)? " ": "Included"%></p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-title">Internet</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getfGiga()==null)? " ": pack.getfGiga()+"€/GB"%></p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-title">Extra Giga</p>
+                    </div>
+                    <div class="row my-2">
+                        <p class="card-text fw-bold"><%=(pack.getExtraFGiga()==null)? " ": pack.getExtraFGiga()+"€/GB"%></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <%
             }
         }

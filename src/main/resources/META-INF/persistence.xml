@@ -6,14 +6,18 @@
     <persistence-unit name="dbproj">
 
         <class>it.polimi.progettodb2.entities.AuditEntity</class>
+        <class>it.polimi.progettodb2.entities.AvgproductperserviceEntity</class>
+        <class>it.polimi.progettodb2.entities.BestOptionalEntity</class>
         <class>it.polimi.progettodb2.entities.EmployeeEntity</class>
+        <class>it.polimi.progettodb2.entities.InsolventUserEntity</class>
         <class>it.polimi.progettodb2.entities.OptserviceEntity</class>
         <class>it.polimi.progettodb2.entities.OrderEntity</class>
         <class>it.polimi.progettodb2.entities.PackageEntity</class>
+        <class>it.polimi.progettodb2.entities.PackagePerSalesEntity</class>
         <class>it.polimi.progettodb2.entities.PaymentEntity</class>
-        <class>it.polimi.progettodb2.entities.UserEntity</class>
-        <class>it.polimi.progettodb2.entities.AvgproductperserviceEntity</class>
+        <class>it.polimi.progettodb2.entities.SuspendedOrderEntity</class>
         <class>it.polimi.progettodb2.entities.TotpurchaseperpackandvalidityEntity</class>
+        <class>it.polimi.progettodb2.entities.UserEntity</class>
 
 
     </persistence-unit>

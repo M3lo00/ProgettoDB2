@@ -23,12 +23,8 @@
 <body>
 
 <%
-    EmployeeEntity employee = null;
-    String employeeUsername = null;
-    if(request.getSession().getAttribute("employee")!=null){
-        employee = (EmployeeEntity) session.getAttribute("employee");
-        employeeUsername = employee.getUsername();
-    }
+    request.getAttribute("noSelection");
+    EmployeeEntity employee = (EmployeeEntity) session.getAttribute("employee");
     List<OptserviceEntity> findAllOptionalProduct = (List<OptserviceEntity>) session.getAttribute("findAllOptionalProduct");
 %>
 
@@ -47,81 +43,91 @@
     </ul>
 </div>
 
-<%-- Name, SMs, minute, mGiga, extraMGiga, extraSms, fixedPhone, fGiga, extraFgiga --%>
+<div class="alert alert-warning alert-dismissible fade show" role="alert" <%=(request.getAttribute("noSelection")=="true")? " ": "hidden"%>>
+    <strong>Error!</strong> At least a service must be selected
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
 <div class="container-fluid px-1 px-sm-4 py-5 col-md-6">
         <h4 class="dark-text mr-4">Create a new Service Package</h4>
-    <form method="post" action="employee">
+    <form method="post" action="newpack">
         <div class="form-row mb-3">
             <div class="form-group ">
                 <label for="packageName">Package Name</label>
-                <input type="text" class="form-control" name="packagename" id="packageName" placeholder="Es. RED Pro" required>
-
+                <input type="text" class="form-control" name="packagename" id="packageName" value="${packagename}" placeholder="Es. RED Pro" required>
             </div>
         </div>
-        <label for="packageName">SMS</label>
-        <div class="input-group mb-3">
 
-            <input type="number" id="quantity" name="sms" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
-        </div>
         <label for="packageName">Minute</label>
         <div class="input-group mb-3">
-
-            <input type="number" id="quantity1" name="minute" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
+            <input type="number" id="quantity" name="minute" placeholder="Insert value" value=${minute} min="0" class="form-control" >
         </div>
+
+        <label for="packageName">SMS</label>
+        <div class="input-group mb-3">
+            <input type="number" id="quantity1" name="sms" placeholder="Insert value" value=${sms} min="0" class="form-control" >
+        </div>
+
         <label for="packageName">Giga Mobile</label>
         <div class="input-group mb-3">
 
-            <input type="number" id="quantity2" name="gigamobile" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox">
+            <input type="number" id="quantity2" name="gigamobile" placeholder="Insert value" value=${gigamobile} min="0" class="form-control">
         </div>
-        <label for="packageName">Extra Giga Mobile</label>
-        <div class="input-group mb-3">
 
-            <input type="number" id="quantity3" name="extragigamobile" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
+        <label for="quantity8">Extra Minute</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">0.00</span>
+            <input type="number" step="0.01" id="quantity8" name="extraminute" placeholder="Insert value"  min="0" class="form-control ${minuteV}" >
         </div>
+
         <label for="packageName">Extra SMS</label>
         <div class="input-group mb-3">
+            <span class="input-group-text">0.00</span>
+            <input type="number" step="0.01" id="quantity4" name="extrasms" placeholder="Insert value"  min="0" class="form-control ${smsV}">
+        </div>
 
-            <input type="number" id="quantity4" name="extrasms" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
+        <label for="packageName">Extra Giga Mobile</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">0.00</span>
+            <input type="number" step="0.01" id="quantity3" name="extragigamobile" placeholder="Insert value"  min="0" class="form-control ${gigamobileV}" >
         </div>
 
         <label for="packageName">Giga Fixed</label>
         <div class="input-group mb-3">
-
-            <input type="number" id="quantity6" name="gigafixed" placeholder="Insert value"  min="0" class="form-control" aria-label="Text input with checkbox" >
+            <input type="number" id="quantity6" name="gigafixed" placeholder="Insert value" value=${gigaFixed} min="0" class="form-control">
         </div>
+
         <label for="packageName">Extra Giga Fixed</label>
         <div class="input-group mb-3">
-
-            <input type="number" id="quantity7" name="extragigafixed" placeholder="Insert value" min="0" class="form-control" aria-label="Text input with checkbox" >
+            <span class="input-group-text">0.00</span>
+            <input type="number" step="0.01" id="quantity7" name="extragigafixed" placeholder="Insert value" min="0" class="form-control ${gigaFixedV}">
         </div>
+
         <label for="packageName">Fixed Phone</label>
         <div class="input-group mb-3">
-            <select class="form-select form-select-lg " name="fixedphone"  aria-label=".form-select-lg example">
-                <option selected>Is a Fixed-Phone Service ?</option>
-                <option value="fixedyes">YES</option>
-                <option value="fixedno">NO</option>
+            <select class="form-select form-select " name="fixedphone">
+                <option hidden value="0">Is Fixed-Phone Service included? (def. NO)</option>
+                <option value="1">YES</option>
+                <option value="0">NO</option>
             </select>
         </div>
 
-
         <%for (OptserviceEntity opt: findAllOptionalProduct) {%>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="opt<%=opt.getIdOptService()%>" value="<%=opt.getIdOptService()%>">
+                <input class="form-check-input" type="checkbox" name="chosenOpt" id="opt<%=opt.getIdOptService()%>" value="<%=opt.getIdOptService()%>">
                 <label class="form-check-label" for="opt<%=opt.getIdOptService()%>">
-                    <%=opt.getName()%>
+                    <%=opt.getName()+"("+opt.getMonthly()+"€)"%>
                 </label>
             </div>
         <% } %>
         <br/>
         <br/>
-        <label for="packageName">Price/Month</label>
+        <label for="price">Price/Month</label>
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
             <span class="input-group-text">0.00</span>
-            <input type="number" name="quantityserv" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
+            <input type="number" step="0.01" name="quantitypack" id="price" min="1" class="form-control" value="${quantitypack}" aria-label="Dollar amount (with dot and two decimal places)" required>
         </div>
-
-
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
@@ -129,23 +135,26 @@
 
 <div class="container-fluid px-1 px-sm-4 py-5 col-md-6">
     <h4 class="dark-text mr-4">Create a new Optional Product</h4>
-    <form>
+    <form action="newOpt" method="post">
         <div class="form-row mb-3">
             <div class="form-group ">
-                <label for="packageName">Product Name</label>
-                <input type="text" class="form-control" id="packageName1" placeholder="Es. Spotify" required>
-
+                <label for="packageName1">Product Name</label>
+                <input type="text" class="form-control" id="packageName1" name="optName" placeholder="Es. Spotify" required>
             </div>
         </div>
+        <label for="priceOpt">Price/Month</label>
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
             <span class="input-group-text">0.00</span>
-            <input type="number" name="quantityopt" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
+            <input type="number" step="0.01" id="priceOpt" name="quantityopt" min="1" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 </body>
 </html>

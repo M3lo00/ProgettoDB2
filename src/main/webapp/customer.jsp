@@ -38,20 +38,6 @@
     List<OrderEntity> rejectedOrders = (List<OrderEntity>) session.getAttribute("rejectedOrders");
     List<OrderEntity> allOrderByUser = (List<OrderEntity>) session.getAttribute("allOrderByUser");
 %>
-<%--
-    if(user!=null){
-%>
-<p align=right>Username of the user: ${user.username}</p>
-<p align=right><a href="${pageContext.request.contextPath}/logout">Logout</a></p>
-<%
-}
-else{
-%>
-<p align=right><a href="${pageContext.request.contextPath}/login">Login</a></p>
-<%
-    }
-%>
-e --%>
 
 
 <div class="container d-flex flex-wrap">
@@ -83,7 +69,6 @@ e --%>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
-
 <div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
     <%for (OrderEntity order: allOrderByUser) {%>
     <div class="row d-flex justify-content-start card-strip">
@@ -108,7 +93,7 @@ e --%>
                 </div>
                 <div class="col-md-2">
                     <div class="row">Price</div>
-                    <div class="row dark-text"><%=order.getTotalAmount()%>$</div>
+                    <div class="row dark-text"><%=order.getTotalAmount()%></div>
                 </div>
                 <% if (order.getnMobile() != null) { %>
                 <div class="col-md-2">
@@ -132,6 +117,8 @@ e --%>
     <% } %>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

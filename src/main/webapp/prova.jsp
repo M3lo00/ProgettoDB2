@@ -122,17 +122,23 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Mobile Service</h5>
-                        <div class="row my-3">
+                        <div class="row my-2">
                             <p class="bold card-title">Minutes</p>
-                            <p class="card-text"><%=pack.getMinute()%></p>
                         </div>
-                        <div class="row my-3">
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getMinute()==null)? " ": pack.getMinute()%></p>
+                        </div>
+                        <div class="row my-2">
                             <p class="bold card-title">Sms </p>
-                            <p class="card-text"><%=pack.getSms()%></p>
                         </div>
-                        <div class="row my-3">
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getSms()==null)? " ": pack.getSms()%></p>
+                        </div>
+                        <div class="row my-2">
                             <p class="bold card-title">Giga</p>
-                            <p class="card-text"><%=pack.getmGiga()%></p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getmGiga()==null)? " ": pack.getmGiga()%></p>
                         </div>
                     </div>
                 </div>
@@ -141,35 +147,49 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Extra Fees</h5>
-                        <div class="row my-3">
-                            <p class="bold card-title"> </p>
-                            <p class="card-text">€/min</p>
+                        <div class="row my-2">
+                            <p class="bold card-title">Extra minutes</p>
                         </div>
-                        <div class="row my-3">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text">€/sms</p>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getExtraMinute()==null)? " ": pack.getExtraMinute()+"€/min"%></p>
                         </div>
-                        <div class="row my-3">
-                            <h6 class="card-title"></h6>
-                            <p class="card-text">€/month</p>
+                        <div class="row my-2">
+                            <p class="card-title">Extra sms</p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getExtraSms()==null)? " ": pack.getExtraSms()+"€/sms"%></p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-title">Extra GB</p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getExtraMGiga()==null)? " ": pack.getExtraMGiga()+"€/GB"%></p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">Fixed Service</h5>
-                        <div class="row my-3">
-                            <p>Phone</p>
-                            <p class="card-text">€/month</p>
+                        <div class="row my-2">
+                            <p class="bold card-title">Phone</p>
                         </div>
-                        <div class="row my-3">
-
-                            <p class="card-text">€/month</p>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getFixedPhone()==null)? " ": "Included"%></p>
                         </div>
-                        <div class="row my-3">
-                            <p class="card-text">€/month</p>
+                        <div class="row my-2">
+                            <p class="card-title">Internet</p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getfGiga()==null)? " ": pack.getfGiga()+"€/GB"%></p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-title">Extra Giga</p>
+                        </div>
+                        <div class="row my-2">
+                            <p class="card-text fw-bold"><%=(pack.getExtraFGiga()==null)? " ": pack.getExtraFGiga()+"€/GB"%></p>
                         </div>
                     </div>
                 </div>

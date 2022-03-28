@@ -7,10 +7,9 @@ import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import it.polimi.progettodb2.exceptions.CredentialsException;
-import jakarta.persistence.criteria.Order;
+import jakarta.validation.ConstraintViolationException;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Stateless
@@ -33,12 +32,34 @@ public class EmployeeService {
         throw new NonUniqueResultException("More than one user registered with same credentials");
     }
 
-    public void newPack(String name, Integer sms, Integer minute, Integer mGiga, Float extraMGiga, Float extraSms, Byte fixedPhone, Integer fGiga, Float extraFGiga, Float price12M, List<OptserviceEntity> opts){
+    public void newPack(EmployeeEntity emp, String name, Integer sms, Integer minute, Integer mGiga, Float extraMinute, Float extraMGiga, Float extraSms, Byte fixedPhone, Integer fGiga, Float extraFGiga, Float price12M, List<OptserviceEntity> opts){
 
 
-        PackageEntity pack = new PackageEntity(name, sms, minute, mGiga, extraMGiga, extraSms, fixedPhone, fGiga, extraFGiga, price12M);
+        PackageEntity pack = new PackageEntity(emp, name, sms, minute, mGiga, extraMinute, extraMGiga, extraSms, fixedPhone, fGiga, extraFGiga, price12M);
         pack.setOptService(opts);
 
+        System.out.println(pack);
+
+        try{
+            em.persist(pack);
+            em.flush();
+        }catch (ConstraintViolationException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void newOpt(EmployeeEntity emp, String name, Float price){
+
+        OptserviceEntity opt = new OptserviceEntity(emp, name, price);
+        System.out.println(opt);
+        System.out.println(opt.getMonthly());
+        try{
+            em.persist(opt);
+            em.flush();
+        }catch (ConstraintViolationException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<OptserviceEntity> findAllOptionalProduct(){

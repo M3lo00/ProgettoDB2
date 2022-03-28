@@ -65,9 +65,16 @@ Sistemare Exceptions!!! Guardare esempi professore
 
 Sistemare Override nelle nuove entity create
 
-Insolventuser non può fare un nuovo ordine finché non paga quello precedente, NON si può fare, bisogna "stampare la lista di rejected orders", susporder può volare!, La soluzione del problema è in new insolvent, già gestita
-
-Nel pagamento con la carta Card number reale (16 cifre)
+Insolventuser non può fare un nuovo ordine finché non paga quello precedente, NON si può fare, bisogna "stampare la lista di rejected orders",
+    susporder può volare!, La soluzione del problema è in new insolvent, già gestita
 
 sistemare il riporto dei dati nella creazione di package
 
+Da togliere:
+    -InsolventUser
+    -BestOptional
+    -SuspendedOrder
+    -Totpurch
+    Da fare come MatViews:
+        -Avgprod
+        -Packpersales

@@ -30,7 +30,7 @@ public class LandingPageServlet extends HttpServlet {
         String message = "Invalid email/password";
         if (req.getParameter("loginFailed") != null) req.setAttribute("messageLogin", message);
 
-        List<PackageEntity> packages = userService.findAllPackages();
+        List<PackageEntity> packages = userService.findAllPackagesOptional();
         session.setAttribute("packages", packages);
 
         session.removeAttribute("chosenPack");

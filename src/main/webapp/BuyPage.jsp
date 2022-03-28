@@ -155,6 +155,13 @@
                 </div>
             </div>
         </div>
+        <%if (pack.getOptService().size()!=0){%>
+        <div class="col-12 pt-2">
+            <div class="card h-40">
+                <p><strong>Bundled Optional Products</strong> <%=pack.getListOptName()%></p>
+            </div>
+        </div>
+        <%}%>
     </div>
 
     <%
@@ -198,6 +205,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div><p> </p></div>
         <div class="row d-flex justify-content-start card-strip">

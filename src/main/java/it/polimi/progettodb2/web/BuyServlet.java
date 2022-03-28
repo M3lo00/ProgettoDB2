@@ -28,7 +28,7 @@ public class BuyServlet extends HttpServlet{
         HttpSession session = req.getSession();
 
         try{
-            List<PackageEntity> packages = userService.findAllPackages();
+            List<PackageEntity> packages = userService.findAllPackagesOptional();
             session.setAttribute("packages", packages);
         }catch (Exception e){
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class BuyServlet extends HttpServlet{
 
         if(session.getAttribute("packages")==null){
             try {
-                List<PackageEntity> packages = userService.findAllPackages();
+                List<PackageEntity> packages = userService.findAllPackagesOptional();
                 session.setAttribute("packages", packages);
             } catch (Exception e) {
                 e.printStackTrace();

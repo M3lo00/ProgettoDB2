@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="./style.css">
     <title>Home-Telco</title>
 </head>
-
-
 <%
-    List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
     PackageEntity pack= (PackageEntity) session.getAttribute("chosenPackObj");
 %>
 
@@ -45,8 +42,12 @@
     <ul class="nav">
         <form class="p-1 d-flex" method="post" action="confLogin">
 
-            <input type="text" class="form-control ${invalid}" name="username" placeholder="username">
-            <input type="password" class="form-control ${invalid}" name="password" placeholder="password">
+            <label>
+                <input type="text" class="form-control ${invalid}" name="username" placeholder="username">
+            </label>
+            <label>
+                <input type="password" class="form-control ${invalid}" name="password" placeholder="password">
+            </label>
             <button type="submit" class="btn btn-sm btn-outline-primary">Login</button>
 
         </form>
@@ -149,6 +150,5 @@
     </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -17,14 +17,10 @@ import java.sql.Timestamp;
 )
 
 @NamedQuery(
-        name = "ServicePackageToSelect.findAll",
-        query = "SELECT stp " +
-                "FROM PackageEntity stp "
-)
-
-@NamedQuery(
-        name = "Service.findAll",
-        query = "SELECT o FROM PackageEntity o "
+        name = "PackageOpts.findAll",
+        query = "SELECT o " +
+                "FROM PackageEntity o " +
+                "LEFT JOIN FETCH o.optService"
 )
 
 
@@ -96,9 +92,7 @@ public class PackageEntity implements Serializable {
     private AvgproductperserviceEntity avgproduct;
 
 
-
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="ownoptservice",
             joinColumns = @JoinColumn(name="refPack"),
             inverseJoinColumns = @JoinColumn(name = "refOptService"))
@@ -280,5 +274,16 @@ public class PackageEntity implements Serializable {
 
     public void setPrice12M(Float price12M) {
         this.price12M = price12M;
+    }
+
+    public String getListOptName (){
+        StringJoiner s= new StringJoiner(", ");
+        if (this.getOptService()!=null) {
+
+            for (OptserviceEntity opt : this.getOptService()) {
+                s.add(opt.getName());
+            }
+        }
+        return s.toString();
     }
 }

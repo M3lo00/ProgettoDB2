@@ -1,3 +1,4 @@
+use dbproj;
 create table package
 (
     idPackage   int auto_increment

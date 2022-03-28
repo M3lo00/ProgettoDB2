@@ -1,3 +1,4 @@
+use dbproj;
 create table avgproductperservice
 (
     idAvgProduct  int auto_increment

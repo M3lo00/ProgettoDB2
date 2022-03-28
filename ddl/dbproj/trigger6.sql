@@ -5,7 +5,7 @@ create table bestOpt
 (
     bestOpt_id      int primary key auto_increment,
     opt_id          int not null ,
-    totalValue      int unsigned default 0 not null,
+    totalValue      int unsigned default '0' not null,
     constraint opt_fk
         foreign key (opt_id) references optservice (idOptService),
     index ind (totalValue)

@@ -60,8 +60,6 @@ public class UserService {
 
         OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, rd.nextBoolean(), total, nMobile, nFixed, opts);
 
-        System.out.println(order);
-
         try{
             em.persist(order);
             em.flush();
@@ -104,10 +102,12 @@ public class UserService {
                 .getResultList();
     }
 
-    public Optional<OrderEntity> findOrderByID(int order_id) {
-        return em.createNamedQuery("Order.findByID", OrderEntity.class)
-                .setParameter("order_id", order_id)
+    public Optional<OrderEntity> findOrderByID(int idOrder) {
+        Optional<OrderEntity> order= em.createNamedQuery("Order.findByID", OrderEntity.class)
+                .setParameter("idOrder", idOrder)
                 .getResultStream().findFirst();
+        order.get().getOptServices().size();
+        return order;
     }
 
     public List<OrderEntity> findAllOrderByUser(int idUser){
@@ -130,8 +130,10 @@ public class UserService {
         Timestamp dateTime= new Timestamp(d.getTime());
 
         try {
+            boolean b= rd.nextBoolean();
             OrderEntity order = em.find(OrderEntity.class, idOrder);
-            order.setValid(rd.nextBoolean());
+            order.setValid(b);
+
             order.setPaymentDate(dateTime);
             em.flush();
         }catch (Exception e){

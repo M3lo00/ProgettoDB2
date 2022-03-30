@@ -27,8 +27,6 @@
 <body>
 
 <%
-
-
     UserEntity user = null;
     String userUsername = null;
     if(request.getSession().getAttribute("customer")!=null){

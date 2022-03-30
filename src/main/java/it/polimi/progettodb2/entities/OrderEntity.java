@@ -231,6 +231,10 @@ public class OrderEntity implements Serializable {
         this.nFixed = nFixed;
     }
 
+    public List<OptserviceEntity> getOptServices(){return this.optService;}
+
+    public void setOptService(List<OptserviceEntity> opt){this.optService=opt;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

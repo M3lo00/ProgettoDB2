@@ -34,21 +34,22 @@ public class RegistrationServlet extends HttpServlet{
         boolean checkLength = username.length() != 0 && email.length() != 0 && password.length() != 0;
         boolean checkAlreadySignup = userService.findByUsername(username).isPresent() || userService.findByEmail(email).isPresent() || employeeService.findByUsername(username).isPresent();
 
-            UserEntity user;
-            if (checkAlreadySignup) destServlet = "signup?signupFailed=true";
-            else {
-                try {
-                    if(checkLength){
-                        user = userService.createUser(username, email, password);
-                        if (user != null) destServlet = "signup?signupDone=true";
-                        else destServlet = "signup?signupError=true";
-                    }
+        UserEntity user;
+        
+        if (checkAlreadySignup) destServlet = "signup?signupFailed=true";
+        else {
+            try {
+                if(checkLength){
+                    user = userService.createUser(username, email, password);
+                    if (user != null) destServlet = "signup?signupDone=true";
                     else destServlet = "signup?signupError=true";
-
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
                 }
+                else destServlet = "signup?signupError=true";
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
+        }
         response.sendRedirect(destServlet);
     }
 

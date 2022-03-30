@@ -29,9 +29,9 @@ public class OptserviceEntity implements Serializable {
     @Basic
     @Column(name = "refEmployee")
     private Integer refEmployee;
-
-    @OneToOne(targetEntity = BestOptionalEntity.class, mappedBy = "opt_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private BestOptionalEntity best;
+    @Basic
+    @Column(name = "totSold")
+    private Float totSold;
 
     public OptserviceEntity(){}
 
@@ -76,6 +76,10 @@ public class OptserviceEntity implements Serializable {
     public void setRefEmployee(Integer refEmployee) {
         this.refEmployee = refEmployee;
     }
+
+    public Float getTotSold(){return this.totSold;}
+
+
 
     @Override
     public boolean equals(Object o) {

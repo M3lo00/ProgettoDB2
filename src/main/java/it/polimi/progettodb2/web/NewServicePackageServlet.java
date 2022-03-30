@@ -105,7 +105,6 @@ public class NewServicePackageServlet extends HttpServlet {
         if(!(minute!=0||sms!=0||gigaMobile!=0||gigaFixed!=0||fixedPhone!=0)){
             valid=false;
             req.setAttribute("noSelection", "true");
-            System.out.println("Non hai selezionato niente");
         }
 
         if(valid){
@@ -118,7 +117,6 @@ public class NewServicePackageServlet extends HttpServlet {
         }else{
             req.setAttribute("quantitypack", price);
             req.setAttribute("packagename", req.getParameter("packagename"));
-            System.out.println("price setup");
             RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
             dispatcher.forward(req, res);
         }

@@ -38,8 +38,6 @@ public class EmployeeService {
         PackageEntity pack = new PackageEntity(emp, name, sms, minute, mGiga, extraMinute, extraMGiga, extraSms, fixedPhone, fGiga, extraFGiga, price12M);
         pack.setOptService(opts);
 
-        System.out.println(pack);
-
         try{
             em.persist(pack);
             em.flush();
@@ -52,8 +50,6 @@ public class EmployeeService {
     public void newOpt(EmployeeEntity emp, String name, Float price){
 
         OptserviceEntity opt = new OptserviceEntity(emp, name, price);
-        System.out.println(opt);
-        System.out.println(opt.getMonthly());
         try{
             em.persist(opt);
             em.flush();
@@ -80,8 +76,8 @@ public class EmployeeService {
         return em.createNamedQuery("AvgProductPerService.findAllAvg", AvgproductperserviceEntity.class).getResultList();
     }
 
-    public List<InsolventUserEntity> findAllInsolvent (){
-        return em.createNamedQuery("InsolventUser.findAllInsolvent", InsolventUserEntity.class).getResultList();
+    public List<UserEntity> findAllInsolvent (){
+        return em.createNamedQuery("User.findAllInsolvent", UserEntity.class).getResultList();
     }
 
     public List<PackagePerSalesEntity> findAllSales (){
@@ -100,8 +96,8 @@ public class EmployeeService {
         return em.createNamedQuery("Audit.findAllAudit", AuditEntity.class).getResultList();
     }
 
-    public List<BestOptionalEntity> findAllBestOptional() {
-        return em.createNamedQuery("BestOptional.findAllBestOptional", BestOptionalEntity.class).getResultList();
+    public List<OptserviceEntity> findAllBestOptional() {
+        return (List<OptserviceEntity>) em.createNativeQuery( "SELECT * FROM optservice o ORDER BY o.totSold desc ", OptserviceEntity.class).getResultList();
     }
 
     public List<OrderEntity> findAllSuspendedOrder() {

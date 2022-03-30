@@ -40,6 +40,13 @@ import java.util.Collection;
                 "FROM UserEntity u "
 )
 
+@NamedQuery(
+        name= "User.findAllInsolvent",
+        query = "SELECT u "+
+                "FROM UserEntity u "+
+                "WHERE u.insolvent=true"
+)
+
 
 public class UserEntity implements Serializable {
 
@@ -74,9 +81,6 @@ public class UserEntity implements Serializable {
     @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audits;
 
-    @OneToOne(targetEntity = InsolventUserEntity.class, fetch = FetchType.EAGER, mappedBy="insolvent_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private InsolventUserEntity insolventuser;
-
     public UserEntity() {
     }
 
@@ -88,7 +92,7 @@ public class UserEntity implements Serializable {
         insolvent=false;
     }
 
-    public InsolventUserEntity getInsolventuser(){ return insolventuser;}
+//    public InsolventUserEntity getInsolventuser(){ return insolventuser;}
 
     public AuditEntity getIdAudit(){ return audits;}
 

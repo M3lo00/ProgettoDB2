@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/customer")
 public class CustomerServlet extends HttpServlet {
@@ -39,6 +40,9 @@ public class CustomerServlet extends HttpServlet {
             session.setAttribute("startDate", null);
             session.setAttribute("optionals", null);
             session.setAttribute("chosenOptObj", null);
+            session.setAttribute("savings", null);
+            session.setAttribute("total", null);
+
 
             user = (UserEntity) session.getAttribute("customer");
 
@@ -51,7 +55,6 @@ public class CustomerServlet extends HttpServlet {
 
             if(session.getAttribute("success")!=null && !(Boolean) session.getAttribute("success")){
                     session.removeAttribute("success");
-
             }else{
                 req.setAttribute("success","hidden");
             }
@@ -66,9 +69,35 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session=req.getSession();
+
         if (req.getParameter("retry")!=null){
-            System.out.println(userService.retryPayment(Integer.parseInt(req.getParameter("retry"))));
+            Optional<OrderEntity> order = userService.findOrderByID(Integer.parseInt(req.getParameter("retry")));
+            if (order.isPresent()){
+                req.setAttribute("retry", order.get().getIdOrder());
+                session.setAttribute("chosenPackObj", order.get().getRefPack());
+                session.setAttribute("chosenMonths", order.get().getPeriodo());
+
+                int periodo=order.get().getPeriodo();
+                float totale= order.get().getTotalAmount();
+
+                if (periodo==24){
+                    session.setAttribute("savings", totale*0.1);
+                    session.setAttribute("total", totale*0.9);
+                }else if(periodo==36){
+                    session.setAttribute("savings", totale*0.2);
+                    session.setAttribute("total", totale*0.8);
+
+                }
+                session.setAttribute("chosenOptObj", order.get().getOptServices());
+                RequestDispatcher dispatcher= req.getRequestDispatcher("Confirmation.jsp");
+                dispatcher.forward(req, resp);
+            }else {
+
+                resp.sendRedirect("customer");
+            }
+        }else {
+            resp.sendRedirect("customer");
         }
-        resp.sendRedirect("customer");
     }
 }

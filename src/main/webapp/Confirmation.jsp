@@ -25,7 +25,7 @@
     <a class="navbar-brand" href="/dbproj/">TELCO COMPANY</a>
 
     <ul class="nav me-auto">
-        <li class="nav-item"><a href="#" class="nav-link link-dark px-2"></a></li>
+        <li class="nav-item"><a class="nav-link link-dark px-2"></a></li>
     </ul>
 
     <%  if (session.getAttribute("customer")!=null){
@@ -64,7 +64,11 @@
             <%}else{%>
             <fieldset disabled>
             <%}%>
-            <form class="row g-3" method="post" action="confirm">
+            <%if (request.getAttribute("retry")!=null){%>
+                <form class="row g-3" method="post" action="RetryPayment">
+            <%}else{%>
+                <form class="row g-3" method="post" action="confirm">
+            <%}%>
                 <div class="col-md-9">
                     <label for="validationCustom01" class="form-label">Card Number</label>
                     <input type="text" class="form-control" id="validationCustom01" pattern="\d*" maxlength="16" minlength="16" required>
@@ -104,7 +108,11 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Submit form</button>
+                    <%if (request.getAttribute("retry")!=null){%>
+                        <button class="btn btn-primary" name="retry" value="${retry}" type="submit">Retry Payment</button>
+                    <%}else{%>
+                        <button class="btn btn-primary" type="submit">Confirm and Pay</button>
+                    <%}%>
                 </div>
             </form>
             </fieldset>

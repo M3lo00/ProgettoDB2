@@ -23,10 +23,8 @@
 
 <%
     EmployeeEntity employee = null;
-    String employeeUsername = null;
     if(session.getAttribute("employee")!=null){
         employee = (EmployeeEntity) session.getAttribute("employee");
-        employeeUsername = employee.getUsername();
     }
 %>
 
@@ -49,7 +47,7 @@
    <%-- selettore --%>
     <div class="row d-flex justify-content-start card-strip">
         <form class="form-floating" action="report" method="post">
-            <select name="select1"  class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            <select name="select1" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                 <option selected disabled>Sales Report menu</option>
                 <option value="1">Total Purchases per Package</option>
                 <option value="2">Total Purchases per Package & Validity Period</option>
@@ -70,9 +68,9 @@
 
             if( result == 1) {
                 List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
-                System.out.println(result);%>
+                %>
         <h4 class="dark-text mt-3">Total Purchase per Package</h4>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -95,9 +93,9 @@
 
         <%if( result == 2) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
-            System.out.println(result);%>
+            %>
         <h4 class="dark-text mt-3">Total Purchase per Package & Validity Period</h4>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -123,9 +121,9 @@
 
         <%if( result == 4) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
-            System.out.println(result);%>
+            %>
         <h4 class="dark-text mt-3">Average number of optional products sold together with each service package</h4>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -151,9 +149,9 @@
 
         <%if( result == 3) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
-            System.out.println(result);%>
+            %>
         <p><h4 class="dark-text mr-4">Sales per Package With the Optional Products</h4></p>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -173,14 +171,11 @@
         </div>
         <% } %>
 
-
-
-
         <%if( result == 7) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
-            System.out.println(result);%>
+            %>
         <p><h4 class="dark-text mr-4">Sales per Package Without the Optional Products</h4></p>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -200,35 +195,37 @@
         </div>
         <% } %>
 
-
-
-
-        <%if( result == 5) {
-            List<InsolventUserEntity> findAllInsolvent = (List<InsolventUserEntity>) request.getAttribute("findAllInsolvent");
-            System.out.println(result);%>
-        <p><h4 class="dark-text mr-4">Insolvent Users</h4></p>
-        <%-- tabella sales report --%>
+        <%if( result == 5 && request.getAttribute("findAllInsolvent")!=null) {
+            %>
+        <p></p><h4 class="dark-text mr-4">Insolvent Users</h4>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
-                    for (InsolventUserEntity user: findAllInsolvent) {
+                    for (UserEntity user: (List<UserEntity>) request.getAttribute("findAllInsolvent")) {
                 %>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="card-body"><%=user.getInsolventId().getUsername() %></div>
+                    <div class="card-body"><%=user.getUsername() %></div>
                 </li>
                 <%
                     }
                 %>
             </ol>
         </div>
-        <% } %>
+        <% } else if (result==5 && request.getAttribute("findAllInsolvent")==null){ %>
+        <p></p><h4 class="dark-text mr-4">Insolvent Users</h4>
+        <div class="row d-flex justify-content-start card-strip">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="card-body">No insolvent Users</div>
+            </li>
+        </div>
+        <%}
+        %>
 
 
         <%if( result == 8) {
             List<OrderEntity> findAllSuspendedOrder = (List<OrderEntity>) request.getAttribute("findAllSuspendedOrder");
-            System.out.println(result);%>
+            %>
         <p><h4 class="dark-text mr-4">Suspended Orders</h4></p>
-        <%-- tabella sales report --%>
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -248,9 +245,9 @@
 
         <%if( result == 9) {
             List<AuditEntity> findAllAudit = (List<AuditEntity>) request.getAttribute("findAllAudit");
-            System.out.println(result);%>
+            %>
         <p><h4 class="dark-text mr-4">Alert</h4></p>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
@@ -273,17 +270,17 @@
 
 
         <%if( result == 6) {
-            List<BestOptionalEntity> findAllBestOptional = (List<BestOptionalEntity>) request.getAttribute("findAllBestOptional");
-            System.out.println(result);%>
+            List<OptserviceEntity> findAllBestOptional = (List<OptserviceEntity>) request.getAttribute("findAllBestOptional");
+            %>
         <p><h4 class="dark-text mr-4">Best seller optional product</h4></p>
-        <%-- tabella sales report --%>
+
         <div class="row d-flex justify-content-start card-strip">
             <ol class="list-group list-group-numbered">
                 <%
-                    for (BestOptionalEntity best: findAllBestOptional) {
+                    for (OptserviceEntity best: findAllBestOptional) {
                 %>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="card-body"><%=best.getOpt_id().getName()%>: <%=best.getTotalValue()%>€</div>
+                    <div class="card-body"><%=best.getName()%>: <%=best.getTotSold()%>€</div>
                 </li>
                 <%
                     }

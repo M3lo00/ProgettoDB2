@@ -7,9 +7,7 @@
 
         <class>it.polimi.progettodb2.entities.AuditEntity</class>
         <class>it.polimi.progettodb2.entities.AvgproductperserviceEntity</class>
-        <class>it.polimi.progettodb2.entities.BestOptionalEntity</class>
         <class>it.polimi.progettodb2.entities.EmployeeEntity</class>
-        <class>it.polimi.progettodb2.entities.InsolventUserEntity</class>
         <class>it.polimi.progettodb2.entities.OptserviceEntity</class>
         <class>it.polimi.progettodb2.entities.OrderEntity</class>
         <class>it.polimi.progettodb2.entities.PackageEntity</class>

@@ -1,6 +1,5 @@
 package it.polimi.progettodb2.web;
 
-import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.entities.PackageEntity;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
@@ -43,7 +42,7 @@ public class LandingPageServlet extends HttpServlet {
         RequestDispatcher dispatcher = null;
 
         if(session.getAttribute("customer")!=null) {
-            res.sendRedirect("./customer"); //ti sposta di servlet
+            res.sendRedirect("./customer");
 
         }else if(session.getAttribute("employee")!=null){
             res.sendRedirect("./employee");

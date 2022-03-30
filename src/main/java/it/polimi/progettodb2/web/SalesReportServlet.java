@@ -32,7 +32,6 @@ public class SalesReportServlet extends HttpServlet{
 
         if(req.getParameter("select1")!=null) {
             String val = req.getParameter("select1");
-            //req.getParameter("select1").equals("select1");
             session = req.getSession(true);
             session.setAttribute("val", val);
             res.sendRedirect("report");
@@ -53,7 +52,7 @@ public class SalesReportServlet extends HttpServlet{
                 session.setAttribute("val", "0");
             }else{
                 if(Integer.parseInt((String) session.getAttribute("val"))==5){
-                    List<InsolventUserEntity> findAllInsolvent = employeeService.findAllInsolvent();
+                    List<UserEntity> findAllInsolvent = employeeService.findAllInsolvent();
                     req.setAttribute("findAllInsolvent", findAllInsolvent);
                 }else if(Integer.parseInt((String) session.getAttribute("val"))==8){
                     List<OrderEntity> findAllSuspendedOrder = employeeService.findAllSuspendedOrder();
@@ -62,7 +61,7 @@ public class SalesReportServlet extends HttpServlet{
                     List<AuditEntity> findAllAudit = employeeService.findAllAudit();
                     req.setAttribute("findAllAudit", findAllAudit);
                 }else if(Integer.parseInt((String) session.getAttribute("val"))==6){
-                    List<BestOptionalEntity> findAllBestOptional = employeeService.findAllBestOptional();
+                    List<OptserviceEntity> findAllBestOptional = employeeService.findAllBestOptional();
                     req.setAttribute("findAllBestOptional", findAllBestOptional);
                 }
             }

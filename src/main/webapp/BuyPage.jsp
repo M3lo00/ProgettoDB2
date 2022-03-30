@@ -56,7 +56,6 @@
         PackageEntity chosen= null;
 
         if (session.getAttribute("chosenPackObj")!=null) chosen= (PackageEntity) session.getAttribute("chosenPackObj");
-        System.out.println(session.getAttribute("chosenPackObj"));
         for (PackageEntity pack: packageEntityList) {
             if(chosen == null || pack == chosen){
     %>

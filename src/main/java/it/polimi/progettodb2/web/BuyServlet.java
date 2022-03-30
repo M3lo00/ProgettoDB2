@@ -40,6 +40,10 @@ public class BuyServlet extends HttpServlet{
         session.removeAttribute("startDate");
         session.removeAttribute("optionals");
         session.removeAttribute("chosenOptObj");
+        session.removeAttribute("savings");
+        session.removeAttribute("total");
+        session.removeAttribute("ownOptionals");
+
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);

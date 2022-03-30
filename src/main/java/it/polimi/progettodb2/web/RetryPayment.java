@@ -33,7 +33,7 @@ public class RetryPayment extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        System.out.println(userService.retryPayment(Integer.parseInt(req.getParameter("retry"))));
+        userService.retryPayment(Integer.parseInt(req.getParameter("retry")));
         resp.sendRedirect("customer");
     }
 }

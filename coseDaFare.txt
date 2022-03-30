@@ -1,61 +1,6 @@
---- Chiedere se fare la registrazione di employee
---- Decidere se mettere required nel registration form o permettere di sign uppare per mostrare l'errore di campo vuoto
---- button sign up: formnovalidate class="btn btn-success"
-
-dbproj
-NUMERO DI TELEFONO ASSOCIATO AD UN'OFFERTA:
-{
----Appena l'offerta è terminata è necessario eliminare la tupla dalla tab order per permettere ad un numero di comprare
----un altro pacchetto con lo stesso numero
-
----Un user che ha già effettuato un order valid può effettuare un nuovo order sullo stesso stesso numero se lo start date
---- risulta essere >= dell'end date delle offerte già presenti relative al numero
-
---- uno stesso numero non può essere utilizzato da user diversi
-
---- portabilità del numero
-} -> tutti questi problemi sono risolti se l'assegnazione del numero di telefono la facciamo fare automaticamente
-
-User:
-	BuyService
-	ConfirmationPage
-	bill the customer by calling an external service
-	A service activation schedule is a record of the services and optional products to activate for the user with their date of activation and date of deactivation.
-
-Employee:
-	login
-	creation of service packages
-
-	Number of total purchases per package.
-	Number of total purchases per package and validity period.
-	(chiedere al professore se va bene unire le due funzioni precedenti)
-
-	**Total value of sales per package with and without the optional products.
-	Average number of optional products sold together with each service package.
-	(chiedere se è inutile mettere l'attributo avg avendo total/how many)
-
-	**List of insolvent users, suspended orders and alerts.
-	Best seller optional product, i.e. the optional product with the greatest value of sales across all the sold service packages.
-
-	Triggers dei ragazzi
-	    first query
-            1. aumento di 1 il pack corrispondente ad un ordine effettuato correttamente (is valid==true)
-            2. aumento di 1 il pack corrispondente ad un ordine effettuato con un errore nel pagamento che poi è stato pagato
-            3. employee crea il pack
-    sommatoria costo mensile * mesi
-
-
---- user ed employee non possono avere lo stesso username //aggiurgere il controllo dell'username a livello di servlet insieme a quello dell'user
-
 A livello di enity aggiugere "nullable" nella definizione delle colonne
-
-Capire a che serve @EJB
 
 Sistemare Exceptions!!! Guardare esempi professore
 Dobbiamo fare le exception .. try catch
 
 Sistemare Override nelle nuove entity create
-
-ConfirmationPage aggiungere ownOptServices.!!!
-
-

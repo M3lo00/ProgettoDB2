@@ -60,13 +60,13 @@ public class UserEntity implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @Column(name = "Username")
+    @Column(name = "username")
     private String username;
     
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
     
-    @Column(name = "Insolvent")
+    @Column(name = "insolvent")
     private Boolean insolvent;
     
     @Column(name = "failedPay")

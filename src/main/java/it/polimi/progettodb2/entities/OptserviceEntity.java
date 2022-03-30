@@ -3,6 +3,7 @@ package it.polimi.progettodb2.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 

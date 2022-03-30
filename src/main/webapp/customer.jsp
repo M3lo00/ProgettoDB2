@@ -113,6 +113,9 @@
         <form action="customer" method="post">
             <button type="submit"  class="btn btn-orange mt-4" name="retry" value="<%=order.getIdOrder()%>">Retry Payment</button>
         </form>
+        <form action="RetryPayment" method="post">
+            <button type="submit"  class="btn btn-orange mt-4" name="retry" value="<%=order.getIdOrder()%>">(Fast) Retry Payment</button>
+        </form>
         <% } %>
     </div>
     <% } %>

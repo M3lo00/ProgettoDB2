@@ -120,7 +120,8 @@
         <div class="col-md-2"></div>
         <div class="col-md-5">
             <div class="bg-light text-dark">
-                <h5 class="p-2">Pacchetto base</h5>
+                <h3>Order Review</h3>
+                <h5 class="p-2">Chosen Package</h5>
                 <div class="p-2 d-flex flex-row justify-content-between">
                     <p class="">Nome:</p>
                     <p><%=pack.getName()%></p>
@@ -133,16 +134,30 @@
                     <p>-<%=String.format("%.2f", ((session.getAttribute("savings")!=null)?Float.parseFloat(session.getAttribute("savings").toString()):0))%></p>
                 </div>
                 <hr class="my-1"/>
-
+                <% if (session.getAttribute("ownOptionals")!=null){
+                    List<OptserviceEntity> ownOpt = (List<OptserviceEntity>) session.getAttribute("ownOptionals");
+                %>
+                <h5 class="p-2">Package Optional Services</h5>
+                <%
+                    for (OptserviceEntity opt: ownOpt){
+                %>
+                <div class="p-2 d-flex flex-row justify-content-between">
+                    <p>Name:</p>
+                    <p><%=opt.getName()%></p>
+                </div>
+                <%      }
+                }
+                %>
+                <hr class="my-1"/>
                 <% if (session.getAttribute("chosenOptObj")!=null){
                     List<OptserviceEntity> chosenOpt = (List<OptserviceEntity>) session.getAttribute("chosenOptObj");
                     %>
-                <h5 class="p-2">Pacchetti opzionali scelti</h5>
+                <h5 class="p-2">Chosen Optional Services</h5>
                 <%
                     for (OptserviceEntity opt: chosenOpt){
                 %>
                 <div class="p-2 d-flex flex-row justify-content-between">
-                    <p>Nome:</p>
+                    <p>Name:</p>
                     <p><%=opt.getName()%></p>
                     <p><%=opt.getMonthly()%>€/m</p>
                 </div>
@@ -150,11 +165,11 @@
                 }
                 %>
                 <div class="p-2 d-flex flex-row justify-content-between">
-                    <p>Totale:</p>
+                    <p>Total:</p>
                     <p><%=String.format("%.2f", Float.parseFloat(session.getAttribute("total").toString()))%>€</p>
                 </div>
             </div>
-            <h5>Order Review</h5>
+
     </div>
     </div>
 </div>

@@ -76,6 +76,8 @@ public class ConfirmationServlet extends HttpServlet{
                 totale+=opt.getMonthly();
             }
 
+            session.setAttribute("ownOptionals", userService.getPackOptionals(pack.getIdPackage()));
+
             session.setAttribute("total", totale);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("Confirmation.jsp");

@@ -143,4 +143,8 @@ public class UserService {
         return true;
     }
 
+    public List<OptserviceEntity> getPackOptionals (int idDPck){
+        return em.find(PackageEntity.class, idDPck).getOptService();
+    }
+
 }

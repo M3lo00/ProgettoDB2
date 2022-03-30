@@ -26,7 +26,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        UserEntity user = null;
+        UserEntity user;
         HttpSession session = req.getSession();
 
         List<OrderEntity> rejectedOrders = null;
@@ -35,14 +35,15 @@ public class CustomerServlet extends HttpServlet {
 
         if(session.getAttribute("customer")!=null){
 
-            session.setAttribute("chosenPackObj", null);
-            session.setAttribute("chosenMonths", null);
-            session.setAttribute("startDate", null);
-            session.setAttribute("optionals", null);
-            session.setAttribute("chosenOptObj", null);
-            session.setAttribute("savings", null);
-            session.setAttribute("total", null);
-
+            session.removeAttribute("chosenPack");
+            session.removeAttribute("chosenPackObj");
+            session.removeAttribute("chosenMonths");
+            session.removeAttribute("startDate");
+            session.removeAttribute("optionals");
+            session.removeAttribute("chosenOptObj");
+            session.removeAttribute("savings");
+            session.removeAttribute("total");
+            session.removeAttribute("ownOptionals");
 
             user = (UserEntity) session.getAttribute("customer");
 
@@ -90,6 +91,8 @@ public class CustomerServlet extends HttpServlet {
 
                 }
                 session.setAttribute("chosenOptObj", order.get().getOptServices());
+                session.setAttribute("ownOptionals", userService.getPackOptionals(order.get().getRefPack().getIdPackage()));
+
                 RequestDispatcher dispatcher= req.getRequestDispatcher("Confirmation.jsp");
                 dispatcher.forward(req, resp);
             }else {

@@ -91,8 +91,7 @@ public class PackageEntity implements Serializable {
     @OneToOne(targetEntity = AvgproductperserviceEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private AvgproductperserviceEntity avgproduct;
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name="ownoptservice",
             joinColumns = @JoinColumn(name="refPack"),
             inverseJoinColumns = @JoinColumn(name = "refOptService"))
@@ -224,7 +223,6 @@ public class PackageEntity implements Serializable {
     public Float getExtraFGiga() {
         return extraFGiga;
     }
-
 
     public void setExtraFGiga(Float extraFGiga) {
         this.extraFGiga = extraFGiga;

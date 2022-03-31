@@ -48,7 +48,7 @@ public class LandingPageServlet extends HttpServlet {
             res.sendRedirect("./employee");
         }
         else{
-            dispatcher= req.getRequestDispatcher("prova.jsp"); //compila il jsp con le req indicate nel get
+            dispatcher= req.getRequestDispatcher("index.jsp"); //compila il jsp con le req indicate nel get
             dispatcher.forward(req, res);
         }
 

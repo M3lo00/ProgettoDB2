@@ -104,9 +104,9 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
-                        <div class="card-body">Total purchase (12) months validity period: <%=pack.getTotpurch().get(0).getTotalPurchases()%></div>
-                        <div class="card-body">Total purchase (24) months validity period: <%=pack.getTotpurch().get(1).getTotalPurchases()%></div>
-                        <div class="card-body">Total purchase (36) months validity period: <%=pack.getTotpurch().get(2).getTotalPurchases()%></div>
+                        <div class="card-body">Total purchase 12 months validity period: <%=pack.getTotpurch().get(0).getTotalPurchases()%></div>
+                        <div class="card-body">Total purchase 24 months validity period: <%=pack.getTotpurch().get(1).getTotalPurchases()%></div>
+                        <div class="card-body">Total purchase 36 months validity period: <%=pack.getTotpurch().get(2).getTotalPurchases()%></div>
                     </div>
                 </li>
                 <%
@@ -132,7 +132,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold"><%=pack.getName() %></div>
-                        <div class="card-body">Average number of optional products sold: <%=pack.getAvgproduct().getAvgnumber()%></div>
+                        <div class="card-body">Average number of optional products sold: <%=String.format("%.2f",pack.getAvgproduct().getAvgnumber())%></div>
                     </div>
 
                 </li>
@@ -259,7 +259,7 @@
                     <div class="card-body"><p>Username</p> <p><%=alert.getRefUser().getUsername()%></p> </div>
                     <div class="card-body"><p>Email</p> <p><%=alert.getRefUser().getEmail()%></p> </div>
                     <div class="card-body"><p>Date and Time Last Rejection:</p> <p><%=alert.getRefOrder().getCreationDate()%></p></div>
-                    <div class="card-body"><p>Amount</p> <p><%=alert.getRefOrder().getTotalAmount()%></p> </div>
+                    <div class="card-body"><p>Amount</p> <p><%=String.format("%.2f",alert.getRefOrder().getTotalAmount())%></p> </div>
                 </li>
                 <%
                     }

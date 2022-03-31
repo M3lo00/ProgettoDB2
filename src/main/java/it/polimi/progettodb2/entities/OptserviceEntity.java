@@ -47,6 +47,7 @@ public class OptserviceEntity implements Serializable {
         this.refEmployee=emp;
         this.name=name;
         this.monthly=price;
+        this.totSold= (float) 0;
     }
 
     public int getIdOptService() {

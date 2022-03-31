@@ -55,7 +55,7 @@ public class RegistrationServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("prova.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         String message;
         if (req.getParameter("signupFailed") != null) {
             message = "Username/Email already exist: try again by entering a new one";

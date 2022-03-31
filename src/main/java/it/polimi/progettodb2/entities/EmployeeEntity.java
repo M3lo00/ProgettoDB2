@@ -50,8 +50,6 @@ public class EmployeeEntity {
     private String email;
     
 
-
-
     @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
@@ -63,9 +61,6 @@ public class EmployeeEntity {
             CascadeType.REFRESH,
             CascadeType.DETACH}, orphanRemoval = true)
     private Collection<OptserviceEntity> optserviceRelatedToEmployee;
-
-
-
 
     public int getIdEmployee() {
         return idEmployee;

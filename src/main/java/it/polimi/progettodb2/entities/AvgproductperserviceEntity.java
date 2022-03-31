@@ -88,7 +88,6 @@ public class AvgproductperserviceEntity {
         AvgproductperserviceEntity that = (AvgproductperserviceEntity) o;
 
         if (idAvgProduct != that.idAvgProduct) return false;
-        //if (packageId != that.packageId) return false;
         if (Double.compare(that.avgnumber, avgnumber) != 0) return false;
         if (numoptservice != that.numoptservice) return false;
         if (numpackage != that.numpackage) return false;
@@ -100,7 +99,6 @@ public class AvgproductperserviceEntity {
     public int hashCode() {
         int result;
         long temp;
-        //result = packageId;
         result = 0;
         temp = Double.doubleToLongBits(avgnumber);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

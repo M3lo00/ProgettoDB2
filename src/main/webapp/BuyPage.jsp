@@ -67,8 +67,8 @@
                 </div>
                 <div class="row p-4 "></div>
                 <div class="row px-3">
-                    <h4 class="blue-text mr-2">$ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
-                    <p class="mt-1 price-fall mr-5"><del>$ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
+                    <h4 class="blue-text mr-2">€ <%=String.format("%.2f",pack.getPrice12M()*0.8)%></h4>
+                    <p class="mt-1 price-fall mr-5"><del>€ <%=String.format("%.2f",pack.getPrice12M())%></del></p>
                 </div>
                 <%if (chosen!=null){%>
                 <button type="submit" class="btn btn-danger mt-4" name="reset" value="reset" > Change Package </button>
@@ -167,7 +167,7 @@
             }
         }
         if (chosen!=null && session.getAttribute("chosenMonths")==null){
-            double prova =  chosen.getPrice12M();
+            double cost =  chosen.getPrice12M();
     %>
 
         <div class="row d-flex justify-content-start card-strip">
@@ -178,7 +178,7 @@
                 <div class="card h-80">
                     <div class="card-body">
                         <h5 class="card-title">Silver</h5>
-                        <p class="card-text"><%= String.format("%.2f",prova) %>€/month</p>
+                        <p class="card-text"><%= String.format("%.2f",cost) %>€/month</p>
                         <input id="chosen1" class="form-check-input stretched-link" type="radio" name="chosenMonths" value="12" <%if(session.getAttribute("chosenMonths")=="12"){%>checked<%}%>>
                         <label for="chosen1" class="form-check-label">12 Months</label>
                     </div>
@@ -188,7 +188,7 @@
                 <div class="card h-80">
                     <div class="card-body">
                         <h5 class="card-title">Gold</h5>
-                        <p class="card-text"><%= String.format("%.2f",prova*0.9)%>€/month</p>
+                        <p class="card-text"><%= String.format("%.2f",cost*0.9)%>€/month</p>
                         <input id="chosen2" class="form-check-input stretched-link" type="radio" name="chosenMonths" value="24" <%if(session.getAttribute("chosenMonths")=="24"){%>checked<%}%>>
                         <label for="chosen2" class="form-check-label">24 Months</label>
                     </div>
@@ -198,7 +198,7 @@
                 <div class="card h-80">
                     <div class="card-body">
                         <h5 class="card-title">Platinum</h5>
-                        <p class="card-text"><%= String.format("%.2f",prova*0.8) %>€/month</p>
+                        <p class="card-text"><%= String.format("%.2f",cost*0.8) %>€/month</p>
                         <input id="chosen3" class="form-check-input stretched-link" type="radio" name="chosenMonths" value="36" <%if(session.getAttribute("chosenMonths")=="36"){%>checked<%}%>>
                         <label for="chosen3" class="form-check-label">36 Months</label>
                     </div>

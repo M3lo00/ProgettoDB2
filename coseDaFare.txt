@@ -1,6 +1,4 @@
-A livello di enity aggiugere "nullable" nella definizione delle colonne
-
 Sistemare Exceptions!!! Guardare esempi professore
 Dobbiamo fare le exception .. try catch
 
-Sistemare Override nelle nuove entity create
+Cambiare i numeri di telefono in String o unsigned int

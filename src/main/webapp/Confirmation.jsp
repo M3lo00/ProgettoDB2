@@ -119,7 +119,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5">
-            <div class="bg-light text-dark">
+            <div class="bg-light text-dark ">
                 <h3>Order Review</h3>
                 <h5 class="p-2">Chosen Package</h5>
                 <div class="p-2 d-flex flex-row justify-content-between">

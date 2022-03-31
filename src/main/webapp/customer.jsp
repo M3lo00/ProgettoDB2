@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="row">Price</div>
-                    <div class="row dark-text"><%=order.getTotalAmount()%></div>
+                    <div class="row dark-text"><%=order.getTotalAmount()%>€</div>
                 </div>
                 <% if (order.getnMobile() != null) { %>
                 <div class="col-md-2">

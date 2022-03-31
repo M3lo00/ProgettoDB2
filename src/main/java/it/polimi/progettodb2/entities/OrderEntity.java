@@ -8,31 +8,26 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-//cercare un ordine per idOrder
 @NamedQuery(
         name = "Order.findByID",
         query = "SELECT o FROM OrderEntity o " +
                 "WHERE o.idOrder = :idOrder"
 )
-//cercare tutti gli ordini relativi ad un user
 @NamedQuery(
         name = "Order.findAllOrderByUser",
         query = "SELECT o FROM OrderEntity o " +
                 "WHERE o.refUser = :user "
 )
-//cercare tutti gli ordini relativi ad un user che sono stati rifiutati
 @NamedQuery(
         name = "Order.findRejectedOrdersOfUser",
         query = "SELECT o FROM OrderEntity o " +
                 "WHERE o.refUser = :user AND " +
                 "o.valid=false"
 )
-
 @NamedQuery(
         name = "Order.findAllOrder",
         query = "SELECT o FROM OrderEntity o "
 )
-
 @NamedQuery(
         name = "Order.findAllSuspendedOrder",
         query = "SELECT o FROM OrderEntity o "+
@@ -101,8 +96,6 @@ public class OrderEntity implements Serializable {
     @JoinColumn(name = "refUser")
     private UserEntity refUser;
 
-
-
     @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
@@ -117,9 +110,6 @@ public class OrderEntity implements Serializable {
             joinColumns = @JoinColumn(name="refOrder"),
             inverseJoinColumns = @JoinColumn(name = "refOptService"))
     private List<OptserviceEntity> optService;
-
-
-
 
     @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audit;

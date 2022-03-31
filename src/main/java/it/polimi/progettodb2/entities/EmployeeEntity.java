@@ -52,8 +52,17 @@ public class EmployeeEntity {
 
 
 
-    @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}, orphanRemoval = true)
     private Collection<PackageEntity> packagesRelatedToEmployee;
+
+    @OneToMany(targetEntity = OptserviceEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH}, orphanRemoval = true)
+    private Collection<OptserviceEntity> optserviceRelatedToEmployee;
 
 
 

@@ -27,17 +27,24 @@ public class OptserviceEntity implements Serializable {
     @Basic
     @Column(name = "monthly")
     private double monthly;
-    @Basic
-    @Column(name = "refEmployee")
-    private Integer refEmployee;
+
     @Basic
     @Column(name = "totSold")
     private Float totSold;
 
+    @ManyToOne(fetch=FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "refEmployee")
+    private EmployeeEntity refEmployee;
+
     public OptserviceEntity(){}
 
     public OptserviceEntity(EmployeeEntity emp, String name, Float price){
-        this.refEmployee=emp.getIdEmployee();
+        this.refEmployee=emp;
         this.name=name;
         this.monthly=price;
     }
@@ -70,11 +77,11 @@ public class OptserviceEntity implements Serializable {
         this.monthly = monthly;
     }
 
-    public Integer getRefEmployee() {
+    public EmployeeEntity getRefEmployee() {
         return refEmployee;
     }
 
-    public void setRefEmployee(Integer refEmployee) {
+    public void setRefEmployee(EmployeeEntity refEmployee) {
         this.refEmployee = refEmployee;
     }
 

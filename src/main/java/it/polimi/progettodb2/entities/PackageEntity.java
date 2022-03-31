@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 
 
 @Entity
-
 @NamedQuery(
         name = "Package.findAll",
         query = "SELECT u " +
@@ -77,7 +76,7 @@ public class PackageEntity implements Serializable {
     @JoinColumn(name = "refEmployee")
     private EmployeeEntity refEmployee;
 
-    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,  CascadeType.DETACH}, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
     @OneToMany(targetEntity = TotpurchaseperpackandvalidityEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)

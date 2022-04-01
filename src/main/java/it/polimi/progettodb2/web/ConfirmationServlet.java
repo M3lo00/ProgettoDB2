@@ -48,7 +48,7 @@ public class ConfirmationServlet extends HttpServlet{
             String[] optIndex = req.getParameterValues("chosenOpt");
 
             if (optIndex != null) {
-                optionals.removeIf(opt -> Arrays.stream(optIndex).noneMatch(str -> opt.getIdOptService() == Integer.parseInt(str))); //ruove dalla List optionals
+                optionals.removeIf(opt -> Arrays.stream(optIndex).noneMatch(str -> opt.getIdOptService() == Integer.parseInt(str)));
             } else if (optionals != null) {
                 try {
                     optionals.removeAll(optionals);

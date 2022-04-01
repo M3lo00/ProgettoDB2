@@ -9,15 +9,6 @@ create table avgproductperservice
         foreign key (package_id) references package (idPackage)
 );
 
-
-CREATE TRIGGER newPackage4
-    AFTER INSERT ON package for each row
-BEGIN
-    INSERT INTO avgproductperservice (package_id)
-        VALUE (NEW.idPackage);
-END;
-
-
 CREATE TRIGGER addOrderAvg
     AFTER INSERT ON `order` for each row
 BEGIN

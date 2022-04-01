@@ -1,8 +1,5 @@
 package it.polimi.progettodb2.web;
 
-import it.polimi.progettodb2.entities.PackageEntity;
-import it.polimi.progettodb2.entities.UserEntity;
-import it.polimi.progettodb2.exceptions.CredentialsException;
 import it.polimi.progettodb2.services.UserService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -22,8 +19,6 @@ public class RetryPayment extends HttpServlet{
 
     @EJB
     private UserService userService;
-
-    PackageEntity pack;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{

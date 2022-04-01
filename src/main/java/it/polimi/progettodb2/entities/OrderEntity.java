@@ -97,8 +97,6 @@ public class OrderEntity implements Serializable {
     @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audit;
 
-
-
     public OrderEntity(){}
 
     public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Timestamp paymentDate, Date startDate, int period, Boolean valid, Float totalAmount, String nMobile, String nFixed, List<OptserviceEntity> optService){
@@ -128,28 +126,12 @@ public class OrderEntity implements Serializable {
         return refUser;
     }
 
-    public void setRefUser(UserEntity refUser) {
-        this.refUser = refUser;
-    }
-
     public PackageEntity getRefPack() {
         return refPack;
     }
 
-    public void setRefPack(PackageEntity refPack) {
-        this.refPack = refPack;
-    }
-
     public Timestamp getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Timestamp getPaymentDate() {
-        return paymentDate;
     }
 
     public void setPaymentDate(Timestamp paymentDate) {
@@ -160,16 +142,9 @@ public class OrderEntity implements Serializable {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
 
     public int getPeriodo() {
         return periodo;
-    }
-
-    public void setPeriodo(int periodo) {
-        this.periodo = periodo;
     }
 
     public Boolean getValid() {
@@ -184,29 +159,15 @@ public class OrderEntity implements Serializable {
         return totalAmount;
     }
 
-    public void setTotalAmount(float totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
     public String getnMobile() {
         return nMobile;
-    }
-
-    public void setnMobile(String nMobile) {
-        this.nMobile = nMobile;
     }
 
     public String getnFixed() {
         return nFixed;
     }
 
-    public void setnFixed(String nFixed) {
-        this.nFixed = nFixed;
-    }
-
     public List<OptserviceEntity> getOptServices(){return this.optService;}
-
-    public void setOptService(List<OptserviceEntity> opt){this.optService=opt;}
 
     @Override
     public boolean equals(Object o) {

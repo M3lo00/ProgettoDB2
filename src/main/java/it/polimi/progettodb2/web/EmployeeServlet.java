@@ -36,7 +36,7 @@ public class EmployeeServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
             dispatcher.forward(req, res);
         }else{
-            res.sendRedirect("./"); //ti sposta di servlet
+            res.sendRedirect("./");
         }
     }
 

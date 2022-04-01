@@ -31,35 +31,13 @@ public class PackagePerSalesEntity {
     @Column(name = "withOpt")
     private double withOpt;
 
-    public int getIdSales() {
-        return idSales;
-    }
-    public void setIdSales(int idAvgProduct) {
-        this.idSales = idSales;
-    }
-
-    public PackageEntity getPackageId() {
-        return package_id;
-    }
-    public void setPackageId(PackageEntity packageId) {
-        this.package_id = packageId;
-    }
-
     public double getJustPack() {
         return justPack;
-    }
-    public void setJustPack(double justPack) {
-        this.justPack = justPack;
     }
 
     public double getWithOpt() {
         return withOpt;
     }
-    public void setWithOpt(double withOpt) {
-        this.withOpt = withOpt;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -71,10 +49,7 @@ public class PackagePerSalesEntity {
         if (idSales != that.idSales) return false;
         if (package_id != that.package_id) return false;
         if (Double.compare(that.justPack, justPack) != 0) return false;
-        if (Double.compare(that.withOpt, withOpt) != 0) return false;
-
-
-        return true;
+        return Double.compare(that.withOpt, withOpt) == 0;
     }
 
 

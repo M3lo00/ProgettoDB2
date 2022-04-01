@@ -2,6 +2,8 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 
 
@@ -12,7 +14,9 @@ import jakarta.persistence.*;
 
 
 @Table(name = "avgproductperservice", schema = "dbproj")
-public class AvgproductperserviceEntity {
+public class AvgproductperserviceEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,44 +44,8 @@ public class AvgproductperserviceEntity {
     @Column(name = "numpackage")
     private int numpackage;
 
-    public int getIdAvgProduct() {
-        return idAvgProduct;
-    }
-
-    public void setIdAvgProduct(int idAvgProduct) {
-        this.idAvgProduct = idAvgProduct;
-    }
-
-    public PackageEntity getPackageId() {
-        return package_id;
-    }
-
-    public void setPackageId(PackageEntity packageId) {
-        this.package_id = packageId;
-    }
-
     public double getAvgnumber() {
         return avgnumber;
-    }
-
-    public void setAvgnumber(double avgnumber) {
-        this.avgnumber = avgnumber;
-    }
-
-    public int getNumoptservice() {
-        return numoptservice;
-    }
-
-    public void setNumoptservice(int numoptservice) {
-        this.numoptservice = numoptservice;
-    }
-
-    public int getNumpackage() {
-        return numpackage;
-    }
-
-    public void setNumpackage(int numpackage) {
-        this.numpackage = numpackage;
     }
 
     @Override

@@ -1,11 +1,8 @@
 package it.polimi.progettodb2.web;
 
-import it.polimi.progettodb2.entities.PackageEntity;
 import it.polimi.progettodb2.entities.UserEntity;
-import it.polimi.progettodb2.entities.EmployeeEntity;
 import it.polimi.progettodb2.services.UserService;
 import it.polimi.progettodb2.exceptions.CredentialsException;
-import it.polimi.progettodb2.services.EmployeeService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,8 +19,6 @@ public class ConfirmationLoginServlet extends HttpServlet {
 
     @EJB
     private UserService userService;
-
-    PackageEntity pack;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

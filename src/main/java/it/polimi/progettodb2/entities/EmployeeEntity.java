@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "employee", schema = "dbproj")
@@ -31,7 +30,7 @@ import java.util.List;
         }
 )
 
-public class EmployeeEntity {
+public class EmployeeEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 

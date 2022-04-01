@@ -2,25 +2,19 @@ package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 
-//Seleziona tutte le tuple che hanno il packageid dato in ingresso
 @NamedQuery(
         name = "TotalPurchasesPerPackage.findAllTot",
-        query = "SELECT n FROM TotpurchaseperpackandvalidityEntity n " //+
-                //"WHERE n.packageId = :package_id"
+        query = "SELECT n FROM TotpurchaseperpackandvalidityEntity n "
 )
-
-
-
-
-
-
-
 
 @Table(name = "totpurchaseperpackandvalidity", schema = "dbproj")
 
-public class TotpurchaseperpackandvalidityEntity {
+public class TotpurchaseperpackandvalidityEntity implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "idTotalPurchase")
@@ -35,49 +29,15 @@ public class TotpurchaseperpackandvalidityEntity {
     @JoinColumn(name = "package_id")
     private PackageEntity package_id;
 
-
-
     @Column(name = "periodo")
     private int periodo;
 
     @Basic
     @Column(name = "totalPurchases")
-
-
-
-
     private int totalPurchases;
-
-    public int getIdTotalPurchase() {
-        return idTotalPurchase;
-    }
-
-    public void setIdTotalPurchase(Integer idTotalPurchase) {
-        this.idTotalPurchase = idTotalPurchase;
-    }
-
-    public PackageEntity getPackageId() {
-        return package_id;
-    }
-
-    public void setPackageId(PackageEntity packageId) {
-        this.package_id = packageId;
-    }
-
-    public int getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(int periodo) {
-        this.periodo = periodo;
-    }
 
     public int getTotalPurchases() {
         return totalPurchases;
-    }
-
-    public void setTotalPurchases(int totalPurchases) {
-        this.totalPurchases = totalPurchases;
     }
 
     @Override
@@ -90,19 +50,6 @@ public class TotpurchaseperpackandvalidityEntity {
         if (idTotalPurchase != that.idTotalPurchase) return false;
         if (package_id != that.package_id) return false;
         if (periodo != that.periodo) return false;
-        if (totalPurchases != that.totalPurchases) return false;
-
-        return true;
+        return totalPurchases == that.totalPurchases;
     }
-
-    /*
-    @Override
-    public int hashCode() {
-        int result = this.package_id;
-        result = 31 * result + periodo;
-        result = 31 * result + totalPurchases;
-        return result;
-    }
-
-     */
 }

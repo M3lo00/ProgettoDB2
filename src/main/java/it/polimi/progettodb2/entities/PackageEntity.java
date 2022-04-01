@@ -86,7 +86,6 @@ public class PackageEntity implements Serializable {
     @OneToOne(targetEntity = PackagePerSalesEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private PackagePerSalesEntity packagesales;
 
-
     @OneToOne(targetEntity = AvgproductperserviceEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private AvgproductperserviceEntity avgproduct;
 
@@ -124,7 +123,6 @@ public class PackageEntity implements Serializable {
 
     public PackagePerSalesEntity getPackageSales(){ return packagesales;}
 
-
     public int getIdPackage() {
         return idPackage;
     }
@@ -143,14 +141,6 @@ public class PackageEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public EmployeeEntity getRefEmployee() {
-        return refEmployee;
-    }
-
-    public void setRefEmployee(EmployeeEntity refEmployee) {
-        this.refEmployee = refEmployee;
     }
 
     public Integer getSms() {
@@ -173,31 +163,17 @@ public class PackageEntity implements Serializable {
         return mGiga;
     }
 
-    public void setmGiga(Integer mGiga) {
-        this.mGiga = mGiga;
-    }
-
     public Float getExtraMGiga() {
         return extraMGiga;
     }
 
-
-    public void setExtraMGiga(Float extraMGiga) {
-        this.extraMGiga = extraMGiga;
-
-    }
     public Float getExtraMinute() {
         return extraMinute;
     }
 
-
-    public void setExtraMinute(Float extraMinute) {
-        this.extraMinute = extraMinute;
-    }
     public Float getExtraSms() {
         return extraSms;
     }
-
 
     public void setExtraSms(Float extraSms) {
         this.extraSms = extraSms;
@@ -207,24 +183,12 @@ public class PackageEntity implements Serializable {
         return fixedPhone;
     }
 
-    public void setFixedPhone(Byte fixedPhone) {
-        this.fixedPhone = fixedPhone;
-    }
-
     public Integer getfGiga() {
         return fGiga;
     }
 
-    public void setfGiga(Integer fGiga) {
-        this.fGiga = fGiga;
-    }
-
     public Float getExtraFGiga() {
         return extraFGiga;
-    }
-
-    public void setExtraFGiga(Float extraFGiga) {
-        this.extraFGiga = extraFGiga;
     }
 
     @Override
@@ -244,9 +208,7 @@ public class PackageEntity implements Serializable {
         if (extraSms != null ? !extraSms.equals(that.extraSms) : that.extraSms != null) return false;
         if (fixedPhone != null ? !fixedPhone.equals(that.fixedPhone) : that.fixedPhone != null) return false;
         if (fGiga != null ? !fGiga.equals(that.fGiga) : that.fGiga != null) return false;
-        if (extraFGiga != null ? !extraFGiga.equals(that.extraFGiga) : that.extraFGiga != null) return false;
-
-        return true;
+        return extraFGiga != null ? extraFGiga.equals(that.extraFGiga) : that.extraFGiga == null;
     }
 
     @Override
@@ -267,10 +229,6 @@ public class PackageEntity implements Serializable {
 
     public float getPrice12M() {
         return price12M;
-    }
-
-    public void setPrice12M(Float price12M) {
-        this.price12M = price12M;
     }
 
     public String getListOptName (){

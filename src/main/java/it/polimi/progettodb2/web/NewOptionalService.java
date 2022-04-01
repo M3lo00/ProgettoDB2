@@ -1,9 +1,8 @@
 package it.polimi.progettodb2.web;
+
 import it.polimi.progettodb2.entities.EmployeeEntity;
-import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.services.EmployeeService;
 import jakarta.ejb.EJB;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,9 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @WebServlet("/newOpt")
 public class NewOptionalService extends HttpServlet {

@@ -68,28 +68,8 @@ public class EmployeeService {
                 .getResultStream().findAny();
     }
 
-    public List<TotpurchaseperpackandvalidityEntity> findAllTot (){
-        return em.createNamedQuery("TotalPurchasesPerPackage.findAllTot", TotpurchaseperpackandvalidityEntity.class).getResultList();
-    }
-
-    public List<AvgproductperserviceEntity> findAllAvg (){
-        return em.createNamedQuery("AvgProductPerService.findAllAvg", AvgproductperserviceEntity.class).getResultList();
-    }
-
     public List<UserEntity> findAllInsolvent (){
         return em.createNamedQuery("User.findAllInsolvent", UserEntity.class).getResultList();
-    }
-
-    public List<PackagePerSalesEntity> findAllSales (){
-        return em.createNamedQuery("PackagePerSales.findAllSales", PackagePerSalesEntity.class).getResultList();
-    }
-
-    public List<UserEntity> findAllUser() {
-        return em.createNamedQuery("User.findAllUser", UserEntity.class).getResultList();
-    }
-
-    public List<OrderEntity> findAllOrder() {
-        return em.createNamedQuery("Order.findAllOrder", OrderEntity.class).getResultList();
     }
 
     public List<AuditEntity> findAllAudit() {
@@ -103,6 +83,4 @@ public class EmployeeService {
     public List<OrderEntity> findAllSuspendedOrder() {
         return em.createNamedQuery("Order.findAllSuspendedOrder", OrderEntity.class).getResultList();
     }
-
-
 }

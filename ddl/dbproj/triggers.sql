@@ -1,9 +1,3 @@
-#aggiungere una tupla ogni volta che viene creato un pack (INT)
-#incrementare il pack ogni volta che viene acquistato
-#Due modalità di acquisto ( valid, valid dopo not valid)
-
-
-
 CREATE TRIGGER newPackage
     AFTER INSERT ON package FOR EACH ROW
 BEGIN
@@ -13,6 +7,12 @@ BEGIN
     VALUES (NEW.idPackage, 24);
     INSERT INTO totpurchaseperpackandvalidity(package_id, periodo)
     VALUES (NEW.idPackage, 36);
+
+    INSERT INTO packagesales (package_id)
+        VALUE (NEW.idPackage);
+
+    INSERT INTO avgproductperservice (package_id)
+        VALUE (NEW.idPackage);
 end;
 
 create trigger addPurchaseToPackage

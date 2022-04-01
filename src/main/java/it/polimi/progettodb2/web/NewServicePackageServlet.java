@@ -1,4 +1,5 @@
 package it.polimi.progettodb2.web;
+
 import it.polimi.progettodb2.entities.EmployeeEntity;
 import it.polimi.progettodb2.entities.OptserviceEntity;
 import it.polimi.progettodb2.services.EmployeeService;
@@ -92,7 +93,7 @@ public class NewServicePackageServlet extends HttpServlet {
             String[] optIndex = req.getParameterValues("chosenOpt");
 
             if (optIndex != null) {
-                optionals.removeIf(opt -> Arrays.stream(optIndex).noneMatch(str -> opt.getIdOptService() == Integer.parseInt(str))); //ruove dalla List optionals
+                optionals.removeIf(opt -> Arrays.stream(optIndex).noneMatch(str -> opt.getIdOptService() == Integer.parseInt(str)));
             } else {
                 try {
                     optionals.removeAll(optionals);

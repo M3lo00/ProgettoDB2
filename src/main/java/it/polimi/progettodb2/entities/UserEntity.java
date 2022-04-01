@@ -75,9 +75,6 @@ public class UserEntity implements Serializable {
     @OneToMany(targetEntity = OrderEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
-    @OneToMany(targetEntity = PaymentEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<PaymentEntity> pay;
-
     @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audits;
 
@@ -92,17 +89,8 @@ public class UserEntity implements Serializable {
         insolvent=false;
     }
 
-//    public InsolventUserEntity getInsolventuser(){ return insolventuser;}
-
-    public AuditEntity getIdAudit(){ return audits;}
-
-
     public int getIdUser() {
         return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
     }
 
     public String getEmail() {
@@ -127,22 +115,6 @@ public class UserEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Boolean getInsolvent() {
-        return insolvent;
-    }
-
-    public void setInsolvent(Boolean insolvent) {
-        this.insolvent = insolvent;
-    }
-
-    public Integer getFailedPay() {
-        return failedPay;
-    }
-
-    public void setFailedPay(Integer failedPay) {
-        this.failedPay = failedPay;
     }
 
     @Override

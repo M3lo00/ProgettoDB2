@@ -100,10 +100,6 @@ public class UserService {
                 .getResultStream().findFirst();
     }
 
-    public List<PackageEntity> findAllPackages(){
-        return em.createNamedQuery("Package.findAll", PackageEntity.class).getResultList();
-    }
-
     public List<PackageEntity> findAllPackagesOptional(){
         return em.createNamedQuery("PackageOpts.findAll", PackageEntity.class).getResultList();
     }

@@ -1,4 +1,2 @@
 Sistemare Exceptions!!! Guardare esempi professore
 Dobbiamo fare le exception .. try catch
-
-Cambiare i numeri di telefono in String o unsigned int

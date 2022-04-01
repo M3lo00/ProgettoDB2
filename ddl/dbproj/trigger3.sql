@@ -1,4 +1,3 @@
-#Total value of sales per package with and without the optional products.
 use dbproj;
 create table packagesales
 (
@@ -9,13 +8,6 @@ create table packagesales
         foreign key (package_id) references package (idPackage)
 );
 
-#questo trigger si potrebbe integrare con quello per le prime 2 query
-CREATE TRIGGER newPackage1
-    AFTER INSERT ON package for each row
-    BEGIN
-            INSERT INTO packagesales (package_id)
-                VALUE (NEW.idPackage);
-    end;
 
 CREATE TRIGGER newOrderTotalValue
     AFTER INSERT ON `order` for each row

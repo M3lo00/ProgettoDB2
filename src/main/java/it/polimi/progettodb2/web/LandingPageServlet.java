@@ -10,11 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.ws.rs.core.Request;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 @WebServlet("")
 public class LandingPageServlet extends HttpServlet {
@@ -40,8 +37,6 @@ public class LandingPageServlet extends HttpServlet {
         session.removeAttribute("optionals");
         session.removeAttribute("chosenOptObj");
 
-        RequestDispatcher dispatcher = null;
-
         if(session.getAttribute("customer")!=null) {
             res.sendRedirect("./customer");
 
@@ -49,7 +44,7 @@ public class LandingPageServlet extends HttpServlet {
             res.sendRedirect("./employee");
         }
         else{
-            dispatcher= req.getRequestDispatcher("index.jsp"); //compila il jsp con le req indicate nel get
+            RequestDispatcher dispatcher= req.getRequestDispatcher("index.jsp");
             dispatcher.forward(req, res);
         }
 

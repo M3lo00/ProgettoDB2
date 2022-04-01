@@ -1,7 +1,6 @@
 package it.polimi.progettodb2.entities;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
@@ -39,29 +38,12 @@ public class AuditEntity implements Serializable {
     @JoinColumn(name="refOrder", referencedColumnName = "idOrder")
     private OrderEntity refOrder;
 
-
-    public int getIdAudit() {
-        return idAudit;
-    }
-
-    public void setIdAudit(int idAudit) {
-        this.idAudit = idAudit;
-    }
-
     public UserEntity getRefUser() {
         return refUser;
     }
 
-    public void setRefUser(UserEntity refUser) {
-        this.refUser = refUser;
-    }
-
     public OrderEntity getRefOrder() {
         return refOrder;
-    }
-
-    public void setRefOrder(OrderEntity refOrder) {
-        this.refOrder = refOrder;
     }
 
     @Override

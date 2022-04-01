@@ -65,7 +65,7 @@ public class BuyServlet extends HttpServlet{
 
             Integer chosenPack_Id= Integer.parseInt(req.getParameter("chosenPack"));
 
-            PackageEntity chosen =null;
+            PackageEntity chosen;
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
 
             chosen = packageEntityList.stream()
@@ -103,7 +103,7 @@ public class BuyServlet extends HttpServlet{
         }
 
         if(req.getParameter("reset")!=null){
-            if (req.getParameter("reset").equals("reset")){;
+            if (req.getParameter("reset").equals("reset")){
                 session.removeAttribute("chosenPack");
                 session.removeAttribute("chosenPackObj");
                 session.removeAttribute("chosenMonths");

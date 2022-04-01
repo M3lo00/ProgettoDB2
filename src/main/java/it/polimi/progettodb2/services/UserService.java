@@ -52,13 +52,26 @@ public class UserService {
     public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total, List<OptserviceEntity> opts){
 
         Random rd = new Random();
-        int nMobile= rd.nextInt(1000);
-        int nFixed=rd.nextInt(1000);
+        boolean valid=rd.nextBoolean();
+        Timestamp paymentT=null;
+        if (valid){
+            paymentT=new Timestamp(creationD.getTime());
+        }
+        String nMobile= null;
+        String nFixed= null;
+
+        if (pack.getMinute()!=null||pack.getSms()!=null||pack.getmGiga()!=null){
+            nMobile= "333"+(rd.nextInt(9000000)+1000000);
+        }
+        if (pack.getFixedPhone()!=null||pack.getfGiga()!=null){
+            nFixed= "02"+(rd.nextInt(9000000)+1000000);
+        }
+
 
         Timestamp crD = new Timestamp(creationD.getTime());
         java.sql.Date startDate= new java.sql.Date(startD.getTime());
 
-        OrderEntity order = new OrderEntity(user, pack, crD, startDate, period, rd.nextBoolean(), total, nMobile, nFixed, opts);
+        OrderEntity order = new OrderEntity(user, pack, crD, paymentT, startDate, period, rd.nextBoolean(), total, nMobile, nFixed, opts);
 
         try{
             em.persist(order);

@@ -2,16 +2,16 @@ create table `order`
 (
     idOrder      int auto_increment
         primary key,
-    refUser      int                       not null,
-    refPack      int                       not null,
-    creationDate datetime                  not null,
-    paymentDate  datetime                  null,
-    startDate    date                      null,
-    periodo      int                       not null,
-    valid        tinyint unsigned zerofill null,
-    totalAmount  float                     not null,
-    nMobile      int                       null,
-    nFixed       int                       null,
+    refUser      int                        not null,
+    refPack      int                        not null,
+    creationDate datetime                   not null,
+    paymentDate  datetime                   null,
+    startDate    date                       null,
+    periodo      int                        not null,
+    valid        tinyint unsigned zerofill  null,
+    totalAmount  float                      not null,
+    nMobile      varchar(10)                null,
+    nFixed       varchar(10)                null,
     constraint fk_Package3
         foreign key (refPack) references package (idPackage),
     constraint fk_User

@@ -35,23 +35,6 @@ import java.util.List;
 )
 
 
-
-
-/*
-@NamedQuery(
-        name = "Order.findOrdersToActivate",
-        query = "SELECT DISTINCT o FROM OrderEntity o " +
-                "JOIN o.refPack refPack " +
-                "WHERE o.refUser = :refUser AND " +
-                "o.valid=true AND " +
-                "o.startDate > CURRENT_TIMESTAMP "
-
-)
-
- */
-
-
-
 @Table(name = "order", schema = "dbproj")
 public class OrderEntity implements Serializable {
 
@@ -82,10 +65,10 @@ public class OrderEntity implements Serializable {
     private float totalAmount;
     
     @Column(name = "nMobile")
-    private Integer nMobile;
+    private String nMobile;
     
     @Column(name = "nFixed")
-    private Integer nFixed;
+    private String nFixed;
 
     @ManyToOne(fetch=FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
@@ -118,7 +101,7 @@ public class OrderEntity implements Serializable {
 
     public OrderEntity(){}
 
-    public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Date startDate, int period, Boolean valid, Float totalAmount, int nMobile, int nFixed, List<OptserviceEntity> optService){
+    public OrderEntity(UserEntity refUser, PackageEntity refPack, Timestamp creationDate, Timestamp paymentDate, Date startDate, int period, Boolean valid, Float totalAmount, String nMobile, String nFixed, List<OptserviceEntity> optService){
             this.refUser=refUser;
             this.refPack=refPack;
             this.creationDate=creationDate;
@@ -205,19 +188,19 @@ public class OrderEntity implements Serializable {
         this.totalAmount = totalAmount;
     }
 
-    public Integer getnMobile() {
+    public String getnMobile() {
         return nMobile;
     }
 
-    public void setnMobile(Integer nMobile) {
+    public void setnMobile(String nMobile) {
         this.nMobile = nMobile;
     }
 
-    public Integer getnFixed() {
+    public String getnFixed() {
         return nFixed;
     }
 
-    public void setnFixed(Integer nFixed) {
+    public void setnFixed(String nFixed) {
         this.nFixed = nFixed;
     }
 
@@ -242,9 +225,7 @@ public class OrderEntity implements Serializable {
         if (startDate != null ? !startDate.equals(that.startDate) : that.startDate != null) return false;
         if (valid != null ? !valid.equals(that.valid) : that.valid != null) return false;
         if (nMobile != null ? !nMobile.equals(that.nMobile) : that.nMobile != null) return false;
-        if (nFixed != null ? !nFixed.equals(that.nFixed) : that.nFixed != null) return false;
-
-        return true;
+        return nFixed != null ? nFixed.equals(that.nFixed) : that.nFixed == null;
     }
 
     @Override

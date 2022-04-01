@@ -73,13 +73,20 @@
     <div class="row d-flex justify-content-start card-strip">
         <div class="info">
             <div class="row px-3 mb-2">
-                <h4 class="dark-text mr-4"><%=order.getIdOrder()%> Order</h4>
-                <% if (order.getValid()) { %>
+                <div class="col-md-6">
+                    <h4 class="dark-text mr-4"><%=order.getIdOrder()%> Order</h4>
+                    <% if (order.getValid()) { %>
                     <h4 class="text-success mr-2">Completed</h4>
-                <% } %>
-                <% if (!order.getValid()) { %>
-                <h4 class="text-danger mr-2">Failed</h4>
-                <% } %>
+                    <% } %>
+                    <% if (!order.getValid()) { %>
+                    <h4 class="text-danger mr-2">Failed</h4>
+                    <% } %>
+                </div>
+
+                <div class="col-md-6">
+                    <h6>Package name:</h6>
+                    <h5><%=order.getRefPack().getName()%></h5>
+                </div>
             </div>
             <div class="row px-3">
                 <div class="col-md-2">

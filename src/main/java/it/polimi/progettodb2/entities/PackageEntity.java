@@ -28,9 +28,8 @@ public class PackageEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPackage")
     private int idPackage;
 

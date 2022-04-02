@@ -15,8 +15,8 @@ import java.io.Serializable;
 
 public class TotpurchaseperpackandvalidityEntity implements Serializable{
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column (name = "idTotalPurchase")
     private int idTotalPurchase;
 

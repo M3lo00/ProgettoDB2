@@ -231,6 +231,7 @@
 
 <%
     if (optServices !=null){
+        if ((optServices.size()!=0)){
 %>
     <div class="row d-flex justify-content-start card-strip">
         <div class="card-title">
@@ -253,9 +254,25 @@
         </div>
     </div>
 <%
+    } else {
+%>
+    <div class="row d-flex justify-content-start card-strip">
+        <div class="card-title">
+            <h5>Continue to payment</h5>
+        </div>
+        <div class="col-9">
+
+        </div>
+        <div class="col-3 ">
+            <div class="card-body position-relative bottom-0 end-0">
+                <button type="submit" class="btn btn-lg btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+<%
+        }
     }
 %>
-
 </form>
 
 

@@ -40,8 +40,8 @@ public class OrderEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idOrder")
     private int idOrder;
     
@@ -50,9 +50,11 @@ public class OrderEntity implements Serializable {
 
 
     @Column(name = "paymentDate")
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp paymentDate;
     
     @Column(name = "startDate")
+    @Temporal(TemporalType.DATE)
     private Date startDate;
     
     @Column(name = "periodo")

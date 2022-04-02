@@ -52,24 +52,18 @@ public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idUser")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
     
-    @Column(name = "email")
     private String email;
     
-    @Column(name = "username")
     private String username;
     
-    @Column(name = "password")
     private String password;
     
-    @Column(name = "insolvent")
     private Boolean insolvent;
     
-    @Column(name = "failedPay")
     private Integer failedPay;
 
     @OneToMany(targetEntity = OrderEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)

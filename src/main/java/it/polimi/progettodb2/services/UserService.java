@@ -142,8 +142,8 @@ public class UserService {
             boolean b= rd.nextBoolean();
             OrderEntity order = em.find(OrderEntity.class, idOrder);
             order.setValid(b);
-
             order.setPaymentDate(dateTime);
+
             em.flush();
         }catch (Exception e){
             e.printStackTrace();

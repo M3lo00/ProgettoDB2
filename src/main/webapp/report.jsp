@@ -107,9 +107,6 @@
         </div>
         <% } %>
 
-
-
-
         <%if( result == 4) {
             List<PackageEntity> packageEntityList = (List<PackageEntity>) session.getAttribute("packages");
             %>

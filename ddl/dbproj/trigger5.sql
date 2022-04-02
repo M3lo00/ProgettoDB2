@@ -1,6 +1,5 @@
 use dbproj;
 
-
 create trigger newInsolvent
     after insert on `order` for each row
 BEGIN
@@ -32,8 +31,7 @@ create trigger failedPayment
 BEGIN
     IF NEW.valid=0 THEN
         update user
-        set failedPay = failedPay+1,
-            Insolvent=1
+        set failedPay = failedPay+1
         where idUser=NEW.refUser;
     end if;
 end;
@@ -45,10 +43,11 @@ create  trigger auditUser
     for each row
 BEGIN
     IF NEW.failedPay=3 AND NEW.Insolvent=1 THEN
+
         INSERT INTO audit(refUser, refOrder)
-        VALUES (NEW.idUser, ( SELECT MAX(o.idOrder)
-                              FROM `order` o
-                              WHERE o.refUser=NEW.idUser));
+        VALUES (NEW.idUser, (   SELECT MAX(o.idOrder)
+                                FROM 'order' o
+                                WHERE o.refUser=NEW.idUser AND o.valid=0));
     end if;
 END;
 

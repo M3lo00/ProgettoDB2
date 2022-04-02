@@ -1,4 +1,4 @@
-<%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
+    <%@ page import="it.polimi.progettodb2.entities.PackageEntity" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Home-Telco</title>
     <script>
-        history.forward();
+        // history.forward();
     </script>
 </head>
 

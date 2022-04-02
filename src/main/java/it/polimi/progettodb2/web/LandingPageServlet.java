@@ -36,6 +36,9 @@ public class LandingPageServlet extends HttpServlet {
         session.removeAttribute("startDate");
         session.removeAttribute("optionals");
         session.removeAttribute("chosenOptObj");
+        session.removeAttribute("savings");
+        session.removeAttribute("total");
+        session.removeAttribute("ownOptionals");
 
         if(session.getAttribute("customer")!=null) {
             res.sendRedirect("./customer");

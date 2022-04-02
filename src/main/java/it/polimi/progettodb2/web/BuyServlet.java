@@ -87,21 +87,6 @@ public class BuyServlet extends HttpServlet{
             req.setAttribute("monthChoice", "true");
         }
 
-
-        if (session.getAttribute("chosenPackObj")!=null && req.getParameter("chosenMonths")!=null){
-
-            session.setAttribute("chosenMonths", req.getParameter("chosenMonths"));
-            session.setAttribute("startDate", req.getParameter("startDate"));
-
-            PackageEntity pack= (PackageEntity) session.getAttribute("chosenPackObj");
-
-            List<OptserviceEntity> optionals=userService.getAllBuyableOpt(pack.getIdPackage());
-            session.setAttribute("optionals", optionals);
-            if (optionals.size()==0){
-                res.sendRedirect("./confirmation");
-            }
-        }
-
         if(req.getParameter("reset")!=null){
             if (req.getParameter("reset").equals("reset")){
                 session.removeAttribute("chosenPack");
@@ -113,8 +98,21 @@ public class BuyServlet extends HttpServlet{
             }
         }
 
+        if (session.getAttribute("chosenPackObj")!=null && req.getParameter("chosenMonths")!=null){
+
+            session.setAttribute("chosenMonths", req.getParameter("chosenMonths"));
+            session.setAttribute("startDate", req.getParameter("startDate"));
+
+            PackageEntity pack= (PackageEntity) session.getAttribute("chosenPackObj");
+
+            List<OptserviceEntity> optionals=userService.getAllBuyableOpt(pack.getIdPackage());
+            session.setAttribute("optionals", optionals);
+
+        }
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("BuyPage.jsp");
         dispatcher.forward(req, res);
+
 
     }
 

@@ -115,6 +115,7 @@ public class UserService {
         Optional<OrderEntity> order= em.createNamedQuery("Order.findByID", OrderEntity.class)
                 .setParameter("idOrder", idOrder)
                 .getResultStream().findFirst();
+
         order.get().getOptServices().size();
         return order;
     }

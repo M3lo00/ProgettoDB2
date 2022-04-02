@@ -30,7 +30,7 @@ public class ConfirmationServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        if(session.getAttribute("chosenPackObj")==null){
+        if(/*session.getAttribute("chosenPackObj")==null*/false){
             res.sendRedirect("buy");
         }else {
             RequestDispatcher dispatcher = req.getRequestDispatcher("Confirmation.jsp");

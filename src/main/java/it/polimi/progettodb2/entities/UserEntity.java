@@ -75,7 +75,7 @@ public class UserEntity implements Serializable {
     @OneToMany(targetEntity = OrderEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
-    @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.EAGER, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = AuditEntity.class, fetch = FetchType.LAZY, mappedBy="refUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audits;
 
     public UserEntity() {

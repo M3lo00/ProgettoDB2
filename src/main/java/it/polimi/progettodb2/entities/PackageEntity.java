@@ -79,14 +79,14 @@ public class PackageEntity implements Serializable {
     @OneToMany(targetEntity = OrderEntity.class, mappedBy = "refPack", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,  CascadeType.DETACH}, orphanRemoval = true)
     private Collection<OrderEntity> orders;
 
-    @OneToMany(targetEntity = TotpurchaseperpackandvalidityEntity.class, mappedBy = "package_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = TotpurchaseperpackandvalidityEntity.class, mappedBy = "package_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TotpurchaseperpackandvalidityEntity> totpurch;
 
 
-    @OneToOne(targetEntity = PackagePerSalesEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = PackagePerSalesEntity.class, fetch = FetchType.LAZY, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private PackagePerSalesEntity packagesales;
 
-    @OneToOne(targetEntity = AvgproductperserviceEntity.class, fetch = FetchType.EAGER, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = AvgproductperserviceEntity.class, fetch = FetchType.LAZY, mappedBy="package_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private AvgproductperserviceEntity avgproduct;
 
     @ManyToMany

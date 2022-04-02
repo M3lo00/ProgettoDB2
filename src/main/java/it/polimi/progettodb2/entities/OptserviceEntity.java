@@ -31,7 +31,7 @@ public class OptserviceEntity implements Serializable {
     @Column(name = "totSold")
     private Float totSold;
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = {
+    @ManyToOne(fetch=FetchType.LAZY, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
@@ -53,14 +53,6 @@ public class OptserviceEntity implements Serializable {
         return idOptService;
     }
 
-    public void setIdOptService(Integer idOptService) {
-        this.idOptService = idOptService;
-    }
-
-    public void setIdOptService(int idOptService) {
-        this.idOptService = idOptService;
-    }
-
     public String getName() {
         return name;
     }
@@ -71,18 +63,6 @@ public class OptserviceEntity implements Serializable {
 
     public double getMonthly() {
         return monthly;
-    }
-
-    public void setMonthly(double monthly) {
-        this.monthly = monthly;
-    }
-
-    public EmployeeEntity getRefEmployee() {
-        return refEmployee;
-    }
-
-    public void setRefEmployee(EmployeeEntity refEmployee) {
-        this.refEmployee = refEmployee;
     }
 
     public Float getTotSold(){return this.totSold;}

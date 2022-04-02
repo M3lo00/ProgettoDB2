@@ -94,7 +94,7 @@ public class OrderEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "refOptService"))
     private List<OptserviceEntity> optService;
 
-    @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private AuditEntity audit;
 
     public OrderEntity(){}

@@ -29,8 +29,7 @@ public class CustomerServlet extends HttpServlet {
         UserEntity user;
         HttpSession session = req.getSession();
 
-        List<OrderEntity> rejectedOrders = null;
-        List<OrderEntity> allOrderByUser = null;
+
 
 
         if(session.getAttribute("customer")!=null){
@@ -46,6 +45,9 @@ public class CustomerServlet extends HttpServlet {
             session.removeAttribute("ownOptionals");
 
             user = (UserEntity) session.getAttribute("customer");
+
+            List<OrderEntity> rejectedOrders = null;
+            List<OrderEntity> allOrderByUser = null;
 
             if(user.getUsername()!=null) rejectedOrders = userService.findRejectedOrdersByUser(user.getIdUser());
 

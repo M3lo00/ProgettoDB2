@@ -77,7 +77,7 @@ public class EmployeeService {
     }
 
     public List<OptserviceEntity> findAllBestOptional() {
-        return (List<OptserviceEntity>) em.createNativeQuery( "SELECT * FROM optservice o ORDER BY o.totSold desc ", OptserviceEntity.class).getResultList();
+        return em.createQuery( "SELECT o FROM OptserviceEntity o ORDER BY o.totSold desc ", OptserviceEntity.class).getResultList();
     }
 
     public List<OrderEntity> findAllSuspendedOrder() {

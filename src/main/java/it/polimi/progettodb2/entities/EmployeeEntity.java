@@ -49,16 +49,18 @@ public class EmployeeEntity implements Serializable{
     private String email;
     
 
-    @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,
+    @OneToMany(targetEntity = PackageEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
-            CascadeType.DETACH}, orphanRemoval = true)
+            CascadeType.DETACH})
     private Collection<PackageEntity> packagesRelatedToEmployee;
 
-    @OneToMany(targetEntity = OptserviceEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,
+    @OneToMany(targetEntity = OptserviceEntity.class, mappedBy = "refEmployee", fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
             CascadeType.MERGE,
             CascadeType.REFRESH,
-            CascadeType.DETACH}, orphanRemoval = true)
+            CascadeType.DETACH})
     private Collection<OptserviceEntity> optserviceRelatedToEmployee;
 
     public int getIdEmployee() {

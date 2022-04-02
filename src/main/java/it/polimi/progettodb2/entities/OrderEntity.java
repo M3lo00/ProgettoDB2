@@ -48,7 +48,6 @@ public class OrderEntity implements Serializable {
     @Column(name = "creationDate")
     private Timestamp creationDate;
 
-
     @Column(name = "paymentDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp paymentDate;
@@ -96,7 +95,7 @@ public class OrderEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "refOptService"))
     private List<OptserviceEntity> optService;
 
-    @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = AuditEntity.class, mappedBy = "refOrder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private AuditEntity audit;
 
     public OrderEntity(){}
@@ -143,7 +142,6 @@ public class OrderEntity implements Serializable {
     public Date getStartDate() {
         return startDate;
     }
-
 
     public int getPeriodo() {
         return periodo;

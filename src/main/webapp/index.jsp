@@ -10,9 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>Home-Telco</title>
-    <script>
-        // history.forward();
-    </script>
 </head>
 
 <%
@@ -49,7 +46,6 @@
                             </div>
                             <button type="submit" class="btn btn-lg btn-primary">Sign Up</button>
 
-
                         </fieldset>
                     </form>
                 </div>
@@ -68,9 +64,8 @@
                             <div class="form-group">
                                 <input type="password" name="password"  class="form-control input-lg" placeholder="password" required>
                             </div>
-
-
                             <br>${messageLogin}
+
                             <button type="submit" class="btn btn-lg btn-primary">Login</button>
                         </fieldset>
                     </form>

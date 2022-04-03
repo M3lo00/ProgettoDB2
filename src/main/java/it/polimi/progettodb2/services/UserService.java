@@ -49,7 +49,7 @@ public class UserService {
         }
     }
 
-    public OrderEntity newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total, List<OptserviceEntity> opts){
+    public void newOrder(UserEntity user, PackageEntity pack, Date creationD, Date startD, int period, float total, List<OptserviceEntity> opts){
 
         Random rd = new Random();
         boolean valid=rd.nextBoolean();
@@ -76,9 +76,8 @@ public class UserService {
         try{
             em.persist(order);
             em.flush();
-            return order;
         }catch (ConstraintViolationException e) {
-            return null;
+            e.printStackTrace();
         }
     }
 
@@ -134,7 +133,7 @@ public class UserService {
         return difference;
     }
 
-    public boolean retryPayment (int idOrder){
+    public void retryPayment (int idOrder){
         Random rd = new Random();
         Date d = new Date();
         Timestamp dateTime= new Timestamp(d.getTime());
@@ -146,11 +145,9 @@ public class UserService {
             order.setPaymentDate(dateTime);
 
             em.flush();
-        }catch (Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
     public List<OptserviceEntity> getPackOptionals (int idPack){

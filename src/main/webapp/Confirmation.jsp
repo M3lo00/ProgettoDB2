@@ -131,7 +131,7 @@
                 <div class="p-2 d-flex flex-row justify-content-between">
                     <p>Periodo:</p>
                     <p><%=session.getAttribute("chosenMonths")%> months</p>
-                    <p>-<%=String.format("%.2f", ((session.getAttribute("savings")!=null)?Float.parseFloat(session.getAttribute("savings").toString()):0))%></p>
+                    <p>-<%=String.format("%.2f", ((session.getAttribute("savings")!=null)?Float.parseFloat(session.getAttribute("savings").toString()):0))%>€/month</p>
                 </div>
                 <hr class="my-1"/>
                 <% if (session.getAttribute("ownOptionals")!=null){
@@ -166,7 +166,7 @@
                 %>
                 <div class="p-2 d-flex flex-row justify-content-between">
                     <p>Total:</p>
-                    <p><%=String.format("%.2f", Float.parseFloat(session.getAttribute("total").toString()))%>€</p>
+                    <p><%=String.format("%.2f", (Float.parseFloat(session.getAttribute("total").toString()))*(Integer.parseInt(session.getAttribute("chosenMonths").toString())))%>€</p>
                 </div>
             </div>
 

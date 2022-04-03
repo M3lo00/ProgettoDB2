@@ -36,7 +36,7 @@ BEGIN
                         WHERE idOrder=NEW.refOrder);
 END;
 
-drop trigger upOrderAvg;
+drop trigger if exists upOrderAvg;
 
 CREATE TRIGGER upOrderAvg
     AFTER UPDATE ON `order` for each row
@@ -61,5 +61,7 @@ END;
 CREATE TRIGGER upAvg
     BEFORE UPDATE ON avgproductperservice for each row
 BEGIN
-    SET NEW.avgnumber=NEW.numoptservice/NEW.numpackage;
+    if NEW.numpackage!=0 THEN
+        SET NEW.avgnumber=NEW.numoptservice/NEW.numpackage;
+    end if;
 end;

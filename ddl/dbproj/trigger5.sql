@@ -46,7 +46,7 @@ BEGIN
 
         INSERT INTO audit(refUser, refOrder)
         VALUES (NEW.idUser, (   SELECT MAX(o.idOrder)
-                                FROM 'order' o
+                                FROM `order` o
                                 WHERE o.refUser=NEW.idUser AND o.valid=0));
     end if;
 END;

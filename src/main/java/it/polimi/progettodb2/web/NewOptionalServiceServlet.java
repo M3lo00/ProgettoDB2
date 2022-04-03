@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/newOpt")
-public class NewOptionalService extends HttpServlet {
+public class NewOptionalServiceServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @EJB

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/RetryPayment")
 
-public class RetryPayment extends HttpServlet{
+public class RetryPaymentServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
     @EJB

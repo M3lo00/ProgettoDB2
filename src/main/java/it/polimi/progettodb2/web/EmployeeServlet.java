@@ -40,22 +40,4 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-
-        req.getParameter("packagename");
-        req.getParameter("sms");
-        req.getParameter("minute");
-        req.getParameter("gigamobile");
-        req.getParameter("extragigamobile");
-        req.getParameter("extrasms");
-        req.getParameter("gigafixed");
-        req.getParameter("extragigafixed");
-        req.getParameter("fixedphone");
-        req.getParameter("quantityserv");
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("employee.jsp");
-        dispatcher.forward(req, res);
-    }
 }

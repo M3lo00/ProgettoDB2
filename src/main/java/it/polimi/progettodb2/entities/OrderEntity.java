@@ -8,31 +8,34 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@NamedQuery(
-        name = "Order.findByID",
-        query = "SELECT o FROM OrderEntity o " +
-                "WHERE o.idOrder = :idOrder"
-)
-@NamedQuery(
-        name = "Order.findAllOrderByUser",
-        query = "SELECT o FROM OrderEntity o " +
-                "WHERE o.refUser = :user "
-)
-@NamedQuery(
-        name = "Order.findRejectedOrdersOfUser",
-        query = "SELECT o FROM OrderEntity o " +
-                "WHERE o.refUser = :user AND " +
-                "o.valid=false"
-)
-@NamedQuery(
-        name = "Order.findAllOrder",
-        query = "SELECT o FROM OrderEntity o "
-)
-@NamedQuery(
-        name = "Order.findAllSuspendedOrder",
-        query = "SELECT o FROM OrderEntity o "+
-                "WHERE o.valid = false "
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "Order.findByID",
+                query = "SELECT o FROM OrderEntity o " +
+                        "WHERE o.idOrder = :idOrder"
+        ),
+        @NamedQuery(
+                name = "Order.findAllOrderByUser",
+                query = "SELECT o FROM OrderEntity o " +
+                        "WHERE o.refUser = :user "
+        ),
+        @NamedQuery(
+                name = "Order.findRejectedOrdersOfUser",
+                query = "SELECT o FROM OrderEntity o " +
+                        "WHERE o.refUser = :user AND " +
+                        "o.valid=false"
+        ),
+        @NamedQuery(
+                name = "Order.findAllOrder",
+                query = "SELECT o FROM OrderEntity o "
+        ),
+        @NamedQuery(
+                name = "Order.findAllSuspendedOrder",
+                query = "SELECT o FROM OrderEntity o "+
+                        "WHERE o.valid = false "
+        )
+})
+
 
 
 @Table(name = "order", schema = "dbproj")

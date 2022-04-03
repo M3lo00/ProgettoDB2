@@ -83,7 +83,6 @@ public class ConfirmationServlet extends HttpServlet{
             RequestDispatcher dispatcher = req.getRequestDispatcher("Confirmation.jsp");
             dispatcher.forward(req, res);
         }else {
-
             Date date = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 

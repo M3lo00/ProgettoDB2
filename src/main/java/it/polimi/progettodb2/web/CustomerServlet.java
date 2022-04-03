@@ -90,7 +90,8 @@ public class CustomerServlet extends HttpServlet {
                 }else if(periodo==36){
                     session.setAttribute("savings", totale*0.2);
                     session.setAttribute("total", totale*0.8);
-
+                }else{
+                    session.setAttribute("total", totale);
                 }
                 session.setAttribute("chosenOptObj", order.get().getOptServices());
                 session.setAttribute("ownOptionals", userService.getPackOptionals(order.get().getRefPack().getIdPackage()));

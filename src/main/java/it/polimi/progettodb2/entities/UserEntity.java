@@ -7,45 +7,47 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "dbproj")
-
-@NamedQuery(name = "User.checkCredentials",
-        query = "SELECT r FROM UserEntity r  WHERE r.username = ?1 and r.password = ?2")
-
-
-@NamedQuery(
-        name = "User.findByUsername",
-        query = "SELECT u " +
-                "FROM UserEntity u " +
-                "WHERE u.username = :username"
-)
-
-@NamedQuery(
-        name = "User.findByEmail",
-        query = "SELECT u " +
-                "FROM UserEntity u " +
-                "WHERE u.email = :email"
-)
-
-@NamedQuery(
-        name = "User.findByID",
-        query = "SELECT u " +
-                "FROM UserEntity u " +
-                "WHERE u.idUser = : idUser"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "User.checkCredentials",
+                query = "SELECT r FROM UserEntity r  WHERE r.username = ?1 and r.password = ?2"),
 
 
-@NamedQuery(
-        name = "User.findAllUser",
-        query = "SELECT u " +
-                "FROM UserEntity u "
-)
+        @NamedQuery(
+                name = "User.findByUsername",
+                query = "SELECT u " +
+                        "FROM UserEntity u " +
+                        "WHERE u.username = :username"
+        ),
 
-@NamedQuery(
-        name= "User.findAllInsolvent",
-        query = "SELECT u "+
-                "FROM UserEntity u "+
-                "WHERE u.insolvent=true"
-)
+        @NamedQuery(
+                name = "User.findByEmail",
+                query = "SELECT u " +
+                        "FROM UserEntity u " +
+                        "WHERE u.email = :email"
+        ),
+
+        @NamedQuery(
+                name = "User.findByID",
+                query = "SELECT u " +
+                        "FROM UserEntity u " +
+                        "WHERE u.idUser = : idUser"
+        ),
+
+
+        @NamedQuery(
+                name = "User.findAllUser",
+                query = "SELECT u " +
+                        "FROM UserEntity u "
+        ),
+
+        @NamedQuery(
+                name= "User.findAllInsolvent",
+                query = "SELECT u "+
+                        "FROM UserEntity u "+
+                        "WHERE u.insolvent=true"
+        )})
+
 
 
 public class UserEntity implements Serializable {

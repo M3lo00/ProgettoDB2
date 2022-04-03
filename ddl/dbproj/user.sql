@@ -7,7 +7,7 @@ create table user
     password  varchar(45)               not null,
     insolvent tinyint unsigned zerofill null,
     failedPay int unsigned zerofill     null,
-    constraint Username_UNIQUE
+    constraint username_UNIQUE
         unique (username),
     constraint email_UNIQUE
         unique (email)

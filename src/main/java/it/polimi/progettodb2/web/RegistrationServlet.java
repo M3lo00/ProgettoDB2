@@ -58,7 +58,7 @@ public class RegistrationServlet extends HttpServlet{
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         String message;
         if (req.getParameter("signupFailed") != null) {
-            message = "Username/Email already exist: try again by entering a new one";
+            message = "Username already exist: try again by entering a new one";
             req.setAttribute("messageSignUp", message);
         }
         else if (req.getParameter("signupError") != null) {

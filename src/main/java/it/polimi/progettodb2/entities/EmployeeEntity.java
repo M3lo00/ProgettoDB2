@@ -96,9 +96,7 @@ public class EmployeeEntity implements Serializable{
 
         if (idEmployee != that.idEmployee) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-
-        return true;
+        return password != null ? password.equals(that.password) : that.password == null;
     }
 
     @Override

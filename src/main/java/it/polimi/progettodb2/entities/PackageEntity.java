@@ -9,18 +9,21 @@ import java.sql.Timestamp;
 
 
 @Entity
-@NamedQuery(
-        name = "Package.findAll",
-        query = "SELECT u " +
-                "FROM PackageEntity u "
-)
+@NamedQueries({
+    @NamedQuery(
+            name = "Package.findAll",
+            query = "SELECT u " +
+                    "FROM PackageEntity u "
+    ),
 
-@NamedQuery(
-        name = "PackageOpts.findAll",
-        query = "SELECT o " +
-                "FROM PackageEntity o " +
-                "LEFT JOIN FETCH o.optService"
-)
+    @NamedQuery(
+            name = "PackageOpts.findAll",
+            query = "SELECT o " +
+                    "FROM PackageEntity o " +
+                    "LEFT JOIN FETCH o.optService"
+    )
+})
+
 
 
 @Table(name = "package", schema = "dbproj")

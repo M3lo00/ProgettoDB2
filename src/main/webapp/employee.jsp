@@ -15,7 +15,6 @@
 <body>
 
 <%
-    request.getAttribute("noSelection");
     EmployeeEntity employee = (EmployeeEntity) session.getAttribute("employee");
     List<OptserviceEntity> findAllOptionalProduct = (List<OptserviceEntity>) session.getAttribute("findAllOptionalProduct");
 %>
@@ -24,7 +23,6 @@
 <div class="container d-flex flex-wrap">
     <a class="navbar-brand" href="">TELCO COMPANY</a>
     <ul class="nav me-auto">
-        <li class="nav-item"><a href="${pageContext.request.contextPath}/employee" class="nav-link link-dark px-2">Home</a></li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/report" class="nav-link link-dark px-2">Sales Report</a></li>
     </ul>
     <ul class="nav">
@@ -122,6 +120,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
+
 </div>
 
 

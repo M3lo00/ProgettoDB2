@@ -30,8 +30,6 @@ public class CustomerServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
 
-
-
         if(session.getAttribute("customer")!=null){
 
             session.removeAttribute("chosenPack");
@@ -75,14 +73,14 @@ public class CustomerServlet extends HttpServlet {
         HttpSession session=req.getSession();
 
         if (req.getParameter("retry")!=null){
-            Optional<OrderEntity> order = userService.findOrderByID(Integer.parseInt(req.getParameter("retry")));
-            if (order.isPresent()){
-                req.setAttribute("retry", order.get().getIdOrder());
-                session.setAttribute("chosenPackObj", order.get().getRefPack());
-                session.setAttribute("chosenMonths", order.get().getPeriodo());
+            OrderEntity order = userService.findOrderByID(Integer.parseInt(req.getParameter("retry")));
+            if (order!=null){
+                req.setAttribute("retry", order.getIdOrder());
+                session.setAttribute("chosenPackObj", order.getRefPack());
+                session.setAttribute("chosenMonths", order.getPeriodo());
 
-                int periodo=order.get().getPeriodo();
-                float totale= order.get().getTotalAmount();
+                int periodo=order.getPeriodo();
+                float totale= order.getTotalAmount();
 
                 if (periodo==24){
                     session.setAttribute("savings", totale*0.1);
@@ -93,8 +91,8 @@ public class CustomerServlet extends HttpServlet {
                 }else{
                     session.setAttribute("total", totale);
                 }
-                session.setAttribute("chosenOptObj", order.get().getOptServices());
-                session.setAttribute("ownOptionals", userService.getPackOptionals(order.get().getRefPack().getIdPackage()));
+                session.setAttribute("chosenOptObj", order.getOptServices());
+                session.setAttribute("ownOptionals", userService.getPackOptionals(order.getRefPack().getIdPackage()));
 
                 RequestDispatcher dispatcher= req.getRequestDispatcher("Confirmation.jsp");
                 dispatcher.forward(req, resp);

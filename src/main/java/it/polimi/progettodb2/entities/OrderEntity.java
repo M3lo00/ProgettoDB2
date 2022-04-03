@@ -10,11 +10,6 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(
-                name = "Order.findByID",
-                query = "SELECT o FROM OrderEntity o " +
-                        "WHERE o.idOrder = :idOrder"
-        ),
-        @NamedQuery(
                 name = "Order.findAllOrderByUser",
                 query = "SELECT o FROM OrderEntity o " +
                         "WHERE o.refUser = :user "

@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.criteria.Order;
 import jakarta.validation.ConstraintViolationException;
 
 import java.sql.SQLException;
@@ -81,10 +82,8 @@ public class UserService {
         }
     }
 
-    public Optional<UserEntity> findByUserID(int idUser){
-        return em.createNamedQuery("User.findByID", UserEntity.class)
-                .setParameter("idUser", idUser)
-                .getResultStream().findFirst();
+    public UserEntity findByUserID(int idUser){
+        return em.find(UserEntity.class, idUser);
     }
 
     public Optional<UserEntity> findByUsername(String usrn) {
@@ -104,24 +103,21 @@ public class UserService {
     }
 
     public List<OrderEntity> findRejectedOrdersByUser(int user_id){
-        UserEntity user = findByUserID(user_id).get();
+        UserEntity user = findByUserID(user_id);
         return em.createNamedQuery("Order.findRejectedOrdersOfUser", OrderEntity.class)
                 .setParameter("user", user)
                 .getResultList();
     }
 
-    public Optional<OrderEntity> findOrderByID(int idOrder) {
-        Optional<OrderEntity> order= em.createNamedQuery("Order.findByID", OrderEntity.class)
-                .setParameter("idOrder", idOrder)
-                .getResultStream().findFirst();
-
-        order.get().getOptServices().size();
+    public OrderEntity findOrderByID(int idOrder) {
+        OrderEntity order= em.find(OrderEntity.class, idOrder);
+        order.getOptServices().size();
         return order;
     }
 
     public List<OrderEntity> findAllOrderByUser(int idUser){
         return em.createNamedQuery("Order.findAllOrderByUser", OrderEntity.class).
-                setParameter("user", findByUserID(idUser).get()).
+                setParameter("user", findByUserID(idUser)).
                 getResultList();
     }
 

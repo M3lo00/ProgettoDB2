@@ -17,6 +17,7 @@ public class EmployeeService {
 
     @PersistenceContext
     private EntityManager em;
+
     public EmployeeEntity checkCredentials(String username, String password) throws CredentialsException, NonUniqueResultException {
         List<EmployeeEntity> eList;
         try {

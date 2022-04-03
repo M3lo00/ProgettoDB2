@@ -28,14 +28,6 @@ import java.util.Collection;
         ),
 
         @NamedQuery(
-                name = "User.findByID",
-                query = "SELECT u " +
-                        "FROM UserEntity u " +
-                        "WHERE u.idUser = : idUser"
-        ),
-
-
-        @NamedQuery(
                 name = "User.findAllUser",
                 query = "SELECT u " +
                         "FROM UserEntity u "
@@ -46,8 +38,8 @@ import java.util.Collection;
                 query = "SELECT u "+
                         "FROM UserEntity u "+
                         "WHERE u.insolvent=true"
-        )})
-
+        )
+})
 
 
 public class UserEntity implements Serializable {

@@ -21,7 +21,7 @@
 %>
 
 <div class="container d-flex flex-wrap">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}../">TELCO COMPANY</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/">TELCO COMPANY</a>
     <ul class="nav me-auto">
         <li class="nav-item"><a href="${pageContext.request.contextPath}/report" class="nav-link link-dark px-2">Sales Report</a></li>
     </ul>
